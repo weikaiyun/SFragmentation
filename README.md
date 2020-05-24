@@ -12,6 +12,6 @@ https://medium.com/@pjonceski/fragmentpageradapter-with-fragments-that-restore-t
 https://inthecheesefactory.com/blog/fragment-state-saving-best-practices/en 
 原理讲解很清晰
 
-关于windowInset请查看此链接，https://gist.github.com/weikaiyun/c22b92d3159c93667bbceb76c98cafe0
+关于windowInset请查看此链接，https://gist.github.com/hanlyjiang/1bdfad93e6340d9f188525a5c0512b24
 
 希望以上对大家能有帮助。如果有问题，希望大家可以一起探讨。
