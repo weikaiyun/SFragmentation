@@ -8,8 +8,9 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -20,7 +21,9 @@ buildscript {
                 gsonconverter        : '2.7.0',
                 retrofit              : '2.7.0',
                 recycler              : '1.1.0',
-                viewpager2            : '1.0.0'
+                viewpager2            : '1.0.0',
+                kotlin_serialization  : '0.20.0',
+                room                  : '2.2.5'
         ]
     }
 }
