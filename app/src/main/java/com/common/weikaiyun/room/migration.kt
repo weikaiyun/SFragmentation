@@ -159,22 +159,22 @@ open class DatabaseMigration<in T : RoomDatabase>(
                         }
                         if (oldField != null) {
                             // a column needs to restore data
-                            backupColumns.add(oldField.columnName)
-                            restoreColumns.add(newField.columnName)
+                            backupColumns.add("`${oldField.columnName}`")
+                            restoreColumns.add("`${newField.columnName}`")
                             // if old column is nullable but the new is non-null, set default value to it
                             if (newField.notNull && !oldField.notNull) {
                                 val replaceNullSql =
                                     """UPDATE `${oldEntity.tableName}$BACKUP_SUFFIX`
-                                                        SET `${oldField.columnName}` = ${oldField.getDefaultValue()}
-                                                        WHERE `${oldField.columnName}` IS NULL;"""
+                                                        SET ${oldField.columnName} = ${oldField.getDefaultValue()}
+                                                        WHERE ${oldField.columnName} IS NULL;"""
                                 database.execSQL(replaceNullSql)
                             }
                         } else {
                             if (newField.notNull) {
                                 // non-null field added in new version
-                                restoreColumns.add(newField.columnName)
+                                restoreColumns.add("`${newField.columnName}`")
                                 // set a default value to it
-                                backupColumns.add("${newField.getDefaultValue()} AS ${newField.columnName}")
+                                backupColumns.add("${newField.getDefaultValue()} AS `${newField.columnName}`")
                             } else {
                                 // do nothing...
                             }
