@@ -174,14 +174,14 @@ open class DatabaseMigration<in T : RoomDatabase>(
                                 // non-null field added in new version
                                 restoreColumns.add(newField.columnName)
                                 // set a default value to it
-                                backupColumns.add("${newField.getDefaultValue()}")
+                                backupColumns.add("${newField.getDefaultValue()} AS ${newField.columnName}")
                             } else {
                                 // do nothing...
                             }
                         }
                     }
-                    val restoreColumnsStr = restoreColumns.joinToString(",") { "`$it`" }
-                    val backupColumnsStr = backupColumns.joinToString(",") { "`$it`" }
+                    val restoreColumnsStr = restoreColumns.joinToString(",")
+                    val backupColumnsStr = backupColumns.joinToString(",")
 
                     if (restoreColumns.isNotEmpty() && backupColumns.isNotEmpty()) {
                         database.execSQL(
