@@ -78,21 +78,10 @@ public class FragmentationMagician {
     private static void hookStateSaved(FragmentManager fragmentManager, Runnable runnable) {
         if (!(fragmentManager instanceof FragmentManagerImpl)) return;
 
-//        FragmentManagerImpl fragmentManagerImpl = (FragmentManagerImpl) fragmentManager;
-//        if (isStateSaved(fragmentManager)) {
-//            boolean tempStateSaved = fragmentManagerImpl.mStateSaved;
-//            boolean tempStopped = fragmentManagerImpl.mStopped;
-//            fragmentManagerImpl.mStateSaved = false;
-//            fragmentManagerImpl.mStopped = false;
-//
-//            runnable.run();
-//
-//            fragmentManagerImpl.mStopped = tempStopped;
-//            fragmentManagerImpl.mStateSaved = tempStateSaved;
-//        } else {
-//            runnable.run();
-//        }
-
+        FragmentManagerImpl fragmentManagerImpl = (FragmentManagerImpl) fragmentManager;
+        if (isStateSaved(fragmentManager)) {
+            fragmentManagerImpl.noteStateNotSaved();
+        }
         runnable.run();
     }
 }
