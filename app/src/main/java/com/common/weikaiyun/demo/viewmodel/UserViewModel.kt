@@ -15,4 +15,10 @@ class UserViewModel: ViewModel() {
             model.insertAll(*users)
         }
     }
+
+    fun updateAll(vararg users: User) {
+        viewModelScope.launch {
+            model.updateAll(*users)
+        }
+    }
 }
