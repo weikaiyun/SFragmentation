@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import com.common.weikaiyun.demo.DemoApplication
 import com.common.weikaiyun.room.*
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class], version = 4)
 abstract class UserDatabase : RoomDatabase() {
     companion object {
         fun getInstance() = Helper.instance
