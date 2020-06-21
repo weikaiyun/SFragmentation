@@ -219,7 +219,7 @@ open class DatabaseMigration<in T : RoomDatabase>(
     // get table info from database schema file
     private fun parseSchemaFile(version: Int): List<Entity> {
         return context.assets.open("${databaseClass.name}/$version.json").use {
-            val json = Json(JsonConfiguration.Stable)
+            val json = Json(JsonConfiguration(ignoreUnknownKeys = true))
             json.parse(DatabaseSchema.serializer(), String(it.readBytes())).database.entities
         }
     }
