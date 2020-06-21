@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        val user1 = User(1, "1", 1,  "female")
-        val user2 = User(2, "2", 2,  "male")
-        val user3 = User(3, "3", 3,  "female")
-        val user4 = User(4, "4", 4,  "male")
-        val user5 = User(5, "5", 5,  "female")
-
-
-        viewModel.updateAll(user1, user2, user3, user4, user5)
+//        val user1 = User(1, "1", 1,  1)
+//        val user2 = User(2, "2", 2,  2)
+//        val user3 = User(3, "3", 3,  3)
+//        val user4 = User(4, "4", 4,  4)
+//        val user5 = User(5, "5", 5,  5)
+//
+//
+//        viewModel.updateAll(user1, user2, user3, user4, user5)
     }
 }
