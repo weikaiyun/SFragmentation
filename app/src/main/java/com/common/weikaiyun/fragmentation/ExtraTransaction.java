@@ -266,7 +266,7 @@ public abstract class ExtraTransaction {
             if (mFragment == null) {
                 return mActivity.getSupportFragmentManager();
             }
-            return mFragment.getFragmentManager();
+            return mFragment.getParentFragmentManager();
         }
     }
 }
