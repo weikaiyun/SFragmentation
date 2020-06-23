@@ -20,7 +20,7 @@ public class FragmentationMagician {
         fragmentManager.popBackStack();
     }
 
-    public static void popBackStackImmediateAllowingStateLoss(final FragmentManager fragmentManager) {
+    public static void popBackStackImmediate(final FragmentManager fragmentManager) {
         fragmentManager.popBackStackImmediate();
     }
 
