@@ -40,10 +40,6 @@ object ExceptionHandler {
                 ex = ResponseThrowable(e, "can not connect")
             }
 
-            is KotlinNullPointerException -> {
-                ex = ResponseThrowable(e, "Retrofit Response is Null")
-            }
-
             is SSLHandshakeException -> {
                 ex = ResponseThrowable(e, "证书验证失败")
             }
