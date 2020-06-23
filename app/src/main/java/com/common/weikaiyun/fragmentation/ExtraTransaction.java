@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.common.weikaiyun.fragmentation.helper.internal.TransactionRecord;
+import com.common.weikaiyun.fragmentation.record.TransactionRecord;
 
 public abstract class ExtraTransaction {
 

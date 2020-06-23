@@ -6,17 +6,15 @@ import android.os.Looper;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentationMagician;
 import androidx.lifecycle.Lifecycle;
 
-import com.common.weikaiyun.fragmentation.exception.AfterSaveStateTransactionWarning;
-import com.common.weikaiyun.fragmentation.helper.internal.ResultRecord;
-import com.common.weikaiyun.fragmentation.helper.internal.TransactionRecord;
 import com.common.weikaiyun.fragmentation.queue.Action;
 import com.common.weikaiyun.fragmentation.queue.ActionQueue;
+import com.common.weikaiyun.fragmentation.record.ResultRecord;
+import com.common.weikaiyun.fragmentation.record.TransactionRecord;
 
 import java.util.List;
 
@@ -38,16 +36,11 @@ class TransactionDelegate {
     static final int TYPE_REPLACE = 4;
     static final int TYPE_REPLACE_NOT_BACK = 5;
 
-    private ISupportActivity mSupport;
-    private FragmentActivity mActivity;
-
     private Handler mHandler;
 
     ActionQueue mActionQueue;
 
     TransactionDelegate(ISupportActivity support) {
-        this.mSupport = support;
-        this.mActivity = (FragmentActivity) support;
         mHandler = new Handler(Looper.getMainLooper());
         mActionQueue = new ActionQueue(mHandler);
     }
@@ -144,6 +137,7 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
+                if (FragmentationMagician.isStateSaved(fm)) return;
                 ISupportFragment top = getTopFragmentForStart(from, fm);
                 if (top == null)
                     throw new NullPointerException("There is no Fragment in the FragmentManager, " +
@@ -152,10 +146,9 @@ class TransactionDelegate {
                 int containerId = top.getSupportDelegate().mContainerId;
                 bindContainerId(containerId, to);
 
-                handleAfterSaveInStateTransactionException(fm, "popTo()");
-                FragmentationMagician.executePendingTransactionsAllowingStateLoss(fm);
-                FragmentationMagician.popBackStackAllowingStateLoss(fm);
-                FragmentationMagician.executePendingTransactionsAllowingStateLoss(fm);
+                FragmentationMagician.executePendingTransactions(fm);
+                FragmentationMagician.popBackStack(fm);
+                FragmentationMagician.executePendingTransactions(fm);
             }
         });
 
@@ -168,6 +161,8 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
+                if (FragmentationMagician.isStateSaved(fm)) return;
+
                 int flag = 0;
                 if (includeTargetFragment) {
                     flag = FragmentManager.POP_BACK_STACK_INCLUSIVE;
@@ -185,8 +180,7 @@ class TransactionDelegate {
 
                 if (willPopFragments.size() <= 0) return;
 
-                handleAfterSaveInStateTransactionException(fm, "startWithPopTo()");
-                FragmentationMagician.executePendingTransactionsAllowingStateLoss(fm);
+                FragmentationMagician.executePendingTransactions(fm);
 
                 safePopTo(fragmentTag, fm, flag, willPopFragments);
             }
@@ -195,7 +189,6 @@ class TransactionDelegate {
 
         dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
     }
-
 
     /**
      * Remove
@@ -225,8 +218,8 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP, fm) {
             @Override
             public void run() {
-                handleAfterSaveInStateTransactionException(fm, "pop()");
-                FragmentationMagician.popBackStackAllowingStateLoss(fm);
+                if (FragmentationMagician.isStateSaved(fm)) return;
+                FragmentationMagician.popBackStack(fm);
             }
         });
     }
@@ -243,6 +236,8 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
+                if (FragmentationMagician.isStateSaved(fm)) return;
+
                 doPopTo(targetFragmentTag, includeTargetFragment, fm);
 
                 if (afterPopTransactionRunnable != null) {
@@ -429,7 +424,6 @@ class TransactionDelegate {
     }
 
     private void supportCommit(FragmentManager fm, FragmentTransaction transaction) {
-        handleAfterSaveInStateTransactionException(fm, "commit()");
         transaction.commitAllowingStateLoss();
     }
 
@@ -486,10 +480,7 @@ class TransactionDelegate {
     }
 
     private void doPopTo(final String targetFragmentTag, boolean includeTargetFragment, FragmentManager fm) {
-        handleAfterSaveInStateTransactionException(fm, "popTo()");
-
         Fragment targetFragment = fm.findFragmentByTag(targetFragmentTag);
-
         if (targetFragment == null) {
             Log.e(TAG, "Pop failure! Can't find FragmentTag:" + targetFragmentTag + " in the FragmentManager's Stack.");
             return;
@@ -510,25 +501,15 @@ class TransactionDelegate {
         for (Fragment fragment : willPopFragments) {
             transaction.remove(fragment);
         }
-        transaction.commitAllowingStateLoss();
+        transaction.commit();
 
-        FragmentationMagician.popBackStackAllowingStateLoss(fm, fragmentTag, flag);
-        FragmentationMagician.executePendingTransactionsAllowingStateLoss(fm);
+        FragmentationMagician.popBackStack(fm, fragmentTag, flag);
+        FragmentationMagician.executePendingTransactions(fm);
     }
 
     private static <T> void checkNotNull(T value, String message) {
         if (value == null) {
             throw new NullPointerException(message);
-        }
-    }
-
-    private void handleAfterSaveInStateTransactionException(FragmentManager fm, String action) {
-        boolean stateSaved = FragmentationMagician.isStateSaved(fm);
-        if (stateSaved) {
-            AfterSaveStateTransactionWarning e = new AfterSaveStateTransactionWarning(action);
-            if (Fragmentation.getDefault().getHandler() != null) {
-                Fragmentation.getDefault().getHandler().onException(e);
-            }
         }
     }
 }

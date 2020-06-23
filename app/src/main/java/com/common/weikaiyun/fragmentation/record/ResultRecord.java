@@ -1,4 +1,4 @@
-package com.common.weikaiyun.fragmentation.helper.internal;
+package com.common.weikaiyun.fragmentation.record;
 
 import android.os.Bundle;
 import android.os.Parcel;

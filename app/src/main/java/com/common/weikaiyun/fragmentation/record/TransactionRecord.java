@@ -1,4 +1,4 @@
-package com.common.weikaiyun.fragmentation.helper.internal;
+package com.common.weikaiyun.fragmentation.record;
 
 public final class TransactionRecord {
     public String tag;
