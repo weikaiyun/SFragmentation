@@ -14,6 +14,7 @@ object RetrofitFactory {
         .addInterceptor(loggingInterceptor)
         .build()
 
+    //此处可以使用多url，只要每次baseUrl不同即可
     fun retrofit(baseUrl : String) : Retrofit = Retrofit.Builder()
             .client(client)
             .baseUrl(baseUrl)
