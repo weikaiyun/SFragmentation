@@ -64,6 +64,13 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view, savedInstanceState);
+        initData(view, savedInstanceState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (!isLoaded && !isHidden()) {
@@ -72,7 +79,16 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         }
     }
 
+    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    public void initData(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+    }
+
     public void lazyInit() {
+
     }
 
     @Override
