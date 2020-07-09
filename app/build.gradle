@@ -85,6 +85,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
 
+    //https://github.com/chrisbanes/insetter
+    implementation "dev.chrisbanes:insetter-ktx:${versions.insetter_ktx}"
+
     // adb forward tcp:8080 tcp:8080
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
