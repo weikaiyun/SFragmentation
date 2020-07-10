@@ -88,6 +88,10 @@ dependencies {
     //https://github.com/chrisbanes/insetter
     implementation "dev.chrisbanes:insetter-ktx:${versions.insetter_ktx}"
 
+    //https://github.com/sockeqwe/AdapterDelegates
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${versions.adapterdelegate}"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${versions.adapterdelegate}"
+
     // adb forward tcp:8080 tcp:8080
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
