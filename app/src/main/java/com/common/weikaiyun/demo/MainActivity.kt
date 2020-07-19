@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
 import com.common.weikaiyun.demo.viewmodel.UserViewModel
@@ -28,5 +29,9 @@ class MainActivity : AppCompatActivity() {
         val user5 = User(5, "5", 5,  5, 5, "5")
 
         viewModel.updateAll(user1, user2, user3, user4, user5)
+
+        lifecycleScope.launchWhenCreated {
+
+        }
     }
 }
