@@ -79,7 +79,7 @@ dependencies {
     //glide
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${versions.kotlin_serialization}"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:${versions.kotlin_serialization}"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"

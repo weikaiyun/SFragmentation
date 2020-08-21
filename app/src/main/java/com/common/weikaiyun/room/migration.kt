@@ -8,7 +8,6 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import kotlin.collections.ArrayList
 
 /**
@@ -219,8 +218,8 @@ open class DatabaseMigration<in T : RoomDatabase>(
     // get table info from database schema file
     private fun parseSchemaFile(version: Int): List<Entity> {
         return context.assets.open("${databaseClass.name}/$version.json").use {
-            val json = Json(JsonConfiguration(ignoreUnknownKeys = true))
-            json.parse(DatabaseSchema.serializer(), String(it.readBytes())).database.entities
+            val json = Json{ignoreUnknownKeys = true}
+            json.decodeFromString(DatabaseSchema.serializer(), String(it.readBytes())).database.entities
         }
     }
 
