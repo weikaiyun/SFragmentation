@@ -84,6 +84,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
 
     //https://github.com/chrisbanes/insetter
     implementation "dev.chrisbanes:insetter-ktx:${versions.insetter_ktx}"
