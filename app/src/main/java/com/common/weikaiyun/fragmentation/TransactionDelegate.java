@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentationMagician;
 import androidx.lifecycle.Lifecycle;
 
+import com.common.weikaiyun.R;
 import com.common.weikaiyun.fragmentation.queue.Action;
 import com.common.weikaiyun.fragmentation.queue.ActionQueue;
 import com.common.weikaiyun.fragmentation.record.ResultRecord;
@@ -273,7 +274,7 @@ class TransactionDelegate {
             if (resultRecord == null) return;
 
             ISupportFragment targetFragment = (ISupportFragment) from
-                    .getFragmentManager()
+                    .getParentFragmentManager()
                     .getFragment(from.getArguments(), FRAGMENTATION_STATE_SAVE_RESULT);
 
             targetFragment.onFragmentResult(resultRecord.requestCode, resultRecord.resultCode, resultRecord.resultBundle);
@@ -366,9 +367,14 @@ class TransactionDelegate {
         } else {
             if (addMode) {
                 TransactionRecord record = to.getSupportDelegate().mTransactionRecord;
-                if (record != null && record.targetFragmentEnter != Integer.MIN_VALUE) {
-                    ft.setCustomAnimations(record.targetFragmentEnter, record.currentFragmentPopExit,
-                            record.currentFragmentPopEnter, record.targetFragmentExit);
+                if (record != null) {
+                    if (record.targetFragmentEnter != Integer.MIN_VALUE) {
+                        ft.setCustomAnimations(record.targetFragmentEnter, record.currentFragmentPopExit,
+                                record.currentFragmentPopEnter, record.targetFragmentExit);
+                    }
+                } else {
+                    ft.setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit,
+                            R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit);
                 }
                 ft.add(from.getSupportDelegate().mContainerId, toF, toFragmentTag);
                 ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
