@@ -23,7 +23,8 @@ object OkHttpHelper {
             builder.addInterceptor(interceptor)
         }
 
-        //此处需添加证书处理
+        //此处需添加证书处理, cert_file放在asset目录下即可
+        HttpsUtil.addCert(DemoApplication.instance, "cert_file", builder)
 
         return builder.build()
     }
