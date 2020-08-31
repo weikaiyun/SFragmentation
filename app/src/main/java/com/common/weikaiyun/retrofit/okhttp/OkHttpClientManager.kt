@@ -3,7 +3,6 @@ package com.common.weikaiyun.retrofit.okhttp
 import okhttp3.logging.HttpLoggingInterceptor
 
 object OkHttpClientManager {
-    var canTrustAll = false
     var headerGenerator: HeaderGenerator? = null
 
     private val loggingInterceptor =  HttpLoggingInterceptor().apply {
