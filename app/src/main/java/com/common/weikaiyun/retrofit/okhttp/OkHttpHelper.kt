@@ -23,9 +23,7 @@ object OkHttpHelper {
         builder.cache(Cache(httpCache, 100 * 1024 * 1024))
         builder.connectTimeout(connectTimeout.toLong(), TimeUnit.SECONDS)
         builder.readTimeout(readTimeout.toLong(), TimeUnit.SECONDS)
-        if (writeTimeout > 0) {
-            builder.writeTimeout(writeTimeout.toLong(), TimeUnit.SECONDS)
-        }
+        builder.writeTimeout(writeTimeout.toLong(), TimeUnit.SECONDS)
         for (interceptor in interceptors) {
             builder.addInterceptor(interceptor)
         }
