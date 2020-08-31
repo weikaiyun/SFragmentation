@@ -9,5 +9,6 @@ object OkHttpClientManager {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val okHttpClient = OkHttpHelper.createOkHttpClient(5, 20, 20, CustomInterceptor(), loggingInterceptor)
+    val okHttpClient = OkHttpHelper.createOkHttpClient(5, 20, 20,
+        CustomInterceptor(), loggingInterceptor)
 }
