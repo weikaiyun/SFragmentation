@@ -5,10 +5,7 @@ import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import java.io.File
-import java.security.KeyStore
-import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.*
 
 object OkHttpHelper {
     fun createOkHttpClient(connectTimeout: Int, readTimeout: Int, writeTimeout: Int, vararg interceptors: Interceptor): OkHttpClient {
@@ -26,22 +23,8 @@ object OkHttpHelper {
             builder.addInterceptor(interceptor)
         }
 
-        try {
-            val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-            trustManagerFactory.init(null as KeyStore?)
-            val trustManagers = trustManagerFactory.trustManagers
-            if (trustManagers.size != 1 || trustManagers[0] !is X509TrustManager) {
-                throw IllegalStateException("Unexpected default trust managers:" + Arrays.toString(trustManagers))
-            }
-            val trustManager = trustManagers[0] as X509TrustManager
-            val sslContext = SSLContext.getInstance("TLS")
-            sslContext.init(null, Array(1) { trustManager }, null)
-            val sslSocketFactory = sslContext.socketFactory
-            builder.sslSocketFactory(sslSocketFactory, trustManager)
-            builder.hostnameVerifier(HostnameVerifier { _, _ -> true })
-        } catch (e: Exception) {
+        //此处需添加证书处理
 
-        }
         return builder.build()
     }
 }
