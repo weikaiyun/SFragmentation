@@ -13,5 +13,4 @@ object RetrofitFactory {
             .baseUrl(baseUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-
 }
