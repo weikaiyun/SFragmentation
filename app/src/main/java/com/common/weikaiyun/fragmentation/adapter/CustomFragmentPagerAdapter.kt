@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 @SuppressLint("WrongConstant")
 abstract class CustomFragmentPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    val mFragments = SparseArray<Fragment>()
+    private val mFragments = SparseArray<Fragment>()
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val fragment = super.instantiateItem(container, position) as Fragment
