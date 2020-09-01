@@ -259,28 +259,23 @@ class TransactionDelegate {
             }
 
             Fragment parentFragment = ((Fragment) activeFragment).getParentFragment();
-            if (dispatchBackPressedEvent((ISupportFragment) parentFragment)) {
-                return true;
-            }
+            return dispatchBackPressedEvent((ISupportFragment) parentFragment);
         }
         return false;
     }
 
     void handleResultRecord(Fragment from) {
-        try {
-            Bundle args = from.getArguments();
-            if (args == null) return;
-            final ResultRecord resultRecord = args.getParcelable(FRAGMENTATION_ARG_RESULT_RECORD);
-            if (resultRecord == null) return;
+        Bundle args = from.getArguments();
+        if (args == null) return;
+        final ResultRecord resultRecord = args.getParcelable(FRAGMENTATION_ARG_RESULT_RECORD);
+        if (resultRecord == null) return;
 
-            ISupportFragment targetFragment = (ISupportFragment) from
-                    .getParentFragmentManager()
-                    .getFragment(from.getArguments(), FRAGMENTATION_STATE_SAVE_RESULT);
+        ISupportFragment targetFragment = (ISupportFragment) from
+                .getParentFragmentManager()
+                .getFragment(from.getArguments(), FRAGMENTATION_STATE_SAVE_RESULT);
 
-            targetFragment.onFragmentResult(resultRecord.requestCode, resultRecord.resultCode, resultRecord.resultBundle);
-        } catch (IllegalStateException ignored) {
-            // Fragment no longer exists
-        }
+        if (targetFragment == null) return;
+        targetFragment.onFragmentResult(resultRecord.requestCode, resultRecord.resultCode, resultRecord.resultBundle);
     }
 
     private void enqueue(FragmentManager fm, Action action) {
@@ -294,7 +289,7 @@ class TransactionDelegate {
     private void doDispatchStartTransaction(FragmentManager fm, ISupportFragment from,
                                             ISupportFragment to, int requestCode, int launchMode, int type) {
 
-        checkNotNull(to, "toFragment == null");
+        checkNotNull(to);
 
         if ((type == TYPE_ADD_RESULT || type == TYPE_ADD_RESULT_WITHOUT_HIDE) && from != null) {
             if (!((Fragment) from).isAdded()) {
@@ -513,9 +508,9 @@ class TransactionDelegate {
         FragmentationMagician.executePendingTransactions(fm);
     }
 
-    private static <T> void checkNotNull(T value, String message) {
+    private static <T> void checkNotNull(T value) {
         if (value == null) {
-            throw new NullPointerException(message);
+            throw new NullPointerException("toFragment == null");
         }
     }
 }
