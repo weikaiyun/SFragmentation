@@ -8,11 +8,6 @@ Fragmentation(https://github.com/YoKeyword/Fragmentation) 的简化版本， 只
 
 库里面还有AdapterDelegate个人觉得也是完全可以看懂的库(感谢 https://github.com/sockeqwe/AdapterDelegates )，方便ReclerView使用，http://hannesdorfmann.com/android/adapter-delegates
 
-库里面有CustomFragmentPagerAdapter，可以配合Fragmentation使用
-https://medium.com/@pjonceski/fragmentpageradapter-with-fragments-that-restore-their-state-properly-a427ecfd792e
-https://inthecheesefactory.com/blog/fragment-state-saving-best-practices/en 
-原理讲解很清晰
-
 关于windowInset发现一个特别好的库，推荐给大家 https://github.com/chrisbanes/insetter
 
 使用Demo直接参考原来的库就好。
