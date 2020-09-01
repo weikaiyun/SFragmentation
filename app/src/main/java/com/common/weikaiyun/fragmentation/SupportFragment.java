@@ -72,6 +72,16 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
             lazyInit();
             isLoaded = true;
         }
+
+        if (!isHidden()) {
+            onVisible();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        onInvisible();
     }
 
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -86,10 +96,17 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     }
 
+    public void onVisible() {
+
+    }
+
+    public void onInvisible() {
+
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        isLoaded = false;
     }
 
     @Override
@@ -101,6 +118,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onDestroy() {
         mDelegate.onDestroy();
+        isLoaded = false;
         super.onDestroy();
     }
 
