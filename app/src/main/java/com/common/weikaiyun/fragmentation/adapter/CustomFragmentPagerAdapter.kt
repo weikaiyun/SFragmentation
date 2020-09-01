@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentPagerAdapter
  *
  * https://inthecheesefactory.com/blog/fragment-state-saving-best-practices/en
  */
-@SuppressLint("WrongConstant")
+
 abstract class CustomFragmentPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val mFragments = SparseArray<Fragment>()
