@@ -315,7 +315,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
      * 得到位于栈顶Fragment
      */
     public ISupportFragment getTopFragment() {
-        return SupportHelper.getTopFragment(getFragmentManager());
+        return SupportHelper.getTopFragment(getParentFragmentManager());
     }
 
     /**
@@ -336,7 +336,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
      * 获取栈内的fragment对象
      */
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
-        return SupportHelper.findFragment(getFragmentManager(), fragmentClass);
+        return SupportHelper.findFragment(getParentFragmentManager(), fragmentClass);
     }
 
     /**

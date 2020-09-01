@@ -96,6 +96,8 @@ dependencies {
     // adb forward tcp:8080 tcp:8080
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
+    implementation "androidx.fragment:fragment-ktx:${versions.fragment_version}"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
