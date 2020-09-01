@@ -71,7 +71,7 @@ public class SupportFragmentDelegate {
         outState.putInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER, mContainerId);
     }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@Nullable Bundle savedInstanceState) {
         View view = mFragment.getView();
         if (view != null) {
             setBackground(view);
