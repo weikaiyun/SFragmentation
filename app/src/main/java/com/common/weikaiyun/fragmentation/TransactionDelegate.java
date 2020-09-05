@@ -167,7 +167,6 @@ class TransactionDelegate {
                 if (includeTargetFragment) {
                     flag = FragmentManager.POP_BACK_STACK_INCLUSIVE;
                 }
-
                 List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
 
                 final ISupportFragment top = getTopFragmentForStart(from, fm);
@@ -180,13 +179,11 @@ class TransactionDelegate {
 
                 if (willPopFragments.size() <= 0) return;
 
-                FragmentationMagician.executePendingTransactions(fm);
+                safePopTo(fragmentTag, fm, flag);
 
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
                 start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
-
-                safePopTo(fragmentTag, fm, flag, willPopFragments);
             }
         });
     }
@@ -488,16 +485,11 @@ class TransactionDelegate {
 
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
-        safePopTo(targetFragmentTag, fm, flag, willPopFragments);
+        safePopTo(targetFragmentTag, fm, flag);
     }
 
-    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag, List<Fragment> willPopFragments) {
-        FragmentTransaction transaction = fm.beginTransaction();
-        for (Fragment fragment : willPopFragments) {
-            transaction.remove(fragment);
-        }
-        transaction.commit();
-        //FragmentationMagician.popBackStack(fm, fragmentTag, flag);
+    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag) {
+        FragmentationMagician.popBackStack(fm, fragmentTag, flag);
         FragmentationMagician.executePendingTransactions(fm);
     }
 
