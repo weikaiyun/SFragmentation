@@ -160,7 +160,7 @@ public class SupportActivityDelegate {
      * Start the target Fragment and pop itself
      */
     public void startWithPop(ISupportFragment toFragment) {
-        mTransactionDelegate.startWithPop(getSupportFragmentManager(), getTopFragment(), toFragment);
+        mTransactionDelegate.dispatchStartWithPopTransaction(getSupportFragmentManager(), getTopFragment(), toFragment);
     }
 
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass,

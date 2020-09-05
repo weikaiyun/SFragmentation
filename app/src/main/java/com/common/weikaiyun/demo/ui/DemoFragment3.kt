@@ -22,7 +22,7 @@ class DemoFragment3: SupportFragment() {
         title.text = "DemoFragment$param1"
         button.text = param2
         button.setOnClickListener {
-            start(DemoFragment4.newInstance(4, "popTo1", "start5WithPopTo1"))
+            start(DemoFragment4.newInstance(4, "popTo1", "start5WithPopTo1", "startWithPop"))
         }
     }
 

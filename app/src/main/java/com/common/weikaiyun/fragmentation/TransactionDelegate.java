@@ -134,7 +134,7 @@ class TransactionDelegate {
     /**
      * Start the target Fragment and pop itself
      */
-    void startWithPop(final FragmentManager fm, final ISupportFragment from, final ISupportFragment to) {
+    void dispatchStartWithPopTransaction(final FragmentManager fm, final ISupportFragment from, final ISupportFragment to) {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
@@ -147,13 +147,14 @@ class TransactionDelegate {
                 int containerId = top.getSupportDelegate().mContainerId;
                 bindContainerId(containerId, to);
 
-                FragmentationMagician.executePendingTransactions(fm);
                 FragmentationMagician.popBackStack(fm);
                 FragmentationMagician.executePendingTransactions(fm);
+
+                String toFragmentTag = to.getClass().getName();
+                ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
+                start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
             }
         });
-
-        dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
     }
 
     void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,

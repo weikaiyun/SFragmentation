@@ -206,7 +206,7 @@ public class SupportFragmentDelegate {
      * Start the target Fragment and pop itself
      */
     public void startWithPop(ISupportFragment toFragment) {
-        mTransactionDelegate.startWithPop(mFragment.getParentFragmentManager(), mSupportF, toFragment);
+        mTransactionDelegate.dispatchStartWithPopTransaction(mFragment.getParentFragmentManager(), mSupportF, toFragment);
     }
 
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass,
@@ -240,7 +240,7 @@ public class SupportFragmentDelegate {
     }
 
     public void startChildWithPop(ISupportFragment toFragment) {
-        mTransactionDelegate.startWithPop(getChildFragmentManager(), getChildTopFragment(), toFragment);
+        mTransactionDelegate.dispatchStartWithPopTransaction(getChildFragmentManager(), getChildTopFragment(), toFragment);
     }
 
     public void replaceChildFragment(ISupportFragment toFragment, boolean addToBackStack) {
