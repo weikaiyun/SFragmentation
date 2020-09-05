@@ -15,7 +15,6 @@ public class SupportActivityDelegate {
     private FragmentActivity mActivity;
 
     private TransactionDelegate mTransactionDelegate;
-    private int mDefaultFragmentBackground = 0;
 
     public SupportActivityDelegate(ISupportActivity support) {
         if (!(support instanceof FragmentActivity))
@@ -43,19 +42,6 @@ public class SupportActivityDelegate {
             mTransactionDelegate = new TransactionDelegate(mSupport);
         }
         return mTransactionDelegate;
-    }
-
-    /**
-     * 当Fragment根布局 没有设定background属性时,
-     * Fragmentation默认使用Theme的android:windowbackground作为Fragment的背景,
-     * 可以通过该方法改变Fragment背景。
-     */
-    public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
-        mDefaultFragmentBackground = backgroundRes;
-    }
-
-    public int getDefaultFragmentBackground() {
-        return mDefaultFragmentBackground;
     }
 
     /**
