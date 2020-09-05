@@ -492,12 +492,6 @@ class TransactionDelegate {
     }
 
     private void safePopTo(String fragmentTag, final FragmentManager fm, int flag, List<Fragment> willPopFragments) {
-        FragmentTransaction transaction = fm.beginTransaction();
-        for (Fragment fragment : willPopFragments) {
-            transaction.remove(fragment);
-        }
-        transaction.commit();
-
         FragmentationMagician.popBackStack(fm, fragmentTag, flag);
         FragmentationMagician.executePendingTransactions(fm);
     }
