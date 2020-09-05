@@ -263,22 +263,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         mDelegate.startForResult(toFragment, requestCode);
     }
 
-    /**
-     * Start the target Fragment and pop itself
-     */
-    public void startWithPop(ISupportFragment toFragment) {
-        mDelegate.startWithPop(toFragment);
-    }
-
-    /**
-     * @see #popTo(Class, boolean)
-     * +
-     * @see #start(ISupportFragment)
-     */
-    public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
-        mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
-    }
-
 
     public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
         mDelegate.replaceFragment(toFragment, addToBackStack);

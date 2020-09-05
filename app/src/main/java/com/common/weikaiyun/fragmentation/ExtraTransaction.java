@@ -45,10 +45,6 @@ public abstract class ExtraTransaction {
 
     public abstract void startForResultNotHideSelf(ISupportFragment toFragment, int requestCode);
 
-    public abstract void startWithPop(ISupportFragment toFragment);
-
-    public abstract void startWithPopTo(ISupportFragment toFragment, String targetFragmentTag, boolean includeTargetFragment);
-
     public abstract void replace(ISupportFragment toFragment);
 
     /**
@@ -247,19 +243,6 @@ public abstract class ExtraTransaction {
             toFragment.getSupportDelegate().mTransactionRecord = mRecord;
             mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), mSupportF,
                     toFragment, requestCode, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD_RESULT_WITHOUT_HIDE);
-        }
-
-        @Override
-        public void startWithPop(ISupportFragment toFragment) {
-            toFragment.getSupportDelegate().mTransactionRecord = mRecord;
-            mTransactionDelegate.startWithPop(getFragmentManager(), mSupportF, toFragment);
-        }
-
-        @Override
-        public void startWithPopTo(ISupportFragment toFragment, String targetFragmentTag, boolean includeTargetFragment) {
-            toFragment.getSupportDelegate().mTransactionRecord = mRecord;
-            mTransactionDelegate.startWithPopTo(getFragmentManager(), mSupportF,
-                    toFragment, targetFragmentTag, includeTargetFragment);
         }
 
         private FragmentManager getFragmentManager() {

@@ -160,27 +160,6 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     }
 
     /**
-     * It is recommended to use {@link SupportFragment#startWithPop(ISupportFragment)}.
-     * Start the target Fragment and pop itself
-     */
-    public void startWithPop(ISupportFragment toFragment) {
-        mDelegate.startWithPop(toFragment);
-    }
-
-    /**
-     * It is recommended to use {@link SupportFragment#startWithPopTo(ISupportFragment, Class, boolean)}.
-     *
-     * @see #popTo(Class, boolean)
-     * +
-     * @see #start(ISupportFragment)
-     */
-    public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass,
-                               boolean includeTargetFragment) {
-
-        mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
-    }
-
-    /**
      * It is recommended to use {@link SupportFragment#replaceFragment(ISupportFragment, boolean)}.
      */
     public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
