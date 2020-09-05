@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        tools:text="demo"/>
+        tools:text="Fragment"/>
 
     <TextView
         android:id="@+id/button"
@@ -23,6 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="60sp"
-        tools:text="demo"/>
+        tools:text="button"
+        android:gravity="center"
+        android:background="@color/colorAccent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
