@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.common.weikaiyun.R;
 import com.common.weikaiyun.fragmentation.record.ResultRecord;
 import com.common.weikaiyun.fragmentation.record.TransactionRecord;
 
@@ -20,6 +23,8 @@ public class SupportFragmentDelegate {
     private TransactionDelegate mTransactionDelegate;
     TransactionRecord mTransactionRecord;
     Bundle mNewBundle;
+
+    boolean mPopNoAnim = false;
 
     private ISupportFragment mSupportF;
     private Fragment mFragment;
@@ -60,6 +65,13 @@ public class SupportFragmentDelegate {
         if (bundle != null) {
             mContainerId = bundle.getInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER);
         }
+    }
+
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (mPopNoAnim) {
+            return AnimationUtils.loadAnimation(_mActivity, R.anim.no_anim);
+        }
+        return null;
     }
 
     public void onViewCreated(@Nullable Bundle savedInstanceState) {

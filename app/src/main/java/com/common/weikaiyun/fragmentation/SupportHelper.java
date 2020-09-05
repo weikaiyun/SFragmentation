@@ -70,8 +70,7 @@ public class SupportHelper {
      * @param fragment 目标Fragment
      */
     public static ISupportFragment getPreFragment(Fragment fragment) {
-        FragmentManager fragmentManager = fragment.getFragmentManager();
-        if (fragmentManager == null) return null;
+        FragmentManager fragmentManager = fragment.getParentFragmentManager();
 
         List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
         int index = fragmentList.indexOf(fragment);
@@ -138,7 +137,7 @@ public class SupportHelper {
         for (int i = fragmentList.size() - 1; i >= 0; i--) {
             Fragment fragment = fragmentList.get(i);
             if (fragment instanceof ISupportFragment) {
-                if (fragment.isResumed() && !fragment.isHidden() && fragment.getUserVisibleHint()) {
+                if (fragment.isResumed() && !fragment.isHidden()) {
                     return getActiveFragment(fragment.getChildFragmentManager(), (ISupportFragment) fragment);
                 }
             }

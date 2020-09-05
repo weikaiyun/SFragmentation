@@ -183,7 +183,13 @@ class TransactionDelegate {
 
                 FragmentationMagician.executePendingTransactions(fm);
 
-                safePopTo(fragmentTag, fm, flag, willPopFragments);
+                for(Fragment fragment : willPopFragments) {
+                    if (fragment instanceof  SupportFragment) {
+                        ((SupportFragment) fragment).getSupportDelegate().mPopNoAnim = true;
+                    }
+                }
+
+                safePopTo(fragmentTag, fm, flag);
             }
 
         });
@@ -488,10 +494,10 @@ class TransactionDelegate {
 
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
-        safePopTo(targetFragmentTag, fm, flag, willPopFragments);
+        safePopTo(targetFragmentTag, fm, flag);
     }
 
-    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag, List<Fragment> willPopFragments) {
+    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag) {
         FragmentationMagician.popBackStack(fm, fragmentTag, flag);
         FragmentationMagician.executePendingTransactions(fm);
     }
