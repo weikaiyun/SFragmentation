@@ -30,8 +30,7 @@ class DemoFragment4: SupportFragment() {
         button2.text = param3
 
         button2.setOnClickListener {
-            startWithPopTo(DemoFragment5.newInstance(5, "test"),
-                DemoFragment1::class.java, false)
+            start(DemoFragment5.newInstance(5, "test"))
         }
     }
 
