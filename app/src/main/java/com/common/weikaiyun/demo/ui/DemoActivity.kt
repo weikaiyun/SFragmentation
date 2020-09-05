@@ -1,6 +1,5 @@
-package com.common.weikaiyun.demo
+package com.common.weikaiyun.demo.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
@@ -9,12 +8,13 @@ import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
 import com.common.weikaiyun.demo.viewmodel.UserViewModel
+import com.common.weikaiyun.fragmentation.SupportActivity
 
-class MainActivity : AppCompatActivity() {
+class DemoActivity : SupportActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getContentViewID(): Int = R.layout.activity_demo
+
+    override fun initData(savedInstanceState: Bundle?) {
         val viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         viewModel.userList.observe(this, Observer {
             it.forEach() { user ->
@@ -33,5 +33,9 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenCreated {
 
         }
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        loadRootFragment(R.id.container, DemoFragment1.newInstance(1, "start2"))
     }
 }
