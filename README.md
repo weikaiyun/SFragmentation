@@ -10,6 +10,4 @@ Fragmentation(https://github.com/YoKeyword/Fragmentation) 的简化版本， 只
 
 关于windowInset发现一个特别好的库，推荐给大家 https://github.com/chrisbanes/insetter
 
-使用Demo直接参考原来的库就好。
-
 希望以上对大家能有帮助。如果有问题，希望大家可以一起探讨。
