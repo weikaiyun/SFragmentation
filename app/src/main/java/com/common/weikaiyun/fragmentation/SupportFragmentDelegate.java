@@ -60,14 +60,6 @@ public class SupportFragmentDelegate {
         if (bundle != null) {
             mContainerId = bundle.getInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER);
         }
-
-        if (savedInstanceState != null) {
-            mContainerId = savedInstanceState.getInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER);
-        }
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER, mContainerId);
     }
 
     public void onViewCreated(@Nullable Bundle savedInstanceState) {

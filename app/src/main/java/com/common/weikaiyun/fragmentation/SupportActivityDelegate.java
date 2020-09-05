@@ -2,7 +2,6 @@ package com.common.weikaiyun.fragmentation;
 
 import android.os.Bundle;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;

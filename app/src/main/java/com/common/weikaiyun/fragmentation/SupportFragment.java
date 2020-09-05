@@ -110,12 +110,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mDelegate.onSaveInstanceState(outState);
-    }
-
-    @Override
     public void onDestroy() {
         mDelegate.onDestroy();
         isLoaded = false;
