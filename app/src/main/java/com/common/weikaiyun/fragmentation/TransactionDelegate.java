@@ -158,7 +158,6 @@ class TransactionDelegate {
 
     void startWithPopTo(final FragmentManager fm, final ISupportFragment from,
                         final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
-
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
@@ -191,9 +190,7 @@ class TransactionDelegate {
 
                 safePopTo(fragmentTag, fm, flag);
             }
-
         });
-
         dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
     }
 
