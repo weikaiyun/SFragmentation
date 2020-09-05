@@ -71,7 +71,7 @@ public class SupportFragmentDelegate {
         outState.putInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER, mContainerId);
     }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@Nullable Bundle savedInstanceState) {
         View view = mFragment.getView();
         if (view != null) {
             setBackground(view);
@@ -201,7 +201,7 @@ public class SupportFragmentDelegate {
      */
     public void start(final ISupportFragment toFragment, @ISupportFragment.LaunchMode int launchMode) {
 
-        mTransactionDelegate.dispatchStartTransaction(mFragment.getFragmentManager(), mSupportF,
+        mTransactionDelegate.dispatchStartTransaction(mFragment.getParentFragmentManager(), mSupportF,
                 toFragment, 0, launchMode, TransactionDelegate.TYPE_ADD);
     }
 
@@ -210,7 +210,7 @@ public class SupportFragmentDelegate {
      */
     public void startForResult(ISupportFragment toFragment, int requestCode) {
 
-        mTransactionDelegate.dispatchStartTransaction(mFragment.getFragmentManager(), mSupportF,
+        mTransactionDelegate.dispatchStartTransaction(mFragment.getParentFragmentManager(), mSupportF,
                 toFragment, requestCode, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD_RESULT);
     }
 
@@ -218,19 +218,19 @@ public class SupportFragmentDelegate {
      * Start the target Fragment and pop itself
      */
     public void startWithPop(ISupportFragment toFragment) {
-        mTransactionDelegate.startWithPop(mFragment.getFragmentManager(), mSupportF, toFragment);
+        mTransactionDelegate.startWithPop(mFragment.getParentFragmentManager(), mSupportF, toFragment);
     }
 
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass,
                                boolean includeTargetFragment) {
 
-        mTransactionDelegate.startWithPopTo(mFragment.getFragmentManager(), mSupportF,
+        mTransactionDelegate.startWithPopTo(mFragment.getParentFragmentManager(), mSupportF,
                 toFragment, targetFragmentClass.getName(), includeTargetFragment);
     }
 
     public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
 
-        mTransactionDelegate.dispatchStartTransaction(mFragment.getFragmentManager(), mSupportF,
+        mTransactionDelegate.dispatchStartTransaction(mFragment.getParentFragmentManager(), mSupportF,
                 toFragment, 0, ISupportFragment.STANDARD,
                 addToBackStack ? TransactionDelegate.TYPE_REPLACE : TransactionDelegate.TYPE_REPLACE_NOT_BACK);
     }
@@ -262,7 +262,7 @@ public class SupportFragmentDelegate {
     }
 
     public void pop() {
-        mTransactionDelegate.pop(mFragment.getFragmentManager());
+        mTransactionDelegate.pop(mFragment.getParentFragmentManager());
     }
 
     /**
@@ -293,7 +293,7 @@ public class SupportFragmentDelegate {
                       Runnable afterPopTransactionRunnable) {
 
         mTransactionDelegate.popTo(targetFragmentClass.getName(), includeTargetFragment,
-                afterPopTransactionRunnable, mFragment.getFragmentManager());
+                afterPopTransactionRunnable, mFragment.getParentFragmentManager());
     }
 
     public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment) {

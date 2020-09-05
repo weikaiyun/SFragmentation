@@ -58,7 +58,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
     implementation "androidx.viewpager2:viewpager2:${versions.viewpager2}"
-    implementation "androidx.recyclerview:recyclerview:${versions.recycler}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
 
     implementation "androidx.room:room-runtime:${versions.room}"
     implementation "androidx.room:room-ktx:${versions.room}"
@@ -94,7 +94,9 @@ dependencies {
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${versions.adapterdelegate}"
 
     // adb forward tcp:8080 tcp:8080
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    debugImplementation "com.amitshekhar.android:debug-db:${versions.debug_db}"
+
+    implementation "androidx.fragment:fragment-ktx:${versions.fragment_version}"
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -51,12 +51,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         mDelegate.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mDelegate.onActivityCreated(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +60,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mDelegate.onViewCreated(savedInstanceState);
         initView(view, savedInstanceState);
         initData(view, savedInstanceState);
     }
@@ -77,6 +72,16 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
             lazyInit();
             isLoaded = true;
         }
+
+        if (!isHidden()) {
+            onVisible();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        onInvisible();
     }
 
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -91,10 +96,17 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     }
 
+    public void onVisible() {
+
+    }
+
+    public void onInvisible() {
+
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        isLoaded = false;
     }
 
     @Override
@@ -106,6 +118,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onDestroy() {
         mDelegate.onDestroy();
+        isLoaded = false;
         super.onDestroy();
     }
 
@@ -315,7 +328,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
      * 得到位于栈顶Fragment
      */
     public ISupportFragment getTopFragment() {
-        return SupportHelper.getTopFragment(getFragmentManager());
+        return SupportHelper.getTopFragment(getParentFragmentManager());
     }
 
     /**
@@ -336,7 +349,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
      * 获取栈内的fragment对象
      */
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
-        return SupportHelper.findFragment(getFragmentManager(), fragmentClass);
+        return SupportHelper.findFragment(getParentFragmentManager(), fragmentClass);
     }
 
     /**
