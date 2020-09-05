@@ -158,6 +158,8 @@ class TransactionDelegate {
 
     void startWithPopTo(final FragmentManager fm, final ISupportFragment from,
                         final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
+        dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
+
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
@@ -182,16 +184,9 @@ class TransactionDelegate {
 
                 FragmentationMagician.executePendingTransactions(fm);
 
-                for(Fragment fragment : willPopFragments) {
-                    if (fragment instanceof  SupportFragment) {
-                        ((SupportFragment) fragment).getSupportDelegate().mPopNoAnim = true;
-                    }
-                }
-
                 safePopTo(fragmentTag, fm, flag);
             }
         });
-        dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
     }
 
     /**

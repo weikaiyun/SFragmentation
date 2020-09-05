@@ -52,11 +52,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         mDelegate.onCreate(savedInstanceState);
     }
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return mDelegate.onCreateAnimation(transit, enter, nextAnim);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

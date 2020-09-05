@@ -67,13 +67,6 @@ public class SupportFragmentDelegate {
         }
     }
 
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (mPopNoAnim) {
-            return AnimationUtils.loadAnimation(_mActivity, R.anim.no_anim);
-        }
-        return null;
-    }
-
     public void onViewCreated(@Nullable Bundle savedInstanceState) {
 
     }
