@@ -28,6 +28,10 @@ public class FragmentationMagician {
         fragmentManager.popBackStack(name, flags);
     }
 
+    public static void popBackStackImmediate(final FragmentManager fragmentManager, final String name, final int flags) {
+        fragmentManager.popBackStackImmediate(name, flags);
+    }
+
 
     public static void executePendingTransactions(final FragmentManager fragmentManager) {
         fragmentManager.executePendingTransactions();
