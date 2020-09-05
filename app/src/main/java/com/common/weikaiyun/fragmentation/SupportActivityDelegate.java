@@ -166,7 +166,7 @@ public class SupportActivityDelegate {
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass,
                                boolean includeTargetFragment) {
 
-        mTransactionDelegate.startWithPopTo(getSupportFragmentManager(),
+        mTransactionDelegate.dispatchStartWithPopToTransaction(getSupportFragmentManager(),
                 getTopFragment(), toFragment, targetFragmentClass.getName(), includeTargetFragment);
     }
 

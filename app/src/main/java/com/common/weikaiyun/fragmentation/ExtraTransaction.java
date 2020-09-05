@@ -258,7 +258,7 @@ public abstract class ExtraTransaction {
         @Override
         public void startWithPopTo(ISupportFragment toFragment, String targetFragmentTag, boolean includeTargetFragment) {
             toFragment.getSupportDelegate().mTransactionRecord = mRecord;
-            mTransactionDelegate.startWithPopTo(getFragmentManager(), mSupportF,
+            mTransactionDelegate.dispatchStartWithPopToTransaction(getFragmentManager(), mSupportF,
                     toFragment, targetFragmentTag, includeTargetFragment);
         }
 

@@ -5,15 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.common.weikaiyun.R;
 import com.common.weikaiyun.fragmentation.record.ResultRecord;
 import com.common.weikaiyun.fragmentation.record.TransactionRecord;
 
@@ -23,8 +20,6 @@ public class SupportFragmentDelegate {
     private TransactionDelegate mTransactionDelegate;
     TransactionRecord mTransactionRecord;
     Bundle mNewBundle;
-
-    boolean mPopNoAnim = false;
 
     private ISupportFragment mSupportF;
     private Fragment mFragment;
@@ -217,7 +212,7 @@ public class SupportFragmentDelegate {
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass,
                                boolean includeTargetFragment) {
 
-        mTransactionDelegate.startWithPopTo(mFragment.getParentFragmentManager(), mSupportF,
+        mTransactionDelegate.dispatchStartWithPopToTransaction(mFragment.getParentFragmentManager(), mSupportF,
                 toFragment, targetFragmentClass.getName(), includeTargetFragment);
     }
 

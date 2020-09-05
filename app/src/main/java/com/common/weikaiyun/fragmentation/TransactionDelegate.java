@@ -156,10 +156,8 @@ class TransactionDelegate {
         dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
     }
 
-    void startWithPopTo(final FragmentManager fm, final ISupportFragment from,
-                        final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
-        dispatchStartTransaction(fm, from, to, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD);
-
+    void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
+                                  final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
@@ -184,7 +182,11 @@ class TransactionDelegate {
 
                 FragmentationMagician.executePendingTransactions(fm);
 
-                safePopTo(fragmentTag, fm, flag);
+                String toFragmentTag = to.getClass().getName();
+                ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
+                start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
+
+                safePopTo(fragmentTag, fm, flag, willPopFragments);
             }
         });
     }
@@ -486,11 +488,16 @@ class TransactionDelegate {
 
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
-        safePopTo(targetFragmentTag, fm, flag);
+        safePopTo(targetFragmentTag, fm, flag, willPopFragments);
     }
 
-    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag) {
-        FragmentationMagician.popBackStack(fm, fragmentTag, flag);
+    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag, List<Fragment> willPopFragments) {
+        FragmentTransaction transaction = fm.beginTransaction();
+        for (Fragment fragment : willPopFragments) {
+            transaction.remove(fragment);
+        }
+        transaction.commit();
+        //FragmentationMagician.popBackStack(fm, fragmentTag, flag);
         FragmentationMagician.executePendingTransactions(fm);
     }
 
