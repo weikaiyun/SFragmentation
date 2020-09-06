@@ -145,34 +145,6 @@ public class SupportHelper {
         return parentFragment;
     }
 
-    /**
-     * Get the topFragment from BackStack
-     */
-    public static ISupportFragment getBackStackTopFragment(FragmentManager fragmentManager) {
-        return getBackStackTopFragment(fragmentManager, 0);
-    }
-
-    /**
-     * Get the topFragment from BackStack
-     */
-    public static ISupportFragment getBackStackTopFragment(FragmentManager fragmentManager, int containerId) {
-        int count = fragmentManager.getBackStackEntryCount();
-
-        for (int i = count - 1; i >= 0; i--) {
-            FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(i);
-            Fragment fragment = fragmentManager.findFragmentByTag(entry.getName());
-            if (fragment instanceof ISupportFragment) {
-                ISupportFragment supportFragment = (ISupportFragment) fragment;
-                if (containerId == 0) return supportFragment;
-
-                if (containerId == supportFragment.getSupportDelegate().mContainerId) {
-                    return supportFragment;
-                }
-            }
-        }
-        return null;
-    }
-
     @SuppressWarnings("unchecked")
     static <T extends ISupportFragment> T findBackStackFragment(Class<T> fragmentClass, String toFragmentTag, FragmentManager fragmentManager) {
         int count = fragmentManager.getBackStackEntryCount();

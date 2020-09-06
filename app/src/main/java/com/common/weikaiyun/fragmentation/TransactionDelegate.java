@@ -132,6 +132,64 @@ class TransactionDelegate {
     }
 
     /**
+     * Start the target Fragment and pop itself
+     */
+    void dispatchStartWithPopTransaction(final FragmentManager fm, final ISupportFragment from, final ISupportFragment to) {
+        enqueue(fm, new Action(Action.ACTION_POP) {
+            @Override
+            public void run() {
+                if (FragmentationMagician.isStateSaved(fm)) return;
+                ISupportFragment top = getTopFragmentForStart(from, fm);
+                if (top == null)
+                    throw new NullPointerException("There is no Fragment in the FragmentManager, " +
+                            "maybe you need to call loadRootFragment() first!");
+
+                int containerId = top.getSupportDelegate().mContainerId;
+                bindContainerId(containerId, to);
+
+                FragmentationMagician.popBackStack(fm);
+                FragmentationMagician.executePendingTransactions(fm);
+
+                String toFragmentTag = to.getClass().getName();
+                ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
+                start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
+            }
+        });
+    }
+
+    void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
+                                  final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
+        enqueue(fm, new Action(Action.ACTION_POP) {
+            @Override
+            public void run() {
+                if (FragmentationMagician.isStateSaved(fm)) return;
+
+                int flag = 0;
+                if (includeTargetFragment) {
+                    flag = FragmentManager.POP_BACK_STACK_INCLUSIVE;
+                }
+                List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
+
+                final ISupportFragment top = getTopFragmentForStart(from, fm);
+                if (top == null)
+                    throw new NullPointerException("There is no Fragment in the FragmentManager, " +
+                            "maybe you need to call loadRootFragment() first!");
+
+                int containerId = top.getSupportDelegate().mContainerId;
+                bindContainerId(containerId, to);
+
+                if (willPopFragments.size() <= 0) return;
+
+                safePopTo(fragmentTag, fm, flag);
+
+                String toFragmentTag = to.getClass().getName();
+                ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
+                start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
+            }
+        });
+    }
+
+    /**
      * Remove
      */
     void remove(final FragmentManager fm, final Fragment fragment, final boolean showPreFragment) {

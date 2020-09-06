@@ -16,7 +16,19 @@
         tools:text="Fragment"/>
 
     <TextView
-        android:id="@+id/button"
+        android:id="@+id/button1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        tools:text="button"
+        android:gravity="center"
+        android:background="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/button2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +41,7 @@
         android:background="@color/colorAccent"/>
 
     <TextView
-        android:id="@+id/button2"
+        android:id="@+id/button3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
