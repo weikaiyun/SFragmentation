@@ -134,7 +134,7 @@ class TransactionDelegate {
      * Start the target Fragment and pop itself
      */
     void dispatchStartWithPopTransaction(final FragmentManager fm, final ISupportFragment from, final ISupportFragment to) {
-        enqueue(fm, new Action(Action.ACTION_POP) {
+        enqueue(fm, new Action(Action.ACTION_NORMAL) {
             @Override
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
@@ -149,15 +149,18 @@ class TransactionDelegate {
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
                 start(fm, fromFragment, to, toFragmentTag, TransactionDelegate.TYPE_ADD);
+                FragmentationMagician.executePendingTransactions(fm);
+
+                FragmentTransaction ft = fm.beginTransaction()
+                        .remove((Fragment) from);
+                supportCommit(fm, ft);
             }
         });
-
-        remove(fm, (Fragment) from);
     }
 
     void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
                                   final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
-        enqueue(fm, new Action(Action.ACTION_POP) {
+        enqueue(fm, new Action(Action.ACTION_NORMAL) {
             @Override
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
@@ -177,6 +180,7 @@ class TransactionDelegate {
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
                 start(fm, fromFragment, to, toFragmentTag, TransactionDelegate.TYPE_ADD);
+                FragmentationMagician.executePendingTransactions(fm);
 
                 safePopTo(fm, willPopFragments);
             }
@@ -203,37 +207,26 @@ class TransactionDelegate {
             if (FragmentationMagician.isStateSaved(fm)) return;
             if (top != null) {
                 FragmentTransaction ft = fm.beginTransaction();
-                TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
-                if (record != null) {
-                    if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
-                        ft.setCustomAnimations(record.targetFragmentEnter, record.currentFragmentPopExit, 0, 0);
-                    }
-                } else {
-                    ft.setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit,
-                            0, 0);
-                }
-                ft.remove((Fragment) top);
                 ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
                 if (preFragment instanceof Fragment) {
                     ft.show((Fragment) preFragment);
                     ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
                 }
+                TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
+                if (record != null) {
+                    if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
+                        ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
+                    }
+                } else {
+                    ft.setCustomAnimations(R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit,
+                            0, 0);
+                }
+                ft.remove((Fragment) top);
                 ft.commitAllowingStateLoss();
             }
         } catch (Exception ignored) {
 
         }
-    }
-
-    void remove(final FragmentManager fm, final Fragment fragment) {
-        enqueue(fm, new Action(Action.ACTION_REMOVE, fm) {
-            @Override
-            public void run() {
-                FragmentTransaction ft = fm.beginTransaction()
-                        .remove(fragment);
-                supportCommit(fm, ft);
-            }
-        });
     }
 
     /**
