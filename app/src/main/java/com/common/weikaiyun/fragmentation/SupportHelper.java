@@ -145,27 +145,6 @@ public class SupportHelper {
         return parentFragment;
     }
 
-    @SuppressWarnings("unchecked")
-    static <T extends ISupportFragment> T findBackStackFragment(Class<T> fragmentClass, String toFragmentTag, FragmentManager fragmentManager) {
-        int count = fragmentManager.getBackStackEntryCount();
-
-        if (toFragmentTag == null) {
-            toFragmentTag = fragmentClass.getName();
-        }
-
-        for (int i = count - 1; i >= 0; i--) {
-            FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(i);
-
-            if (toFragmentTag.equals(entry.getName())) {
-                Fragment fragment = fragmentManager.findFragmentByTag(entry.getName());
-                if (fragment instanceof ISupportFragment) {
-                    return (T) fragment;
-                }
-            }
-        }
-        return null;
-    }
-
     static List<Fragment> getWillPopFragments(FragmentManager fm, String targetTag, boolean includeTarget) {
         Fragment target = fm.findFragmentByTag(targetTag);
         List<Fragment> willPopFragments = new ArrayList<>();

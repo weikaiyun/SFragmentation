@@ -431,7 +431,7 @@ class TransactionDelegate {
                                      final ISupportFragment to, String toFragmentTag, int launchMode) {
 
         if (topFragment == null) return false;
-        final ISupportFragment stackToFragment = SupportHelper.findBackStackFragment(to.getClass(), toFragmentTag, fm);
+        final ISupportFragment stackToFragment = SupportHelper.findStackFragment(to.getClass(), toFragmentTag, fm);
         if (stackToFragment == null) return false;
 
         if (launchMode == ISupportFragment.SINGLETOP) {
@@ -488,7 +488,28 @@ class TransactionDelegate {
 
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
-        safePopTo(fm, willPopFragments);
+
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment top = willPopFragments.get(0);
+        TransactionRecord record = ((ISupportFragment) top).getSupportDelegate().mTransactionRecord;
+        if (record != null) {
+            if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
+                ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
+            }
+        } else {
+            ft.setCustomAnimations(R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit,
+                    0, 0);
+        }
+
+        for (Fragment fragment : willPopFragments) {
+            ft.remove(fragment);
+        }
+
+        ft.show(targetFragment);
+        ft.setMaxLifecycle(targetFragment, Lifecycle.State.RESUMED);
+        ft.commit();
+
+        FragmentationMagician.executePendingTransactions(fm);
     }
 
     private void safePopTo(final FragmentManager fm, List<Fragment> willPopFragments) {
