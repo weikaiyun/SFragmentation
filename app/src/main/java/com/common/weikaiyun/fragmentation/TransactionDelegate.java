@@ -153,7 +153,7 @@ class TransactionDelegate {
             }
         });
 
-        enqueue(fm, new Action(Action.ACTION_NORMAL) {
+        enqueue(fm, new Action() {
             @Override
             public void run() {
                 FragmentTransaction ft = fm.beginTransaction()
@@ -188,7 +188,7 @@ class TransactionDelegate {
             }
         });
 
-        enqueue(fm, new Action(Action.ACTION_NORMAL) {
+        enqueue(fm, new Action() {
             @Override
             public void run() {
                 safePopTo(fm, willPopFragments);
@@ -210,17 +210,13 @@ class TransactionDelegate {
     }
 
     private void removeTopFragment(FragmentManager fm) {
-        try {
-            ISupportFragment top = SupportHelper.getTopFragment(fm);
-
-            if (FragmentationMagician.isStateSaved(fm)) return;
-            if (top != null) {
+        if (FragmentationMagician.isStateSaved(fm)) return;
+        ISupportFragment top = SupportHelper.getTopFragment(fm);
+        enqueue(fm, new Action(Action.ACTION_POP) {
+            @Override
+            public void run() {
                 FragmentTransaction ft = fm.beginTransaction();
                 ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
-                if (preFragment instanceof Fragment) {
-                    ft.show((Fragment) preFragment);
-                    ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
-                }
                 TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
                 if (record != null) {
                     if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
@@ -231,11 +227,13 @@ class TransactionDelegate {
                             0, 0);
                 }
                 ft.remove((Fragment) top);
-                ft.commitAllowingStateLoss();
+                if (preFragment instanceof Fragment) {
+                    ft.show((Fragment) preFragment);
+                    ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
+                }
+                ft.commit();
             }
-        } catch (Exception ignored) {
-
-        }
+        });
     }
 
     /**
