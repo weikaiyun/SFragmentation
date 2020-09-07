@@ -9,7 +9,6 @@ public abstract class Action {
     public static final int ACTION_POP = 1;
     public static final int ACTION_BACK = 2;
     public static final int ACTION_LOAD = 3;
-    public static final int ACTION_REMOVE = 4;
 
     public FragmentManager fragmentManager;
     public int action = ACTION_NORMAL;

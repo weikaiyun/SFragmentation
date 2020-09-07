@@ -134,7 +134,7 @@ class TransactionDelegate {
      * Start the target Fragment and pop itself
      */
     void dispatchStartWithPopTransaction(final FragmentManager fm, final ISupportFragment from, final ISupportFragment to) {
-        enqueue(fm, new Action(Action.ACTION_NORMAL) {
+        enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
@@ -149,8 +149,12 @@ class TransactionDelegate {
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
                 start(fm, fromFragment, to, toFragmentTag, TransactionDelegate.TYPE_ADD);
-                FragmentationMagician.executePendingTransactions(fm);
+            }
+        });
 
+        enqueue(fm, new Action(Action.ACTION_NORMAL) {
+            @Override
+            public void run() {
                 FragmentTransaction ft = fm.beginTransaction()
                         .remove((Fragment) from);
                 supportCommit(fm, ft);
@@ -160,12 +164,11 @@ class TransactionDelegate {
 
     void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
                                   final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
-        enqueue(fm, new Action(Action.ACTION_NORMAL) {
+        List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
+        enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
-
-                List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
 
                 final ISupportFragment top = getTopFragmentForStart(from, fm);
                 if (top == null)
@@ -180,8 +183,12 @@ class TransactionDelegate {
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
                 start(fm, fromFragment, to, toFragmentTag, TransactionDelegate.TYPE_ADD);
-                FragmentationMagician.executePendingTransactions(fm);
+            }
+        });
 
+        enqueue(fm, new Action(Action.ACTION_NORMAL) {
+            @Override
+            public void run() {
                 safePopTo(fm, willPopFragments);
             }
         });
