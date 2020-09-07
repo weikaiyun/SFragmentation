@@ -103,12 +103,6 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
         mDelegate.loadRootFragment(containerId, toFragment);
     }
 
-    public void loadRootFragment(int containerId, ISupportFragment toFragment,
-                                 boolean addToBackStack) {
-
-        mDelegate.loadRootFragment(containerId, toFragment, addToBackStack);
-    }
-
     /**
      * 加载多个同级根Fragment
      */
@@ -182,10 +176,10 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
 
 
     /**
-     * It is recommended to use {@link SupportFragment#replaceFragment(ISupportFragment, boolean)}.
+     * It is recommended to use {@link SupportFragment#replaceFragment(ISupportFragment)}.
      */
-    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
-        mDelegate.replaceFragment(toFragment, addToBackStack);
+    public void replaceFragment(ISupportFragment toFragment) {
+        mDelegate.replaceFragment(toFragment);
     }
 
     /**

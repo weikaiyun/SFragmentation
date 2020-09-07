@@ -35,7 +35,6 @@ class TransactionDelegate {
     static final int TYPE_ADD_WITHOUT_HIDE = 2;
     static final int TYPE_ADD_RESULT_WITHOUT_HIDE = 3;
     static final int TYPE_REPLACE = 4;
-    static final int TYPE_REPLACE_NOT_BACK = 5;
 
     private Handler mHandler;
 
@@ -56,7 +55,7 @@ class TransactionDelegate {
     }
 
     void loadRootTransaction(final FragmentManager fm, final int containerId,
-                             final ISupportFragment to, final boolean addToBackStack) {
+                             final ISupportFragment to) {
 
         enqueue(fm, new Action(Action.ACTION_LOAD) {
             @Override
@@ -71,7 +70,7 @@ class TransactionDelegate {
                     }
                 }
 
-                start(fm, null, to, toFragmentTag, !addToBackStack, TYPE_REPLACE);
+                start(fm, null, to, toFragmentTag, TYPE_REPLACE);
             }
         });
     }
@@ -147,14 +146,13 @@ class TransactionDelegate {
                 int containerId = top.getSupportDelegate().mContainerId;
                 bindContainerId(containerId, to);
 
-                FragmentationMagician.popBackStack(fm);
-                FragmentationMagician.executePendingTransactions(fm);
-
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
-                start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
+                start(fm, fromFragment, to, toFragmentTag, TransactionDelegate.TYPE_ADD);
             }
         });
+
+        remove(fm, (Fragment) from);
     }
 
     void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
@@ -164,10 +162,6 @@ class TransactionDelegate {
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
 
-                int flag = 0;
-                if (includeTargetFragment) {
-                    flag = FragmentManager.POP_BACK_STACK_INCLUSIVE;
-                }
                 List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
 
                 final ISupportFragment top = getTopFragmentForStart(from, fm);
@@ -180,32 +174,11 @@ class TransactionDelegate {
 
                 if (willPopFragments.size() <= 0) return;
 
-                safePopTo(fragmentTag, fm, flag);
-
                 String toFragmentTag = to.getClass().getName();
                 ISupportFragment fromFragment = getTopFragmentForStart(from, fm);
-                start(fm, fromFragment, to, toFragmentTag, false, TransactionDelegate.TYPE_ADD);
-            }
-        });
-    }
+                start(fm, fromFragment, to, toFragmentTag, TransactionDelegate.TYPE_ADD);
 
-    /**
-     * Remove
-     */
-    void remove(final FragmentManager fm, final Fragment fragment, final boolean showPreFragment) {
-        enqueue(fm, new Action(Action.ACTION_POP, fm) {
-            @Override
-            public void run() {
-                FragmentTransaction ft = fm.beginTransaction()
-                        .remove(fragment);
-                if (showPreFragment) {
-                    ISupportFragment preFragment = SupportHelper.getPreFragment(fragment);
-                    if (preFragment instanceof Fragment) {
-                        ft.show((Fragment) preFragment);
-                        ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
-                    }
-                }
-                supportCommit(fm, ft);
+                safePopTo(fm, willPopFragments);
             }
         });
     }
@@ -218,7 +191,47 @@ class TransactionDelegate {
             @Override
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
-                FragmentationMagician.popBackStack(fm);
+                removeTopFragment(fm);
+            }
+        });
+    }
+
+    private void removeTopFragment(FragmentManager fm) {
+        try {
+            ISupportFragment top = SupportHelper.getTopFragment(fm);
+
+            if (FragmentationMagician.isStateSaved(fm)) return;
+            if (top != null) {
+                FragmentTransaction ft = fm.beginTransaction();
+                TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
+                if (record != null) {
+                    if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
+                        ft.setCustomAnimations(record.targetFragmentEnter, record.currentFragmentPopExit, 0, 0);
+                    }
+                } else {
+                    ft.setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit,
+                            0, 0);
+                }
+                ft.remove((Fragment) top);
+                ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
+                if (preFragment instanceof Fragment) {
+                    ft.show((Fragment) preFragment);
+                    ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
+                }
+                ft.commitAllowingStateLoss();
+            }
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    void remove(final FragmentManager fm, final Fragment fragment) {
+        enqueue(fm, new Action(Action.ACTION_REMOVE, fm) {
+            @Override
+            public void run() {
+                FragmentTransaction ft = fm.beginTransaction()
+                        .remove(fragment);
+                supportCommit(fm, ft);
             }
         });
     }
@@ -312,18 +325,16 @@ class TransactionDelegate {
 
         // process ExtraTransaction
         String toFragmentTag = to.getClass().getName();
-        boolean notAddToBackStack = false;
         TransactionRecord transactionRecord = to.getSupportDelegate().mTransactionRecord;
         if (transactionRecord != null) {
             if (transactionRecord.tag != null) {
                 toFragmentTag = transactionRecord.tag;
             }
-            notAddToBackStack = transactionRecord.notAddToBackStack;
         }
 
         if (handleLaunchMode(fm, from, to, toFragmentTag, launchMode)) return;
 
-        start(fm, from, to, toFragmentTag, notAddToBackStack, type);
+        start(fm, from, to, toFragmentTag, type);
     }
 
     private ISupportFragment getTopFragmentForStart(ISupportFragment from, FragmentManager fm) {
@@ -337,7 +348,7 @@ class TransactionDelegate {
     }
 
     private void start(FragmentManager fm, final ISupportFragment from, ISupportFragment to, String toFragmentTag,
-                       boolean notAddToBackStack, int type) {
+                       int type) {
         FragmentTransaction ft = fm.beginTransaction();
         boolean addMode = (type == TYPE_ADD
                 || type == TYPE_ADD_RESULT
@@ -357,11 +368,11 @@ class TransactionDelegate {
                 if (record != null) {
                     if (record.targetFragmentEnter != Integer.MIN_VALUE) {
                         ft.setCustomAnimations(record.targetFragmentEnter, record.currentFragmentPopExit,
-                                record.currentFragmentPopEnter, record.targetFragmentExit);
+                                0, 0);
                     }
                 } else {
                     ft.setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit,
-                            R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit);
+                            0, 0);
                 }
                 ft.add(from.getSupportDelegate().mContainerId, toF, toFragmentTag);
                 ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
@@ -373,10 +384,6 @@ class TransactionDelegate {
                 ft.replace(from.getSupportDelegate().mContainerId, toF, toFragmentTag);
                 ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
             }
-        }
-
-        if (!notAddToBackStack && type != TYPE_REPLACE_NOT_BACK) {
-            ft.addToBackStack(toFragmentTag);
         }
         supportCommit(fm, ft);
     }
@@ -479,18 +486,17 @@ class TransactionDelegate {
             return;
         }
 
-        int flag = 0;
-        if (includeTargetFragment) {
-            flag = FragmentManager.POP_BACK_STACK_INCLUSIVE;
-        }
-
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
-        safePopTo(targetFragmentTag, fm, flag);
+        safePopTo(fm, willPopFragments);
     }
 
-    private void safePopTo(String fragmentTag, final FragmentManager fm, int flag) {
-        FragmentationMagician.popBackStack(fm, fragmentTag, flag);
+    private void safePopTo(final FragmentManager fm, List<Fragment> willPopFragments) {
+        FragmentTransaction transaction = fm.beginTransaction();
+        for (Fragment fragment : willPopFragments) {
+            transaction.remove(fragment);
+        }
+        transaction.commit();
         FragmentationMagician.executePendingTransactions(fm);
     }
 

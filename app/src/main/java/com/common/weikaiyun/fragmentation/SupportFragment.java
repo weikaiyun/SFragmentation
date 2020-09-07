@@ -209,10 +209,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         mDelegate.loadRootFragment(containerId, toFragment);
     }
 
-    public void loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack) {
-        mDelegate.loadRootFragment(containerId, toFragment, addToBackStack);
-    }
-
     /**
      * 加载多个同级根Fragment
      */
@@ -275,8 +271,8 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
 
 
-    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
-        mDelegate.replaceFragment(toFragment, addToBackStack);
+    public void replaceFragment(ISupportFragment toFragment) {
+        mDelegate.replaceFragment(toFragment);
     }
 
     public void pop() {

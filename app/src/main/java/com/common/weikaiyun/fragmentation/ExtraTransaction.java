@@ -31,8 +31,6 @@ public abstract class ExtraTransaction {
 
     public abstract void loadRootFragment(int containerId, ISupportFragment toFragment);
 
-    public abstract void loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack);
-
     public abstract void start(ISupportFragment toFragment);
 
     public abstract void startNotHideSelf(ISupportFragment toFragment);
@@ -66,43 +64,11 @@ public abstract class ExtraTransaction {
     public abstract void popToChild(String targetFragmentTag, boolean includeTargetFragment, Runnable afterPopTransactionRunnable);
 
 
-
-    /**
-     * 非回退站操作必须通过此类进行。
-     * Don't add this extraTransaction to the back stack.
-     */
-    public abstract NotAddToBackStackTransaction notAddToBackStack();
-
-    public interface NotAddToBackStackTransaction {
-        /**
-         * add() +  hide(preFragment)
-         */
-        void start(ISupportFragment toFragment);
-
-        /**
-         * Only add()
-         */
-        void add(ISupportFragment toFragment);
-
-        /**
-         * replace()
-         */
-        void replace(ISupportFragment toFragment);
-
-        /**
-         * 使用notAddToBackStack() 加载Fragment时， 使用remove()移除Fragment
-         */
-        void remove(ISupportFragment fragment, boolean showPreFragment);
-    }
-
-
-
-
     /**
      * Impl
      */
     final static class ExtraTransactionImpl<T extends ISupportFragment>
-            extends ExtraTransaction implements NotAddToBackStackTransaction {
+            extends ExtraTransaction {
 
         private FragmentActivity mActivity;
         private T mSupportF;
@@ -122,26 +88,9 @@ public abstract class ExtraTransaction {
             mRecord = new TransactionRecord();
         }
 
-        //operation not add to back stack
-        /**************************************************************************/
-
-        @Override
-        public NotAddToBackStackTransaction notAddToBackStack() {
-            mRecord.notAddToBackStack = true;
-            return this;
-        }
-
         @Override
         public void start(ISupportFragment toFragment) {
             start(toFragment, ISupportFragment.STANDARD);
-        }
-
-        @Override
-        public void add(ISupportFragment toFragment) {
-
-            toFragment.getSupportDelegate().mTransactionRecord = mRecord;
-            mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), mSupportF,
-                    toFragment, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_ADD_WITHOUT_HIDE);
         }
 
         @Override
@@ -150,13 +99,6 @@ public abstract class ExtraTransaction {
             mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), mSupportF,
                     toFragment, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_REPLACE);
         }
-
-        @Override
-        public void remove(ISupportFragment fragment, boolean showPreFragment) {
-            mTransactionDelegate.remove(getFragmentManager(), (Fragment) fragment, showPreFragment);
-        }
-
-        /**************************************************************************/
 
         @Override
         public ExtraTransaction setTag(String tag) {
@@ -175,13 +117,8 @@ public abstract class ExtraTransaction {
 
         @Override
         public void loadRootFragment(int containerId, ISupportFragment toFragment) {
-            loadRootFragment(containerId, toFragment, true);
-        }
-
-        @Override
-        public void loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack) {
             toFragment.getSupportDelegate().mTransactionRecord = mRecord;
-            mTransactionDelegate.loadRootTransaction(getFragmentManager(), containerId, toFragment, addToBackStack);
+            mTransactionDelegate.loadRootTransaction(getFragmentManager(), containerId, toFragment);
         }
 
         @Override

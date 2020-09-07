@@ -142,15 +142,11 @@ public class SupportFragmentDelegate {
     /**
      * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
      */
-    public void loadRootFragment(int containerId, ISupportFragment toFragment) {
-        loadRootFragment(containerId, toFragment, true);
-    }
 
-    public void loadRootFragment(int containerId, ISupportFragment toFragment,
-                                 boolean addToBackStack) {
+    public void loadRootFragment(int containerId, ISupportFragment toFragment) {
 
         mTransactionDelegate.loadRootTransaction(getChildFragmentManager(),
-                containerId, toFragment, addToBackStack);
+                containerId, toFragment);
     }
 
     /**
@@ -216,11 +212,11 @@ public class SupportFragmentDelegate {
                 toFragment, targetFragmentClass.getName(), includeTargetFragment);
     }
 
-    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
+    public void replaceFragment(ISupportFragment toFragment) {
 
         mTransactionDelegate.dispatchStartTransaction(mFragment.getParentFragmentManager(), mSupportF,
                 toFragment, 0, ISupportFragment.STANDARD,
-                addToBackStack ? TransactionDelegate.TYPE_REPLACE : TransactionDelegate.TYPE_REPLACE_NOT_BACK);
+                TransactionDelegate.TYPE_REPLACE);
     }
 
     public void startChild(ISupportFragment toFragment) {
@@ -243,10 +239,9 @@ public class SupportFragmentDelegate {
         mTransactionDelegate.dispatchStartWithPopTransaction(getChildFragmentManager(), getChildTopFragment(), toFragment);
     }
 
-    public void replaceChildFragment(ISupportFragment toFragment, boolean addToBackStack) {
+    public void replaceChildFragment(ISupportFragment toFragment) {
         mTransactionDelegate.dispatchStartTransaction(getChildFragmentManager(), getChildTopFragment(),
-                toFragment, 0, ISupportFragment.STANDARD,
-                addToBackStack ? TransactionDelegate.TYPE_REPLACE : TransactionDelegate.TYPE_REPLACE_NOT_BACK);
+                toFragment, 0, ISupportFragment.STANDARD, TransactionDelegate.TYPE_REPLACE);
     }
 
     public void pop() {

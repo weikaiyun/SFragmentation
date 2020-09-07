@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentationMagician;
 
 import com.common.weikaiyun.fragmentation.queue.Action;
 
@@ -77,7 +78,7 @@ public class SupportActivityDelegate {
      * 请尽量复写该方法,避免复写onBackPress(),以保证SupportFragment内的onBackPressedSupport()回退事件正常执行
      */
     public void onBackPressedSupport() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+        if (FragmentationMagician.getActiveFragments(getSupportFragmentManager()).size() > 1) {
             pop();
         } else {
             ActivityCompat.finishAfterTransition(mActivity);
@@ -89,14 +90,11 @@ public class SupportActivityDelegate {
     /**
      * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
      */
-    public void loadRootFragment(int containerId, ISupportFragment toFragment) {
-        loadRootFragment(containerId, toFragment, true);
-    }
 
-    public void loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack) {
+    public void loadRootFragment(int containerId, ISupportFragment toFragment) {
 
         mTransactionDelegate.loadRootTransaction(getSupportFragmentManager(),
-                containerId, toFragment, addToBackStack);
+                containerId, toFragment);
     }
 
     /**
@@ -170,11 +168,11 @@ public class SupportActivityDelegate {
                 getTopFragment(), toFragment, targetFragmentClass.getName(), includeTargetFragment);
     }
 
-    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
+    public void replaceFragment(ISupportFragment toFragment) {
 
         mTransactionDelegate.dispatchStartTransaction(getSupportFragmentManager(),
                 getTopFragment(), toFragment, 0, ISupportFragment.STANDARD,
-                addToBackStack ? TransactionDelegate.TYPE_REPLACE : TransactionDelegate.TYPE_REPLACE_NOT_BACK);
+                TransactionDelegate.TYPE_REPLACE);
     }
 
     /**
