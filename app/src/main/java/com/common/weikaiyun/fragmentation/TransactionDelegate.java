@@ -204,12 +204,12 @@ class TransactionDelegate {
             @Override
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
-                removeTopFragment(fm);
+                doPop(fm);
             }
         });
     }
 
-    private void removeTopFragment(FragmentManager fm) {
+    private void doPop(FragmentManager fm) {
         if (FragmentationMagician.isStateSaved(fm)) return;
         ISupportFragment top = SupportHelper.getTopFragment(fm);
         enqueue(fm, new Action(Action.ACTION_POP) {
@@ -489,8 +489,16 @@ class TransactionDelegate {
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
 
-        FragmentTransaction ft = fm.beginTransaction();
         Fragment top = willPopFragments.get(0);
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.setReorderingAllowed(false);
+
+        willPopFragments.remove(0);
+        for (Fragment fragment : willPopFragments) {
+            ft.remove(fragment);
+        }
+
         TransactionRecord record = ((ISupportFragment) top).getSupportDelegate().mTransactionRecord;
         if (record != null) {
             if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
@@ -501,9 +509,7 @@ class TransactionDelegate {
                     0, 0);
         }
 
-        for (Fragment fragment : willPopFragments) {
-            ft.remove(fragment);
-        }
+        ft.remove(top);
 
         ft.show(targetFragment);
         ft.setMaxLifecycle(targetFragment, Lifecycle.State.RESUMED);
