@@ -134,6 +134,7 @@ class TransactionDelegate {
      * Start the target Fragment and pop itself
      */
     void dispatchStartWithPopTransaction(final FragmentManager fm, final ISupportFragment from, final ISupportFragment to) {
+        //此处需要设置 ACTION_POP， 动画效果更自然
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
@@ -165,6 +166,7 @@ class TransactionDelegate {
     void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
                                   final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
+        //此处需要设置 ACTION_POP， 动画效果更自然
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
