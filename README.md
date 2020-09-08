@@ -8,7 +8,7 @@ Fragmentation(https://github.com/YoKeyword/Fragmentation) 的简化版本， 只
 
 推荐使用NoBackStack分支。
 
-现在添加了基本使用demo startWithPop和startWithPopTo两个方法可以被完美替代。用法见DemoFragment4和DemoFragment5。
+现在添加了基本使用demo startWithPop和startWithPopTo可以比较好地进行处理。用法见DemoFragment4和DemoFragment5。
 
 库里面还有AdapterDelegate个人觉得也是完全可以看懂的库(感谢 https://github.com/sockeqwe/AdapterDelegates )，方便ReclerView使用，http://hannesdorfmann.com/android/adapter-delegates
 
