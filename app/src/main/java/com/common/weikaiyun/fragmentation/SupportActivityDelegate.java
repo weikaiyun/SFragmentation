@@ -5,11 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentationMagician;
 
 import com.common.weikaiyun.fragmentation.queue.Action;
+
+import java.util.List;
 
 public class SupportActivityDelegate {
     private ISupportActivity mSupport;
@@ -81,7 +84,14 @@ public class SupportActivityDelegate {
      * 请尽量复写该方法,避免复写onBackPress(),以保证SupportFragment内的onBackPressedSupport()回退事件正常执行
      */
     public void onBackPressedSupport() {
-        if (FragmentationMagician.getActiveFragments(getSupportFragmentManager()).size() > 1) {
+        List<Fragment> list = FragmentationMagician.getActiveFragments(getSupportFragmentManager());
+        int fragmentNum = 0;
+        for (Fragment f : list) {
+            if (f instanceof ISupportFragment) {
+                fragmentNum++;
+            }
+        }
+        if (fragmentNum > 1) {
             pop();
         } else {
             ActivityCompat.finishAfterTransition(mActivity);
