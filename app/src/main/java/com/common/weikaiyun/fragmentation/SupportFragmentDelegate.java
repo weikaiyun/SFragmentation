@@ -3,6 +3,7 @@ package com.common.weikaiyun.fragmentation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 
@@ -63,7 +64,33 @@ public class SupportFragmentDelegate {
     }
 
     public void onViewCreated(@Nullable Bundle savedInstanceState) {
+        View view = mFragment.getView();
+        if (view != null) {
+            setBackground(view);
+        }
+    }
 
+    public void setBackground(View view) {
+        if (view.getBackground() != null) {
+            return;
+        }
+
+        int defaultBg = mSupport.getSupportDelegate().getDefaultFragmentBackground();
+        if (defaultBg == 0) {
+            int background = getWindowBackground();
+            view.setBackgroundResource(background);
+        } else {
+            view.setBackgroundResource(defaultBg);
+        }
+    }
+
+    private int getWindowBackground() {
+        TypedArray a = _mActivity.getTheme().obtainStyledAttributes(new int[]{
+                android.R.attr.windowBackground
+        });
+        int background = a.getResourceId(0, 0);
+        a.recycle();
+        return background;
     }
 
     public void onDestroy() {

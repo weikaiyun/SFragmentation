@@ -2,6 +2,7 @@ package com.common.weikaiyun.fragmentation;
 
 import android.os.Bundle;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -15,6 +16,8 @@ public class SupportActivityDelegate {
     private FragmentActivity mActivity;
 
     private TransactionDelegate mTransactionDelegate;
+
+    private int mDefaultFragmentBackground = 0;
 
     public SupportActivityDelegate(ISupportActivity support) {
         if (!(support instanceof FragmentActivity))
@@ -213,5 +216,18 @@ public class SupportActivityDelegate {
 
     private ISupportFragment getTopFragment() {
         return SupportHelper.getTopFragment(getSupportFragmentManager());
+    }
+
+    /**
+     * 当Fragment根布局 没有设定background属性时,
+     * Fragmentation默认使用Theme的android:windowbackground作为Fragment的背景,
+     * 可以通过该方法改变Fragment背景。
+     */
+    public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
+        mDefaultFragmentBackground = backgroundRes;
+    }
+
+    public int getDefaultFragmentBackground() {
+        return mDefaultFragmentBackground;
     }
 }
