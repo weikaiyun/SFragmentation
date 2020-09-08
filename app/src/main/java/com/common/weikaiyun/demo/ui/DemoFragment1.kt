@@ -5,6 +5,7 @@ import android.view.View
 import com.common.weikaiyun.R
 import com.common.weikaiyun.fragmentation.SupportFragment
 import com.common.weikaiyun.fragmentation.fragmentargument.argument
+import com.common.weikaiyun.util.trigger
 import kotlinx.android.synthetic.main.fragment_demo.*
 
 class DemoFragment1 : SupportFragment() {
@@ -22,7 +23,9 @@ class DemoFragment1 : SupportFragment() {
         title.text = "DemoFragment$param1"
         button.text = param2
         button.setOnClickListener {
-            start(DemoFragment2.newInstance(2, "start3"))
+            it.trigger(1000) {
+                start(DemoFragment2.newInstance(2, "start3"))
+            }
         }
     }
 
