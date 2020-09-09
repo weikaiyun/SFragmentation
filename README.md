@@ -1,6 +1,6 @@
 # EasyFragmentation
 关于fragment管理 建议大家看下youtube上这个视频课 讲解很好 https://www.youtube.com/playlist?list=PLfuE3hOAeWhZDH-wHD0BJsJl7PpEW-wN8
-fragment懒加载可以利用setMaxLifeCycle实现 SupportViewDelegate个人觉得不再需要
+fragment懒加载可以利用setMaxLifeCycle实现
 关于setMaxLifeCycle请大家查看此库 https://github.com/AndyJennifer/AndroidxLazyLoad
 和此文档https://juejin.im/post/5e232d01e51d455801624c06 个人觉得写得很好
 
