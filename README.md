@@ -26,5 +26,5 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.weikaiyun:EasyFragmentation:1.0.1'
+	implementation 'com.github.weikaiyun:EasyFragmentation:1.0.2'
 }
