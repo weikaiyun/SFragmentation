@@ -88,11 +88,12 @@ class TransactionDelegate {
 
                     String toName = to.getClass().getName();
                     ft.add(containerId, to, toName);
-                    ft.setMaxLifecycle(to, Lifecycle.State.RESUMED);
 
                     if (i != showPosition) {
                         ft.hide(to);
                         ft.setMaxLifecycle(to, Lifecycle.State.STARTED);
+                    } else {
+                        ft.setMaxLifecycle(to, Lifecycle.State.RESUMED);
                     }
                 }
 
