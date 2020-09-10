@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.weikaiyun.fragmentation.record.ResultRecord;
 import com.weikaiyun.fragmentation.record.TransactionRecord;
 
+
 public class SupportFragmentDelegate {
     int mContainerId;
 

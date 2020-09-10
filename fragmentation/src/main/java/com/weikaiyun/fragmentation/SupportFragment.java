@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     protected SupportActivity _mActivity;
 
     private boolean isLoaded;
+
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -97,11 +99,11 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     public void onVisible() {
-
+        Log.d("SupportFragment", "onVisible :" + this.getClass().getSimpleName());
     }
 
     public void onInvisible() {
-
+        Log.d("SupportFragment", "onInvisible :" + this.getClass().getSimpleName());
     }
 
     @Override
@@ -111,8 +113,8 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     @Override
     public void onDestroy() {
-        mDelegate.onDestroy();
         isLoaded = false;
+        mDelegate.onDestroy();
         super.onDestroy();
     }
 
@@ -268,7 +270,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
         mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
     }
-
 
 
     public void replaceFragment(ISupportFragment toFragment) {

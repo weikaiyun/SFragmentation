@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 abstract public class SupportActivity extends AppCompatActivity implements ISupportActivity {
     final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
 
+    private boolean isLoaded;
+
     @Override
     public SupportActivityDelegate getSupportDelegate() {
         return mDelegate;
@@ -37,12 +39,25 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
         if (getContentViewID() != 0) {
             setContentView(getContentViewID());
         }
+
         init(savedInstanceState);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isLoaded) {
+            lazyInit();
+            isLoaded = true;
+        }
+    }
+
+    public void lazyInit() {
     }
 
     @Override
@@ -54,6 +69,7 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        isLoaded = false;
     }
 
     private void init(@Nullable Bundle savedInstanceState) {
@@ -175,7 +191,6 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
         mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
     }
 
-
     /**
      * It is recommended to use {@link SupportFragment#replaceFragment(ISupportFragment)}.
      */
@@ -211,6 +226,15 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     }
 
     /**
+     * 当Fragment根布局 没有 设定background属性时,
+     * Fragmentation默认使用Theme的android:windowbackground作为Fragment的背景,
+     * 可以通过该方法改变其内所有Fragment的默认背景。
+     */
+    public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
+        mDelegate.setDefaultFragmentBackground(backgroundRes);
+    }
+
+    /**
      * 得到位于栈顶Fragment
      */
     public ISupportFragment getTopFragment() {
@@ -222,14 +246,5 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
      */
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getSupportFragmentManager(), fragmentClass);
-    }
-
-    /**
-     * 当Fragment根布局 没有 设定background属性时,
-     * Fragmentation默认使用Theme的android:windowbackground作为Fragment的背景,
-     * 可以通过该方法改变其内所有Fragment的默认背景。
-     */
-    public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
-        mDelegate.setDefaultFragmentBackground(backgroundRes);
     }
 }

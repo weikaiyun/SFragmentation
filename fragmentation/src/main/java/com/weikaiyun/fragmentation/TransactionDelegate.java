@@ -88,12 +88,11 @@ class TransactionDelegate {
 
                     String toName = to.getClass().getName();
                     ft.add(containerId, to, toName);
+                    ft.setMaxLifecycle(to, Lifecycle.State.RESUMED);
 
                     if (i != showPosition) {
                         ft.hide(to);
                         ft.setMaxLifecycle(to, Lifecycle.State.STARTED);
-                    } else {
-                        ft.setMaxLifecycle(to, Lifecycle.State.RESUMED);
                     }
                 }
 
@@ -164,7 +163,7 @@ class TransactionDelegate {
     }
 
     void dispatchStartWithPopToTransaction(final FragmentManager fm, final ISupportFragment from,
-                                  final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
+                                           final ISupportFragment to, final String fragmentTag, final boolean includeTargetFragment) {
         final List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, fragmentTag, includeTargetFragment);
         //此处需要设置 ACTION_POP， 动画效果更自然
         enqueue(fm, new Action(Action.ACTION_POP) {
