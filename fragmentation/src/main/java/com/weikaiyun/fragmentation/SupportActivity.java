@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * {@link ISupportActivity} and
  * {@link AppCompatActivity} APIs.
  */
-abstract public class BaseActivity extends AppCompatActivity implements ISupportActivity {
+abstract public class SupportActivity extends AppCompatActivity implements ISupportActivity {
     final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
 
     private boolean isLoaded;
@@ -147,14 +147,14 @@ abstract public class BaseActivity extends AppCompatActivity implements ISupport
     }
 
     /**
-     * It is recommended to use {@link BaseFragment#start(ISupportFragment)}.
+     * It is recommended to use {@link SupportFragment#start(ISupportFragment)}.
      */
     public void start(ISupportFragment toFragment) {
         mDelegate.start(toFragment);
     }
 
     /**
-     * It is recommended to use {@link BaseFragment#start(ISupportFragment, int)}.
+     * It is recommended to use {@link SupportFragment#start(ISupportFragment, int)}.
      *
      * @param launchMode Similar to Activity's LaunchMode.
      */
@@ -163,7 +163,7 @@ abstract public class BaseActivity extends AppCompatActivity implements ISupport
     }
 
     /**
-     * It is recommended to use {@link BaseFragment#startForResult(ISupportFragment, int)}.
+     * It is recommended to use {@link SupportFragment#startForResult(ISupportFragment, int)}.
      * Launch an fragment for which you would like a result when it popped.
      */
     public void startForResult(ISupportFragment toFragment, int requestCode) {
@@ -171,7 +171,7 @@ abstract public class BaseActivity extends AppCompatActivity implements ISupport
     }
 
     /**
-     * It is recommended to use {@link BaseFragment#startWithPop(ISupportFragment)}.
+     * It is recommended to use {@link SupportFragment#startWithPop(ISupportFragment)}.
      * Start the target Fragment and pop itself
      */
     public void startWithPop(ISupportFragment toFragment) {
@@ -179,7 +179,7 @@ abstract public class BaseActivity extends AppCompatActivity implements ISupport
     }
 
     /**
-     * It is recommended to use {@link BaseFragment#startWithPopTo(ISupportFragment, Class, boolean)}.
+     * It is recommended to use {@link SupportFragment#startWithPopTo(ISupportFragment, Class, boolean)}.
      *
      * @see #popTo(Class, boolean)
      * +
@@ -192,7 +192,7 @@ abstract public class BaseActivity extends AppCompatActivity implements ISupport
     }
 
     /**
-     * It is recommended to use {@link BaseFragment#replaceFragment(ISupportFragment)}.
+     * It is recommended to use {@link SupportFragment#replaceFragment(ISupportFragment)}.
      */
     public void replaceFragment(ISupportFragment toFragment) {
         mDelegate.replaceFragment(toFragment);

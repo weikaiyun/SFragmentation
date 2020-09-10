@@ -19,9 +19,9 @@ import androidx.fragment.app.Fragment;
  * {@link ISupportFragment} and
  * {@link Fragment} APIs.
  */
-abstract public class BaseFragment extends Fragment implements ISupportFragment {
+abstract public class SupportFragment extends Fragment implements ISupportFragment {
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
-    protected BaseActivity _mActivity;
+    protected SupportActivity _mActivity;
 
     private boolean isLoaded;
 
@@ -44,7 +44,7 @@ abstract public class BaseFragment extends Fragment implements ISupportFragment 
     public void onAttach(Context context) {
         super.onAttach(context);
         mDelegate.onAttach(context);
-        _mActivity = (BaseActivity) mDelegate.getActivity();
+        _mActivity = (SupportActivity) mDelegate.getActivity();
     }
 
     @Override
