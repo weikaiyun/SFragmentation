@@ -3,8 +3,8 @@ package com.common.weikaiyun.demo.ui
 import android.os.Bundle
 import android.view.View
 import com.common.weikaiyun.R
-import com.common.weikaiyun.fragmentation.SupportFragment
-import com.common.weikaiyun.fragmentation.fragmentargument.argument
+import com.weikaiyun.fragmentation.SupportFragment
+import com.weikaiyun.fragmentation.fragmentargument.argument
 import kotlinx.android.synthetic.main.fragment_demo.*
 
 class DemoFragment3: SupportFragment() {

@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
 import com.common.weikaiyun.demo.viewmodel.UserViewModel
-import com.common.weikaiyun.fragmentation.SupportActivity
+import com.weikaiyun.fragmentation.SupportActivity
 
 class DemoActivity : SupportActivity() {
 
