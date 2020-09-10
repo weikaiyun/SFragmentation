@@ -8,9 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
 import com.common.weikaiyun.demo.viewmodel.UserViewModel
-import com.weikaiyun.fragmentation.SupportActivity
+import com.weikaiyun.fragmentation.BaseActivity
 
-class DemoActivity : SupportActivity() {
+class DemoActivity : BaseActivity() {
 
     override fun getContentViewID(): Int = R.layout.activity_demo
 
