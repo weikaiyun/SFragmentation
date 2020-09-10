@@ -223,7 +223,7 @@ class TransactionDelegate {
                         ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
                     }
                 } else {
-                    ft.setCustomAnimations(R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit,
+                    ft.setCustomAnimations(R.anim.v_fragment_pop_enter, R.anim.v_fragment_pop_exit,
                             0, 0);
                 }
                 ft.remove((Fragment) top);

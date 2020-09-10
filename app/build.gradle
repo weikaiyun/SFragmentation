@@ -50,7 +50,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //implementation project(':fragmentation')
-    implementation 'com.github.weikaiyun:EasyFragmentation:1.0.8'
+    implementation 'com.github.weikaiyun:EasyFragmentation:1.1.2'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinx_coroutines}"
