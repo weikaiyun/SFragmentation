@@ -15,3 +15,16 @@ Fragmentation(https://github.com/YoKeyword/Fragmentation) 的简化版本， 只
 关于windowInset发现一个特别好的库，推荐给大家 https://github.com/chrisbanes/insetter
 
 希望以上对大家能有帮助。如果有问题，希望大家可以一起探讨。
+
+gradle使用:
+
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+
+dependencies {
+	implementation 'com.github.weikaiyun:EasyFragmentation:1.0.0'
+}
