@@ -1,13 +1,13 @@
 package com.weikaiyun.fragmentation.adapter
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.weikaiyun.fragmentation.BaseActivity
-import com.weikaiyun.fragmentation.BaseFragment
+import com.weikaiyun.fragmentation.SupportActivity
+import com.weikaiyun.fragmentation.SupportFragment
 
 
 class CustomFragmentStateAdapter(
-    activity: BaseActivity,
-    private val fragments: MutableList<BaseFragment>
+    activity: SupportActivity,
+    private val fragments: MutableList<SupportFragment>
 ) :
     FragmentStateAdapter(activity) {
 
