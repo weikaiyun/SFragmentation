@@ -371,7 +371,7 @@ class TransactionDelegate {
                                 0, 0);
                     }
                 } else {
-                    ft.setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit,
+                    ft.setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_exit,
                             0, 0);
                 }
                 ft.add(from.getSupportDelegate().mContainerId, toF, toFragmentTag);
