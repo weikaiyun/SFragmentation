@@ -36,14 +36,14 @@ class DemoFragment4: SupportFragment() {
 
         button2.setOnClickListener {
             it.trigger(1000) {
-                startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"), DemoFragment1::class.java, false)
+                start(DemoFragment5.newInstance(5, "testStartWithPopTo"))
             }
         }
 
         button3.text = param4
         button3.setOnClickListener {
             it.trigger(1000) {
-                startWithPop(DemoFragment5.newInstance(5, "testStartWithPop"))
+                start(DemoFragment5.newInstance(5, "testStartWithPop"))
             }
         }
     }
