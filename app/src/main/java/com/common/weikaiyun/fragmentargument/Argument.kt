@@ -1,4 +1,4 @@
-package com.weikaiyun.fragmentation.fragmentargument
+package com.common.weikaiyun.fragmentargument
 
 import androidx.fragment.app.Fragment
 import kotlin.properties.ReadWriteProperty
