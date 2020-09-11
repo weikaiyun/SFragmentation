@@ -219,7 +219,7 @@ class TransactionDelegate {
                 ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
                 TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
                 if (record != null) {
-                    if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
+                    if (record.currentFragmentPopEnter != Integer.MIN_VALUE) {
                         ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
                     }
                 } else {
@@ -501,7 +501,7 @@ class TransactionDelegate {
 
         TransactionRecord record = ((ISupportFragment) top).getSupportDelegate().mTransactionRecord;
         if (record != null) {
-            if (record.currentFragmentPopExit != Integer.MIN_VALUE) {
+            if (record.currentFragmentPopEnter != Integer.MIN_VALUE) {
                 ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
             }
         } else {
