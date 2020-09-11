@@ -3,6 +3,7 @@ package com.weikaiyun.fragmentation;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -213,6 +214,15 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
                       Runnable afterPopTransactionRunnable) {
 
         mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
+    /**
+     * 当Fragment根布局 没有 设定background属性时,
+     * Fragmentation默认使用Theme的android:windowbackground作为Fragment的背景,
+     * 可以通过该方法改变其内所有Fragment的默认背景。
+     */
+    public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
+        mDelegate.setDefaultFragmentBackground(backgroundRes);
     }
 
     /**

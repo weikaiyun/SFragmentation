@@ -330,6 +330,12 @@ class TransactionDelegate {
         if (from == null) {
             top = SupportHelper.getTopFragment(fm);
         } else {
+            if (from.getSupportDelegate().mContainerId == 0) {
+                Fragment fromF = (Fragment) from;
+                if (fromF.getTag() != null && !fromF.getTag().startsWith("android:switcher:")) {
+                    throw new IllegalStateException("Can't find container, please call loadRootFragment() first!");
+                }
+            }
             top = SupportHelper.getTopFragment(fm, from.getSupportDelegate().mContainerId);
         }
         return top;
