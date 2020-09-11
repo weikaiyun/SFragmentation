@@ -200,16 +200,6 @@ class TransactionDelegate {
      * Pop
      */
     void pop(final FragmentManager fm) {
-        enqueue(fm, new Action(Action.ACTION_POP, fm) {
-            @Override
-            public void run() {
-                if (FragmentationMagician.isStateSaved(fm)) return;
-                doPop(fm);
-            }
-        });
-    }
-
-    private void doPop(final FragmentManager fm) {
         if (FragmentationMagician.isStateSaved(fm)) return;
         final ISupportFragment top = SupportHelper.getTopFragment(fm);
         enqueue(fm, new Action(Action.ACTION_POP) {
