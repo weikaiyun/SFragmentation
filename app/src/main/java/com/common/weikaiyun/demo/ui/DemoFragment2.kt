@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.common.weikaiyun.R
 import com.common.weikaiyun.util.trigger
-import com.weikaiyun.fragmentation.fragmentargument.argument
+import com.common.weikaiyun.fragmentargument.argument
 import kotlinx.android.synthetic.main.fragment_demo.*
 
 class DemoFragment2: com.weikaiyun.fragmentation.SupportFragment() {

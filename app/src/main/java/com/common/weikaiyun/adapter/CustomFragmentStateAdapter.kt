@@ -1,4 +1,4 @@
-package com.weikaiyun.fragmentation.adapter
+package com.common.weikaiyun.adapter
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.weikaiyun.fragmentation.SupportActivity
