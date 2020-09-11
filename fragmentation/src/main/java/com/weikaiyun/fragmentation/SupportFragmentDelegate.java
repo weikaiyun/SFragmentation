@@ -308,8 +308,7 @@ public class SupportFragmentDelegate {
     }
 
     public void setBackground(View view) {
-        if ((mFragment.getTag() != null && mFragment.getTag().startsWith("android:switcher:"))
-                || view.getBackground() != null) {
+        if (view.getBackground() != null) {
             return;
         }
 
