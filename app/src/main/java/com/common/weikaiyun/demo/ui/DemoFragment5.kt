@@ -24,17 +24,4 @@ class DemoFragment5: SupportFragment() {
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_demo
-
-    override fun onBackPressedSupport(): Boolean {
-        when(param2) {
-            "testStartWithPopTo" -> {
-                popTo(DemoFragment1::class.java, false)
-            }
-            "testStartWithPop" -> {
-                popTo(DemoFragment3::class.java, false)
-            }
-        }
-
-        return true
-    }
 }
