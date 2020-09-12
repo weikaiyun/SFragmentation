@@ -340,6 +340,7 @@ class TransactionDelegate {
     private void start(FragmentManager fm, final ISupportFragment from, ISupportFragment to, String toFragmentTag,
                        int type) {
         FragmentTransaction ft = fm.beginTransaction();
+        ft.setReorderingAllowed(false);
         boolean addMode = (type == TYPE_ADD
                 || type == TYPE_ADD_RESULT
                 || type == TYPE_ADD_WITHOUT_HIDE
