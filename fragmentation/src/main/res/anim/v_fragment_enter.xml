@@ -21,7 +21,7 @@
     android:shareInterpolator="false"
     android:zAdjustment="normal"
     android:fillEnabled="true"
-    android:fillBefore="false" android:fillAfter="true">
+    android:fillBefore="true" android:fillAfter="true">
     <alpha android:fromAlpha="0.7" android:toAlpha="1.0"
             android:interpolator="@android:anim/decelerate_interpolator"
             android:duration="200"/>

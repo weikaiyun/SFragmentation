@@ -20,7 +20,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:zAdjustment="normal"
     android:fillEnabled="true"
-    android:fillBefore="false"
+    android:fillBefore="true"
     android:fillAfter="true">
     <alpha android:fromAlpha="1.0" android:toAlpha="0.7"
             android:interpolator="@android:anim/decelerate_interpolator"
