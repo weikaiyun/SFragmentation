@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:androidx.fragment.app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorAccent">
     <TextView
         android:id="@+id/title"
         androidx.fragment.app:layout_constraintStart_toStartOf="parent"
