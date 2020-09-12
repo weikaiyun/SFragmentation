@@ -5,7 +5,7 @@ import android.view.View
 import com.common.weikaiyun.R
 import com.common.weikaiyun.util.trigger
 import com.common.weikaiyun.fragmentargument.argument
-import kotlinx.android.synthetic.main.fragment_demo.*
+import kotlinx.android.synthetic.main.fragment_demo2.*
 
 class DemoFragment2: com.weikaiyun.fragmentation.SupportFragment() {
     private var param1: Int by argument()
@@ -28,5 +28,5 @@ class DemoFragment2: com.weikaiyun.fragmentation.SupportFragment() {
         }
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_demo
+    override fun getLayoutId(): Int = R.layout.fragment_demo2
 }
