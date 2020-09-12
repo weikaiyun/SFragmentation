@@ -9,6 +9,7 @@ import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
 import com.common.weikaiyun.demo.viewmodel.UserViewModel
 import com.weikaiyun.fragmentation.SupportActivity
+import kotlinx.coroutines.launch
 
 class DemoActivity : SupportActivity() {
 
@@ -30,8 +31,7 @@ class DemoActivity : SupportActivity() {
 
         viewModel.updateAll(user1, user2, user3, user4, user5)
 
-        lifecycleScope.launchWhenCreated {
-
+        lifecycleScope.launch {
         }
     }
 
