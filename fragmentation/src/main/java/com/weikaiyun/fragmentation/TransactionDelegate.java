@@ -221,7 +221,7 @@ class TransactionDelegate {
                     ft.show((Fragment) preFragment);
                     ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
                 }
-                ft.commit();
+                supportCommit(fm, ft);
             }
         });
     }
@@ -414,7 +414,7 @@ class TransactionDelegate {
     }
 
     private void supportCommit(FragmentManager fm, FragmentTransaction transaction) {
-        transaction.commitAllowingStateLoss();
+        transaction.commitNowAllowingStateLoss();
     }
 
     private boolean handleLaunchMode(FragmentManager fm, ISupportFragment topFragment,
@@ -503,18 +503,15 @@ class TransactionDelegate {
 
         ft.show(targetFragment);
         ft.setMaxLifecycle(targetFragment, Lifecycle.State.RESUMED);
-        ft.commit();
-
-        FragmentationMagician.executePendingTransactions(fm);
+        supportCommit(fm, ft);
     }
 
     private void safePopTo(final FragmentManager fm, List<Fragment> willPopFragments) {
-        FragmentTransaction transaction = fm.beginTransaction();
+        FragmentTransaction ft = fm.beginTransaction();
         for (Fragment fragment : willPopFragments) {
-            transaction.remove(fragment);
+            ft.remove(fragment);
         }
-        transaction.commit();
-        FragmentationMagician.executePendingTransactions(fm);
+        supportCommit(fm, ft);
     }
 
     private static <T> void checkNotNull(T value) {
