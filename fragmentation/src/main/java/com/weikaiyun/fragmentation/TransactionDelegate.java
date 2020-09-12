@@ -414,7 +414,8 @@ class TransactionDelegate {
     }
 
     private void supportCommit(FragmentManager fm, FragmentTransaction transaction) {
-        transaction.commitNowAllowingStateLoss();
+        transaction.commitAllowingStateLoss();
+        FragmentationMagician.executePendingTransactions(fm);
     }
 
     private boolean handleLaunchMode(FragmentManager fm, ISupportFragment topFragment,
