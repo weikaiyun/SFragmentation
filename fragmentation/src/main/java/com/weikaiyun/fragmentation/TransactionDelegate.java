@@ -219,6 +219,7 @@ class TransactionDelegate {
             public void run() {
                 if (FragmentationMagician.isStateSaved(fm)) return;
                 FragmentationMagician.popBackStack(fm);
+                FragmentationMagician.executePendingTransactions(fm);
             }
         });
     }
