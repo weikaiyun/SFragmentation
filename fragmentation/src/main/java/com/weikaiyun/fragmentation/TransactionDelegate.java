@@ -417,7 +417,7 @@ class TransactionDelegate {
     }
 
     private void supportCommit(FragmentManager fm, FragmentTransaction transaction) {
-        transaction.commitAllowingStateLoss();
+        transaction.commitNowAllowingStateLoss();
     }
 
     private boolean handleLaunchMode(FragmentManager fm, ISupportFragment topFragment,
