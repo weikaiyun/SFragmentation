@@ -22,7 +22,7 @@ class DemoFragment2: com.weikaiyun.fragmentation.SupportFragment() {
         title.text = "DemoFragment$param1"
         button.text = param2
         button.setOnClickListener {
-            it.trigger(1000) {
+            it.trigger(400) {
                 start(DemoFragment3.newInstance(3, "start4"))
             }
         }

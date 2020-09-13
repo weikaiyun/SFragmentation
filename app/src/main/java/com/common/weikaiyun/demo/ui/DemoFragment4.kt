@@ -27,7 +27,7 @@ class DemoFragment4: SupportFragment() {
         title.text = "DemoFragment$param1"
         button1.text = param2
         button1.setOnClickListener {
-            it.trigger(1000) {
+            it.trigger(400) {
                 popTo(DemoFragment1::class.java, false)
             }
         }

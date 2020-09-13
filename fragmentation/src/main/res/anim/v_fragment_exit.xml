@@ -23,7 +23,7 @@
     android:fillEnabled="true"
     android:fillBefore="true"
     android:fillAfter="true">
-    <alpha android:fromAlpha="1.0" android:toAlpha="0.7"
+    <alpha android:fromAlpha="1.0" android:toAlpha="0.0"
             android:interpolator="@android:anim/linear_interpolator"
             android:startOffset="100"
             android:duration="150"/>
