@@ -28,7 +28,10 @@ class DemoFragment4: SupportFragment() {
         button1.text = param2
         button1.setOnClickListener {
             it.trigger(400) {
-                popTo(DemoFragment1::class.java, false)
+                extraTransaction()
+                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+                    .popTo(DemoFragment1::class.java.name, false)
             }
         }
 
@@ -36,14 +39,21 @@ class DemoFragment4: SupportFragment() {
 
         button2.setOnClickListener {
             it.trigger(1000) {
-                startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"), DemoFragment1::class.java, false)
+                extraTransaction()
+                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+                    .startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"),
+                    DemoFragment1::class.java.name, false)
             }
         }
 
         button3.text = param4
         button3.setOnClickListener {
             it.trigger(1000) {
-                startWithPop(DemoFragment5.newInstance(5, "testStartWithPop"))
+                extraTransaction()
+                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+                    .startWithPop(DemoFragment5.newInstance(5, "testStartWithPop"))
             }
         }
     }

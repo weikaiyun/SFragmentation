@@ -24,7 +24,10 @@ class DemoFragment3: SupportFragment() {
         button.text = param2
         button.setOnClickListener {
             it.trigger(400) {
-                start(DemoFragment4.newInstance(4, "popTo1", "start5WithPopTo1", "startWithPop"))
+                extraTransaction()
+                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+                    .start(DemoFragment4.newInstance(4, "popTo1", "start5WithPopTo1", "startWithPop"))
             }
         }
     }
