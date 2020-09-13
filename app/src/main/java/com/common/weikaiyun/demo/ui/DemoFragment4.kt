@@ -28,10 +28,11 @@ class DemoFragment4: SupportFragment() {
         button1.text = param2
         button1.setOnClickListener {
             it.trigger(400) {
-                extraTransaction()
-                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
-                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
-                    .popTo(DemoFragment1::class.java.name, false)
+//                extraTransaction()
+//                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+//                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+//                    .popTo(DemoFragment1::class.java.name, false)
+                popTo(DemoFragment1::class.java, false)
             }
         }
 
@@ -39,21 +40,24 @@ class DemoFragment4: SupportFragment() {
 
         button2.setOnClickListener {
             it.trigger(1000) {
-                extraTransaction()
-                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
-                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
-                    .startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"),
-                    DemoFragment1::class.java.name, false)
+//                extraTransaction()
+//                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+//                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+//                    .startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"),
+//                    DemoFragment1::class.java.name, false)
+                startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"),
+                    DemoFragment1::class.java, false)
             }
         }
 
         button3.text = param4
         button3.setOnClickListener {
             it.trigger(1000) {
-                extraTransaction()
-                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
-                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
-                    .startWithPop(DemoFragment5.newInstance(5, "testStartWithPop"))
+//                extraTransaction()
+//                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+//                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+//                    .startWithPop(DemoFragment5.newInstance(5, "testStartWithPop"))
+                startWithPop(DemoFragment5.newInstance(5, "testStartWithPop"))
             }
         }
     }

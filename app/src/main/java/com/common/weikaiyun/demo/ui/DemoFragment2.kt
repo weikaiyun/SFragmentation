@@ -23,10 +23,11 @@ class DemoFragment2: com.weikaiyun.fragmentation.SupportFragment() {
         button.text = param2
         button.setOnClickListener {
             it.trigger(400) {
-                extraTransaction()
-                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
-                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
-                    .start(DemoFragment3.newInstance(3, "start4"))
+//                extraTransaction()
+//                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+//                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+//                    .start(DemoFragment3.newInstance(3, "start4"))
+                start(DemoFragment3.newInstance(3, "start4"))
             }
         }
     }

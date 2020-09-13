@@ -24,10 +24,11 @@ class DemoFragment1 : SupportFragment() {
         button.text = param2
         button.setOnClickListener {
             it.trigger(400) {
-                extraTransaction()
-                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
-                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
-                    .start(DemoFragment2.newInstance(2, "start3"))
+//                extraTransaction()
+//                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
+//                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
+//                    .start(DemoFragment2.newInstance(2, "start3"))
+                start(DemoFragment2.newInstance(2, "start3"))
             }
         }
     }
