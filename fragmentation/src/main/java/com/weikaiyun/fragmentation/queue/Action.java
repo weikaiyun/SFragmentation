@@ -3,7 +3,7 @@ package com.weikaiyun.fragmentation.queue;
 import androidx.fragment.app.FragmentManager;
 
 public abstract class Action {
-    public static final long DEFAULT_POP_TIME = 400L;
+    public static final long DEFAULT_POP_TIME = 320L;
 
     public static final int ACTION_NORMAL = 0;
     public static final int ACTION_POP = 1;
