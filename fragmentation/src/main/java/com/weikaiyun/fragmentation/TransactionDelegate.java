@@ -414,8 +414,7 @@ class TransactionDelegate {
     }
 
     private void supportCommit(FragmentManager fm, FragmentTransaction transaction) {
-        transaction.commitAllowingStateLoss();
-        FragmentationMagician.executePendingTransactions(fm);
+        transaction.commitNowAllowingStateLoss();
     }
 
     private boolean handleLaunchMode(FragmentManager fm, ISupportFragment topFragment,
@@ -483,7 +482,6 @@ class TransactionDelegate {
         Fragment top = willPopFragments.get(0);
 
         FragmentTransaction ft = fm.beginTransaction();
-        ft.setReorderingAllowed(false);
 
         willPopFragments.remove(0);
         for (Fragment fragment : willPopFragments) {
