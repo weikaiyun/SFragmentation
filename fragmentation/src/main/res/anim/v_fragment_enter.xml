@@ -19,18 +19,14 @@
 
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:shareInterpolator="false"
-    android:fillBefore="true"
-    android:fillAfter="true">
-    <alpha
-        android:fillEnabled="true"
-        android:fromAlpha="0.0"
-        android:toAlpha="1.0"
+    android:zAdjustment="top">
+    <alpha android:fromAlpha="0.0" android:toAlpha="1.0"
         android:interpolator="@android:anim/decelerate_interpolator"
-        android:duration="200"/>
-    <translate
         android:fillEnabled="true"
-        android:fromYDelta="8%"
-        android:toYDelta="0%"
+        android:fillBefore="false" android:fillAfter="true"
+        android:duration="200"/>
+    <translate android:fromYDelta="8%" android:toYDelta="0"
+        android:fillEnabled="true" android:fillBefore="true" android:fillAfter="true"
         android:interpolator="@android:anim/decelerate_interpolator"
         android:duration="300"/>
 </set>
