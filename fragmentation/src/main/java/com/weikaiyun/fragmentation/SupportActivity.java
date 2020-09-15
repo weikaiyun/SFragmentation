@@ -37,6 +37,11 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
         if (getContentViewID() != 0) {
             setContentView(getContentViewID());
         }
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         init(savedInstanceState);
     }
 
