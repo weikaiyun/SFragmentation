@@ -266,17 +266,21 @@ class TransactionDelegate {
     }
 
     void handleResultRecord(Fragment from) {
-        Bundle args = from.getArguments();
-        if (args == null) return;
-        final ResultRecord resultRecord = args.getParcelable(FRAGMENTATION_ARG_RESULT_RECORD);
-        if (resultRecord == null) return;
+        try {
+            Bundle args = from.getArguments();
+            if (args == null) return;
+            final ResultRecord resultRecord = args.getParcelable(FRAGMENTATION_ARG_RESULT_RECORD);
+            if (resultRecord == null) return;
 
-        ISupportFragment targetFragment = (ISupportFragment) from
-                .getParentFragmentManager()
-                .getFragment(from.getArguments(), FRAGMENTATION_STATE_SAVE_RESULT);
+            ISupportFragment targetFragment = (ISupportFragment) from
+                    .getParentFragmentManager()
+                    .getFragment(from.getArguments(), FRAGMENTATION_STATE_SAVE_RESULT);
 
-        if (targetFragment == null) return;
-        targetFragment.onFragmentResult(resultRecord.requestCode, resultRecord.resultCode, resultRecord.resultBundle);
+            if (targetFragment == null) return;
+            targetFragment.onFragmentResult(resultRecord.requestCode, resultRecord.resultCode, resultRecord.resultBundle);
+        } catch (IllegalStateException ignored) {
+            // Fragment no longer exists
+        }
     }
 
     private void enqueue(FragmentManager fm, Action action) {
