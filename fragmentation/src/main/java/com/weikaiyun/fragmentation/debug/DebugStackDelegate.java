@@ -140,7 +140,6 @@ public class DebugStackDelegate implements SensorEventListener {
     private void addDebugFragmentRecord(List<DebugFragmentRecord> fragmentRecords, Fragment fragment) {
         if (fragment != null) {
             CharSequence name = fragment.getClass().getSimpleName();
-            name = span(name, " *");
 
             if (fragment instanceof ISupportFragment && ((ISupportFragment)fragment).getSupportDelegate().getVisibleDelegate().isVisible()) {
                 name = span(name, " ☀");
