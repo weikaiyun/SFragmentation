@@ -17,6 +17,8 @@ public interface ISupportFragment {
     int RESULT_CANCELED = 0;
     int RESULT_OK = -1;
 
+    boolean isVisible = false;
+
     @IntDef({STANDARD, SINGLETOP, SINGLETASK})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LaunchMode {

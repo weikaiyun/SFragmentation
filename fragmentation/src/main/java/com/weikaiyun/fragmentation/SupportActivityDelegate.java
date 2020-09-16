@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentationMagician;
 
+import com.weikaiyun.fragmentation.debug.DebugStackDelegate;
 import com.weikaiyun.fragmentation.queue.Action;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public class SupportActivityDelegate {
 
     private TransactionDelegate mTransactionDelegate;
 
+    private DebugStackDelegate mDebugStackDelegate;
+
     private int mDefaultFragmentBackground = 0;
 
     public SupportActivityDelegate(ISupportActivity support) {
@@ -27,6 +30,7 @@ public class SupportActivityDelegate {
             throw new RuntimeException("Must extends FragmentActivity/AppCompatActivity");
         this.mSupport = support;
         this.mActivity = (FragmentActivity) support;
+        this.mDebugStackDelegate = new DebugStackDelegate(this.mActivity);
     }
 
     /**
@@ -41,6 +45,15 @@ public class SupportActivityDelegate {
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mTransactionDelegate = getTransactionDelegate();
+        mDebugStackDelegate.onCreate(Fragmentation.getDefault().getMode());
+    }
+
+    public void onPostCreate(@Nullable Bundle savedInstanceState) {
+        mDebugStackDelegate.onPostCreate(Fragmentation.getDefault().getMode());
+    }
+
+    public void onDestroy() {
+        mDebugStackDelegate.onDestroy();
     }
 
     public TransactionDelegate getTransactionDelegate() {

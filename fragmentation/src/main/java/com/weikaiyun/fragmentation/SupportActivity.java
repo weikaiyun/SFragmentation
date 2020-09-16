@@ -42,6 +42,7 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        mDelegate.onPostCreate(savedInstanceState);
         init(savedInstanceState);
     }
 
@@ -59,6 +60,7 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mDelegate.onDestroy();
     }
 
     private void init(@Nullable Bundle savedInstanceState) {

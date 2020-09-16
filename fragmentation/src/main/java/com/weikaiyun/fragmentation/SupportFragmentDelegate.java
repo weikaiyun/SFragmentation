@@ -27,11 +27,18 @@ public class SupportFragmentDelegate {
     protected FragmentActivity _mActivity;
     private ISupportActivity mSupport;
 
+    private VisibleDelegate visibleDelegate;
+
     public SupportFragmentDelegate(ISupportFragment support) {
         if (!(support instanceof Fragment))
             throw new RuntimeException("Must extends Fragment");
         this.mSupportF = support;
         this.mFragment = (Fragment) support;
+        visibleDelegate = new VisibleDelegate();
+    }
+
+    public VisibleDelegate getVisibleDelegate() {
+        return visibleDelegate;
     }
 
     /**

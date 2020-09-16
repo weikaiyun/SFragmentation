@@ -97,11 +97,11 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     public void onVisible() {
-
+        getSupportDelegate().getVisibleDelegate().setVisible(true);
     }
 
     public void onInvisible() {
-
+        getSupportDelegate().getVisibleDelegate().setVisible(false);
     }
 
     @Override
