@@ -1,5 +1,7 @@
 package com.weikaiyun.fragmentation;
 
+import android.view.animation.Animation;
+
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
@@ -26,6 +28,8 @@ public class Fragmentation {
 
     private boolean debug;
     private int mode = BUBBLE;
+    int targetFragmentEnter, currentFragmentPopExit, currentFragmentPopEnter, targetFragmentExit;
+
 
     @IntDef({NONE, SHAKE, BUBBLE})
     @Retention(RetentionPolicy.SOURCE)
@@ -50,6 +54,11 @@ public class Fragmentation {
         } else {
             mode = NONE;
         }
+
+        targetFragmentEnter = builder.targetFragmentEnter;
+        currentFragmentPopExit = builder.currentFragmentPopExit;
+        currentFragmentPopEnter = builder.currentFragmentPopEnter;
+        targetFragmentExit = builder.targetFragmentExit;
     }
 
     public boolean isDebug() {
@@ -76,12 +85,22 @@ public class Fragmentation {
     public static class FragmentationBuilder {
         private boolean debug;
         private int mode;
+        private int targetFragmentEnter, currentFragmentPopExit, currentFragmentPopEnter, targetFragmentExit;
+
 
         /**
          * @param debug Suppressed Exception("Can not perform this action after onSaveInstanceState!") when debug=false
          */
         public FragmentationBuilder debug(boolean debug) {
             this.debug = debug;
+            return this;
+        }
+
+        public FragmentationBuilder animation(int targetFragmentEnter, int currentFragmentPopExit, int currentFragmentPopEnter, int targetFragmentExit) {
+            this.targetFragmentEnter = targetFragmentEnter;
+            this.currentFragmentPopExit = currentFragmentPopExit;
+            this.currentFragmentPopEnter = currentFragmentPopEnter;
+            this.targetFragmentExit = targetFragmentExit;
             return this;
         }
 
