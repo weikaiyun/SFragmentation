@@ -1,6 +1,5 @@
 package com.weikaiyun.fragmentation.debug;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
