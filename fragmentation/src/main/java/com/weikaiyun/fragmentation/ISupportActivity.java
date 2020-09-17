@@ -1,6 +1,5 @@
 package com.weikaiyun.fragmentation;
 
-import android.os.Bundle;
 import android.view.MotionEvent;
 
 public interface ISupportActivity {
@@ -15,10 +14,4 @@ public interface ISupportActivity {
     void onBackPressedSupport();
 
     boolean dispatchTouchEvent(MotionEvent ev);
-
-    int getContentViewID();
-
-    void initData(Bundle savedInstanceState);
-
-    void initView(Bundle savedInstanceState);
 }
