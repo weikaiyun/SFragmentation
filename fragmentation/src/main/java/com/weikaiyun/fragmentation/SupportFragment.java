@@ -51,18 +51,10 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         mDelegate.onCreate(savedInstanceState);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), container,false);
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mDelegate.onViewCreated(savedInstanceState);
-        initView(view, savedInstanceState);
-        initData(view, savedInstanceState);
     }
 
     @Override
@@ -82,14 +74,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     public void onPause() {
         super.onPause();
         onInvisible();
-    }
-
-    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-    }
-
-    public void initData(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
     }
 
     public void lazyInit() {

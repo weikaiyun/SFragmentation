@@ -15,9 +15,7 @@ public interface ISupportFragment {
 
     // ResultCode
     int RESULT_CANCELED = 0;
-    int RESULT_OK = -1;
-
-    boolean isVisible = false;
+    int RESULT_OK = 1;
 
     @IntDef({STANDARD, SINGLETOP, SINGLETASK})
     @Retention(RetentionPolicy.SOURCE)
@@ -29,8 +27,6 @@ public interface ISupportFragment {
     ExtraTransaction extraTransaction();
 
     void post(Runnable runnable);
-
-    int getLayoutId();
 
     void lazyInit();
 
