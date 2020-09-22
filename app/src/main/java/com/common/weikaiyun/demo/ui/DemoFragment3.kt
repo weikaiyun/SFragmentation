@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.View
 import com.common.weikaiyun.R
 import com.common.weikaiyun.util.trigger
-import com.weikaiyun.fragmentation.SupportFragment
 import com.common.weikaiyun.fragmentargument.argument
 import kotlinx.android.synthetic.main.fragment_demo.*
 
-class DemoFragment3: SupportFragment() {
+class DemoFragment3: BaseSupportFragment() {
     private var param1: Int by argument()
     private var param2: String by argument()
     companion object {

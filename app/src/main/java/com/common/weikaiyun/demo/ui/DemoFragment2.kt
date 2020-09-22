@@ -7,7 +7,7 @@ import com.common.weikaiyun.util.trigger
 import com.common.weikaiyun.fragmentargument.argument
 import kotlinx.android.synthetic.main.fragment_demo2.*
 
-class DemoFragment2: com.weikaiyun.fragmentation.SupportFragment() {
+class DemoFragment2: BaseSupportFragment() {
     private var param1: Int by argument()
     private var param2: String by argument()
     companion object {
