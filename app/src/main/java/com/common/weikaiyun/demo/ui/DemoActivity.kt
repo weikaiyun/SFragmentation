@@ -12,9 +12,20 @@ import com.weikaiyun.fragmentation.SupportActivity
 
 class DemoActivity : SupportActivity() {
 
-    override fun getContentViewID(): Int = R.layout.activity_demo
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(getContentViewID())
+    }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    private fun getContentViewID(): Int = R.layout.activity_demo
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        initView(savedInstanceState)
+        initData(savedInstanceState)
+    }
+
+    private fun initData(savedInstanceState: Bundle?) {
         val viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         viewModel.userList.observe(this, Observer {
             it.forEach() { user ->
@@ -22,11 +33,11 @@ class DemoActivity : SupportActivity() {
             }
         })
 
-        val user1 = User(1, "1", 1,  1, 1, "1")
-        val user2 = User(2, "2", 2,  2, 2, "2")
-        val user3 = User(3, "3", 3,  3, 3, "3")
-        val user4 = User(4, "4", 4,  4, 4, "4")
-        val user5 = User(5, "5", 5,  5, 5, "5")
+        val user1 = User(1, "1", 1, 1, 1, "1")
+        val user2 = User(2, "2", 2, 2, 2, "2")
+        val user3 = User(3, "3", 3, 3, 3, "3")
+        val user4 = User(4, "4", 4, 4, 4, "4")
+        val user5 = User(5, "5", 5, 5, 5, "5")
 
         viewModel.updateAll(user1, user2, user3, user4, user5)
 
@@ -35,7 +46,7 @@ class DemoActivity : SupportActivity() {
         }
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
+    private fun initView(savedInstanceState: Bundle?) {
         loadRootFragment(R.id.container, DemoFragment1.newInstance(1, "start2"))
     }
 }
