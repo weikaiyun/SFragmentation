@@ -1,8 +1,9 @@
-package com.common.weikaiyun.demo.ui
+package com.common.weikaiyun.demo.ui.demo
 
 import android.os.Bundle
 import android.view.View
 import com.common.weikaiyun.R
+import com.common.weikaiyun.demo.ui.base.BaseSupportFragment
 import com.common.weikaiyun.util.trigger
 import com.common.weikaiyun.fragmentargument.argument
 import kotlinx.android.synthetic.main.fragment_demo4.*
@@ -44,7 +45,8 @@ class DemoFragment4: BaseSupportFragment() {
 //                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
 //                    .startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"),
 //                    DemoFragment1::class.java.name, false)
-                startWithPopTo(DemoFragment5.newInstance(5, "testStartWithPopTo"),
+                startWithPopTo(
+                    DemoFragment5.newInstance(5, "testStartWithPopTo"),
                     DemoFragment1::class.java, false)
             }
         }

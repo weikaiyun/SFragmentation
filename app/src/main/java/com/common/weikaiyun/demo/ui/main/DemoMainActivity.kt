@@ -1,4 +1,4 @@
-package com.common.weikaiyun.demo.ui
+package com.common.weikaiyun.demo.ui.main
 
 import android.os.Bundle
 import android.util.Log
@@ -7,25 +7,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
+import com.common.weikaiyun.demo.ui.base.BaseSupportActivity
 import com.common.weikaiyun.demo.viewmodel.UserViewModel
-import com.weikaiyun.fragmentation.SupportActivity
+import com.weikaiyun.fragmentation.SupportHelper
 
-class DemoActivity : SupportActivity() {
+class DemoMainActivity : BaseSupportActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(getContentViewID())
-    }
+    override fun getContentViewID(): Int = R.layout.activity_demo_main
 
-    private fun getContentViewID(): Int = R.layout.activity_demo
-
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        initView(savedInstanceState)
-        initData(savedInstanceState)
-    }
-
-    private fun initData(savedInstanceState: Bundle?) {
+    override fun initData(savedInstanceState: Bundle?) {
         val viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         viewModel.userList.observe(this, Observer {
             it.forEach() { user ->
@@ -46,7 +36,11 @@ class DemoActivity : SupportActivity() {
         }
     }
 
-    private fun initView(savedInstanceState: Bundle?) {
-        loadRootFragment(R.id.container, DemoFragment1.newInstance(1, "start2"))
+    override fun initView(savedInstanceState: Bundle?) {
+        var mainFragment = SupportHelper.findFragment(supportFragmentManager, DemoMainFragment::class.java)
+        if (mainFragment == null) {
+            mainFragment = DemoMainFragment.newInstance()
+            loadRootFragment(R.id.container, mainFragment)
+        }
     }
 }

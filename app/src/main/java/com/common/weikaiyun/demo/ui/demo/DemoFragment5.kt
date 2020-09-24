@@ -1,8 +1,9 @@
-package com.common.weikaiyun.demo.ui
+package com.common.weikaiyun.demo.ui.demo
 
 import android.os.Bundle
 import android.view.View
 import com.common.weikaiyun.R
+import com.common.weikaiyun.demo.ui.base.BaseSupportFragment
 import com.common.weikaiyun.fragmentargument.argument
 import kotlinx.android.synthetic.main.fragment_demo.*
 

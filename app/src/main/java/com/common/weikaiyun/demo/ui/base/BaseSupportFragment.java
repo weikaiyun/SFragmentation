@@ -1,4 +1,4 @@
-package com.common.weikaiyun.demo.ui;
+package com.common.weikaiyun.demo.ui.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,9 +24,7 @@ abstract public class BaseSupportFragment extends SupportFragment {
         initData(view, savedInstanceState);
     }
 
-    int getLayoutId() {
-        return 0;
-    }
+    abstract public int getLayoutId();
 
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
 

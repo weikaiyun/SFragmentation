@@ -21,7 +21,10 @@ class DemoApplication: Application() {
     }
 
     companion object {
+        @JvmStatic
         lateinit var context: Context
+
+        @JvmStatic
         lateinit var instance: DemoApplication
     }
 }
