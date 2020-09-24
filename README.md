@@ -9,6 +9,8 @@
 
 推荐使用NoBackStack分支。
 
+demo有比较详细的使用示例， 欢迎star。
+
 gradle使用:
 
 allprojects {
