@@ -21,5 +21,6 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.weikaiyun:EasyFragmentation:1.4.5'
+	//请使用最新版本
+	implementation 'com.github.weikaiyun:EasyFragmentation:latest'
 }
