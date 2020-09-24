@@ -1,9 +1,7 @@
 package com.common.weikaiyun.demo.ui.demo
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.ui.base.BaseSupportFragment
 import com.common.weikaiyun.fragmentargument.argument
@@ -19,14 +17,6 @@ class DemoFragment1 : BaseSupportFragment() {
                 this.param1 = param1
                 this.param2 = param2
             }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(getLayoutId(), container, false)
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
