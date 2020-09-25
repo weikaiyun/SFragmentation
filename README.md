@@ -7,7 +7,7 @@
 
 框架的源码简单易懂， 不存在复杂的逻辑.
 
-推荐使用NoBackStack分支。
+推荐使用NewNoBackStack分支。
 
 demo有比较详细的使用示例， 欢迎star。
 
