@@ -46,7 +46,7 @@ Fragmentation.builder() // 设置 栈视图 模式为 （默认）悬浮球模�
 // 装载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
 loadRootFragment(int containerId, SupportFragment toFragment)
 
-// 装载多个根Fragment，用于同级Fragment的场景，详情见新Demo的MainActivity
+// 装载多个根Fragment，用于同级Fragment的场景，详情见DemoMainFragment
 loadMultipleRootFragment(int containerId, int showPosition, SupportFragment... toFragments);
 
 ```
@@ -55,7 +55,6 @@ loadMultipleRootFragment(int containerId, int showPosition, SupportFragment... t
 
 ```
 showHideFragment(SupportFragment showFragment, SupportFragment hideFragment);
-
 ```
 
 ##### 4. 启动fragment
@@ -74,7 +73,6 @@ startWithPop(SupportFragment fragment)
 
 // 启动目标Fragment，并关闭targetFragment之上的Fragments
 startWithPopTo(SupportFragment fragment, Class targetFragment, boolean includeTargetFragment)
-
 
 // 你可以使用extraTransaction() + start() 来实现上面的各种startXX()设置更多功能
 supportFragment.extraTransaction()
@@ -100,6 +98,5 @@ hideSoftInput();
 showSoftInput(View view);
 
 ```
-
 
 #####  如有使用问题欢迎提交issues
