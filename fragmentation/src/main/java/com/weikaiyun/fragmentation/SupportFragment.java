@@ -64,7 +64,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         }
 
         if (!isHidden()) {
-            getSupportDelegate().getVisibleDelegate().setVisible(true);
+            getSupportDelegate().setVisible(true);
             onVisible();
         }
     }
@@ -72,7 +72,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onPause() {
         super.onPause();
-        getSupportDelegate().getVisibleDelegate().setVisible(false);
+        getSupportDelegate().setVisible(false);
         onInvisible();
     }
 

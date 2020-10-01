@@ -69,6 +69,7 @@ class TransactionDelegate {
                     }
                 }
 
+                to.getSupportDelegate().setCanPop(false);
                 start(fm, null, to, toFragmentTag, TYPE_REPLACE);
             }
         });
@@ -83,6 +84,8 @@ class TransactionDelegate {
                 FragmentTransaction ft = fm.beginTransaction();
                 for (int i = 0; i < tos.length; i++) {
                     Fragment to = (Fragment) tos[i];
+
+                    ((ISupportFragment) to).getSupportDelegate().setCanPop(false);
 
                     bindContainerId(containerId, tos[i]);
 
