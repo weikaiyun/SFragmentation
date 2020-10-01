@@ -1,7 +1,5 @@
 package com.weikaiyun.fragmentation;
 
-import android.view.animation.Animation;
-
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
