@@ -141,14 +141,14 @@ public class SkinManager {
         mPrefUtils.clear();
     }
 
-    private void updatePluginInfo(String skinPluginPath, String pkgName, String suffix) {
+    private void updatePluginInfo(String skinPluginPath, String pkgName) {
         mPrefUtils.putPluginPath(skinPluginPath);
         mPrefUtils.putPluginPkgName(pkgName);
-        mPrefUtils.putPluginSuffix(suffix);
+        mPrefUtils.putPluginSuffix("");
 
         mCurPluginPkg = pkgName;
         mCurPluginPath = skinPluginPath;
-        mSuffix = suffix;
+        mSuffix = "";
     }
 
     /**
@@ -189,7 +189,7 @@ public class SkinManager {
                     return;
                 }
                 try {
-                    updatePluginInfo(skinPluginPath, skinPluginPkg, "");
+                    updatePluginInfo(skinPluginPath, skinPluginPkg);
                     notifyChangedListeners();
                     skinChangingCallback.onComplete();
                 } catch (Exception e) {
@@ -198,6 +198,12 @@ public class SkinManager {
                 }
             }
         }.execute();
+    }
+
+    public void notifyChangedListeners() {
+        for (Activity activity : mActivities) {
+            apply(activity);
+        }
     }
 
 
@@ -223,16 +229,8 @@ public class SkinManager {
         mActivities.remove(activity);
     }
 
-    public void notifyChangedListeners() {
-        for (Activity activity : mActivities) {
-            apply(activity);
-        }
-    }
-
     /**
      * apply for dynamic construct view
-     *
-     * @param view
      */
     public void injectSkin(View view) {
         List<SkinView> skinViews = new ArrayList<>();
