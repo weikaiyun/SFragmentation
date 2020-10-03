@@ -19,7 +19,7 @@ public enum SkinAttrType
             public void apply(View view, String resName) {
                 Drawable drawable = getResourceManager().getDrawableByName(resName);
                 if (drawable != null) {
-                    view.setBackgroundDrawable(drawable);
+                    view.setBackground(drawable);
                 } else {
                     try{
                         int color = getResourceManager().getColor(resName);

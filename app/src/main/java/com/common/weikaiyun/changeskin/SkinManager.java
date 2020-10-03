@@ -33,18 +33,19 @@ public class SkinManager {
     private String mCurPluginPath;
     private String mCurPluginPkg;
 
-
     private List<Activity> mActivities = new ArrayList<>();
 
-    private SkinManager() {
-    }
-
-    private static class SingletonHolder {
-        static SkinManager sInstance = new SkinManager();
-    }
+    static volatile SkinManager INSTANCE;
 
     public static SkinManager getInstance() {
-        return SingletonHolder.sInstance;
+        if (INSTANCE == null) {
+            synchronized (SkinManager.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new SkinManager();
+                }
+            }
+        }
+        return INSTANCE;
     }
 
 
@@ -95,9 +96,7 @@ public class SkinManager {
             return false;
 
         PackageInfo info = getPackageInfo(skinPath);
-        if (!info.packageName.equals(skinPkgName))
-            return false;
-        return true;
+        return info.packageName.equals(skinPkgName);
     }
 
     private void checkPluginParamsThrow(String skinPath, String skinPkgName) {
@@ -164,11 +163,6 @@ public class SkinManager {
 
     /**
      * 根据suffix选择插件内某套皮肤，默认为""
-     *
-     * @param skinPluginPath
-     * @param skinPluginPkg
-     * @param suffix
-     * @param callback
      */
     public void changeSkin(final String skinPluginPath, final String skinPluginPkg, final String suffix, ISkinChangingCallback callback) {
         L.e("changeSkin = " + skinPluginPath + " , " + skinPluginPkg);
@@ -219,7 +213,6 @@ public class SkinManager {
 
     public void apply(Activity activity) {
         List<SkinView> skinViews = SkinAttrSupport.getSkinViews(activity);
-        if (skinViews == null) return;
         for (SkinView skinView : skinViews) {
             skinView.apply();
         }

@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import com.common.weikaiyun.changeskin.utils.L;
 
 public class ResourceManager {
@@ -29,7 +31,8 @@ public class ResourceManager {
         try {
             name = appendSuffix(name);
             L.e("name = " + name + " , " + mPluginPackageName);
-            return mResources.getDrawable(mResources.getIdentifier(name, DEF_TYPE_DRAWABLE, mPluginPackageName));
+            return ResourcesCompat.getDrawable(mResources,
+                    mResources.getIdentifier(name, DEF_TYPE_DRAWABLE, mPluginPackageName), null);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
             return null;
@@ -39,14 +42,14 @@ public class ResourceManager {
     public int getColor(String name) throws Resources.NotFoundException {
         name = appendSuffix(name);
         L.e("name = " + name);
-        return mResources.getColor(mResources.getIdentifier(name, DEF_TYPE_COLOR, mPluginPackageName));
+        return mResources.getColor(mResources.getIdentifier(name, DEF_TYPE_COLOR, mPluginPackageName), null);
     }
 
     public ColorStateList getColorStateList(String name) {
         try {
             name = appendSuffix(name);
             L.e("name = " + name);
-            return mResources.getColorStateList(mResources.getIdentifier(name, DEF_TYPE_COLOR, mPluginPackageName));
+            return mResources.getColorStateList(mResources.getIdentifier(name, DEF_TYPE_COLOR, mPluginPackageName), null);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
             return null;
