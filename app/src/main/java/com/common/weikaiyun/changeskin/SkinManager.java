@@ -29,7 +29,7 @@ public class SkinManager {
 
     private boolean usePlugin;
 
-    private String mSuffix = "";
+    private String mSuffix;
     private String mCurPluginPath;
     private String mCurPluginPkg;
 
@@ -60,7 +60,7 @@ public class SkinManager {
             return;
 
         try {
-            loadPlugin(skinPluginPath, skinPluginPkg, mSuffix);
+            loadPlugin(skinPluginPath, skinPluginPkg);
             mCurPluginPath = skinPluginPath;
             mCurPluginPkg = skinPluginPkg;
         } catch (Exception e) {
@@ -74,14 +74,14 @@ public class SkinManager {
         return pm.getPackageArchiveInfo(skinPluginPath, PackageManager.GET_ACTIVITIES);
     }
 
-    private void loadPlugin(String skinPath, String skinPkgName, String suffix) throws Exception {
+    private void loadPlugin(String skinPath, String skinPkgName) throws Exception {
         AssetManager assetManager = AssetManager.class.newInstance();
         Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
         addAssetPath.invoke(assetManager, skinPath);
 
         Resources superRes = mContext.getResources();
         mResources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
-        mResourceManager = new ResourceManager(mResources, skinPkgName, suffix);
+        mResourceManager = new ResourceManager(mResources, skinPkgName, null);
         usePlugin = true;
     }
 
@@ -124,20 +124,20 @@ public class SkinManager {
     }
 
     /**
-     * 应用内换肤，传入资源区别的后缀
+     * 应用内换肤，传入区别资源的后缀
      */
     public void changeSkin(String suffix) {
-        clearPluginInfo();//clear before
+        clearPluginInfo();
         mSuffix = suffix;
         mPrefUtils.putPluginSuffix(suffix);
         notifyChangedListeners();
     }
 
     private void clearPluginInfo() {
-        mCurPluginPath = null;
-        mCurPluginPkg = null;
+        mCurPluginPath = "";
+        mCurPluginPkg = "";
         usePlugin = false;
-        mSuffix = null;
+        mSuffix = "";
         mPrefUtils.clear();
     }
 
@@ -151,16 +151,10 @@ public class SkinManager {
         mSuffix = suffix;
     }
 
-
-    public void changeSkin(final String skinPluginPath, final String skinPluginPkg, ISkinChangingCallback callback) {
-        changeSkin(skinPluginPath, skinPluginPkg, null, callback);
-    }
-
-
     /**
      * 根据suffix选择插件内某套皮肤，默认为""
      */
-    public void changeSkin(final String skinPluginPath, final String skinPluginPkg, final String suffix, ISkinChangingCallback callback) {
+    public void changeSkin(final String skinPluginPath, final String skinPluginPkg, ISkinChangingCallback callback) {
         L.e("changeSkin = " + skinPluginPath + " , " + skinPluginPkg);
         if (callback == null)
             callback = ISkinChangingCallback.DEFAULT_SKIN_CHANGING_CALLBACK;
@@ -179,7 +173,7 @@ public class SkinManager {
             @Override
             protected Integer doInBackground(Void... params) {
                 try {
-                    loadPlugin(skinPluginPath, skinPluginPkg, suffix);
+                    loadPlugin(skinPluginPath, skinPluginPkg);
                     return 1;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -195,7 +189,7 @@ public class SkinManager {
                     return;
                 }
                 try {
-                    updatePluginInfo(skinPluginPath, skinPluginPkg, suffix);
+                    updatePluginInfo(skinPluginPath, skinPluginPkg, "");
                     notifyChangedListeners();
                     skinChangingCallback.onComplete();
                 } catch (Exception e) {
@@ -230,7 +224,6 @@ public class SkinManager {
     }
 
     public void notifyChangedListeners() {
-
         for (Activity activity : mActivities) {
             apply(activity);
         }
