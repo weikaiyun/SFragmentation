@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 
 class UserViewModel: ViewModel() {
     private val model = UserModel()
-    val userList = model.getAll()
 
     fun insertAll(vararg users: User) {
         viewModelScope.launch {

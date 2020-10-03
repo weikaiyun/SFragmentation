@@ -1,8 +1,6 @@
 package com.common.weikaiyun.demo.ui.main
 
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
@@ -17,11 +15,6 @@ class DemoMainActivity : BaseSupportActivity() {
 
     override fun initData(savedInstanceState: Bundle?) {
         val viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        viewModel.userList.observe(this, Observer {
-            it.forEach() { user ->
-                Log.i("User Info", user.toString())
-            }
-        })
 
         val user1 = User(1, "1", 1, 1, 1, "1")
         val user2 = User(2, "2", 2, 2, 2, "2")
