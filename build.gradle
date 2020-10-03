@@ -11,7 +11,6 @@ buildscript {
                 recyclerView          : '1.2.0-alpha05',
                 viewpager2            : '1.1.0-alpha01',
                 room                  : '2.2.5',
-                moshi                 : '1.9.3',
                 okhttp3               : '4.2.2',
                 appcompat             : '1.2.0',
                 fragment_version      : '1.2.5',

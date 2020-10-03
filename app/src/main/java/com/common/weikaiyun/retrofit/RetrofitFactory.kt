@@ -2,7 +2,7 @@ package com.common.weikaiyun.retrofit
 
 import com.common.weikaiyun.retrofit.okhttp.OkHttpClientManager
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitFactory {
     private val client = OkHttpClientManager.okHttpClient
@@ -11,6 +11,6 @@ object RetrofitFactory {
     fun retrofit(baseUrl : String) : Retrofit = Retrofit.Builder()
             .client(client)
             .baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 }

@@ -66,13 +66,9 @@ dependencies {
     implementation "androidx.room:room-ktx:${versions.room}"
     kapt "androidx.room:room-compiler:${versions.room}"
 
-    //moshi
-    implementation "com.squareup.moshi:moshi-kotlin:${versions.moshi}"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
-
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
 
     //okhttp3
     implementation "com.squareup.okhttp3:okhttp:${versions.okhttp3}"
