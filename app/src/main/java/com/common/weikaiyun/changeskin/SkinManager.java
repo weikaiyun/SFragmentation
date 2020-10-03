@@ -48,7 +48,6 @@ public class SkinManager {
         return INSTANCE;
     }
 
-
     public void init(Context context) {
         mContext = context.getApplicationContext();
         mPrefUtils = new PrefUtils(mContext);
@@ -122,8 +121,7 @@ public class SkinManager {
             mResourceManager = new ResourceManager(mContext.getResources(), mContext.getPackageName(), mSuffix);
         }
         return mResourceManager;
-}
-
+    }
 
     /**
      * 应用内换肤，传入资源区别的后缀
