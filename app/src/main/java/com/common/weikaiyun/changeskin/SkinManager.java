@@ -127,8 +127,6 @@ public class SkinManager {
 
     /**
      * 应用内换肤，传入资源区别的后缀
-     *
-     * @param suffix
      */
     public void changeSkin(String suffix) {
         clearPluginInfo();//clear before
