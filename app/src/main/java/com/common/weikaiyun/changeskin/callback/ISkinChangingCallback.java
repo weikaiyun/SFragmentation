@@ -7,9 +7,9 @@ public interface ISkinChangingCallback {
 
     void onComplete();
 
-    public static DefaultSkinChangingCallback DEFAULT_SKIN_CHANGING_CALLBACK = new DefaultSkinChangingCallback();
+    DefaultSkinChangingCallback DEFAULT_SKIN_CHANGING_CALLBACK = new DefaultSkinChangingCallback();
 
-    public class DefaultSkinChangingCallback implements ISkinChangingCallback {
+    class DefaultSkinChangingCallback implements ISkinChangingCallback {
         @Override
         public void onStart() {
 

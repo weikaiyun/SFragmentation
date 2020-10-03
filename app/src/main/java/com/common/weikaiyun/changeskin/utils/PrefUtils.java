@@ -43,8 +43,8 @@ public class PrefUtils {
         sp.edit().putString(SkinConfig.KEY_PLUGIN_PKG, pkgName).apply();
     }
 
-    public boolean clear() {
+    public void clear() {
         SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
-        return sp.edit().clear().commit();
+        sp.edit().clear().apply();
     }
 }
