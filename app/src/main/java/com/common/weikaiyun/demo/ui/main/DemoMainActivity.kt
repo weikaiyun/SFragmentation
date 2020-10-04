@@ -2,7 +2,6 @@ package com.common.weikaiyun.demo.ui.main
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.db.User
 import com.common.weikaiyun.demo.ui.base.BaseSupportActivity
@@ -23,10 +22,6 @@ class DemoMainActivity : BaseSupportActivity() {
         val user5 = User(5, "5", 5, 5, 5, "5")
 
         viewModel.updateAll(user1, user2, user3, user4, user5)
-
-        lifecycleScope.launchWhenCreated {
-
-        }
     }
 
     override fun initView(savedInstanceState: Bundle?) {

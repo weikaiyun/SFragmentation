@@ -3,7 +3,6 @@ package com.common.weikaiyun.demo
 import android.app.Application
 import android.content.Context
 import com.common.weikaiyun.R
-import com.common.weikaiyun.changeskin.SkinManager
 import com.common.weikaiyun.demo.db.UserDatabase
 import com.weikaiyun.fragmentation.Fragmentation
 
@@ -19,8 +18,6 @@ class DemoApplication: Application() {
             .debug(true) // 实际场景建议.debug(BuildConfig.DEBUG)
             .animation(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit, R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit)
             .install()
-
-        SkinManager.getInstance().init(this)
     }
 
     companion object {
