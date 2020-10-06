@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Home"
         android:textColor="@color/colorPrimary"
-        android:textSize="60sp"
+        android:textSize="@dimen/text_px_40"
         />
 
     <TextView
@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="点击跳转"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_px_20"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
