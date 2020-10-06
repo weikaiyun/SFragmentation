@@ -69,7 +69,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
     implementation "androidx.viewpager2:viewpager2:${versions.viewpager2}"
-    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
 
     implementation "androidx.room:room-runtime:${versions.room}"
     implementation "androidx.room:room-ktx:${versions.room}"
@@ -83,22 +82,12 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${versions.okhttp3}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}"
 
-    //glide
-    implementation "com.github.bumptech.glide:glide:${versions.glide}"
-
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:${versions.kotlin_serialization}"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
-
-    //https://github.com/chrisbanes/insetter
-    implementation "dev.chrisbanes:insetter-ktx:${versions.insetter_ktx}"
-
-    //https://github.com/sockeqwe/AdapterDelegates
-    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${versions.adapterdelegate}"
-    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${versions.adapterdelegate}"
 
     // adb forward tcp:8080 tcp:8080
     debugImplementation "com.amitshekhar.android:debug-db:${versions.debug_db}"
