@@ -74,14 +74,6 @@ dependencies {
     implementation "androidx.room:room-ktx:${versions.room}"
     kapt "androidx.room:room-compiler:${versions.room}"
 
-    //retrofit2
-    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-
-    //okhttp3
-    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp3}"
-    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}"
-
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:${versions.kotlin_serialization}"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
