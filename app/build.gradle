@@ -3,15 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
-apply plugin: 'calces.screen'
-
-screen {
-    dimens {
-        designPx 375
-        smallesWidths 320, 360, 480, 600
-        scaleMode BigDecimal.ROUND_HALF_UP  //小数保留的方式
-    }
-}
 
 android {
     compileSdkVersion 29
