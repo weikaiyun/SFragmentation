@@ -18,13 +18,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    /** 目录指向*/
-    sourceSets {
-        main {
-            assets.srcDirs += files("$projectDir/schemas".toString())
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -35,14 +28,6 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
-    }
-}
-
-kapt {
-    useBuildCache = true
-    arguments {
-        arg("room.schemaLocation", "$projectDir/schemas".toString())
-        arg("room.incremental", "true")
     }
 }
 
@@ -61,19 +46,12 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
     implementation "androidx.viewpager2:viewpager2:${versions.viewpager2}"
 
-    implementation "androidx.room:room-runtime:${versions.room}"
-    implementation "androidx.room:room-ktx:${versions.room}"
-    kapt "androidx.room:room-compiler:${versions.room}"
-
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:${versions.kotlin_serialization}"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
-
-    // adb forward tcp:8080 tcp:8080
-    debugImplementation "com.amitshekhar.android:debug-db:${versions.debug_db}"
 
     implementation "androidx.fragment:fragment-ktx:${versions.fragment_version}"
 
