@@ -33,6 +33,9 @@ public abstract class ExtraTransaction {
 
     public abstract void start(ISupportFragment toFragment);
 
+    public abstract void load(FragmentManager fm, final int containerId, ISupportFragment toFragment);
+    public abstract void remove(FragmentManager fm, ISupportFragment toFragment);
+
     public abstract void startNotHideSelf(ISupportFragment toFragment);
 
     public abstract void startNotHideSelf(ISupportFragment toFragment, @ISupportFragment.LaunchMode int launchMode);
@@ -119,6 +122,16 @@ public abstract class ExtraTransaction {
         public void loadRootFragment(int containerId, ISupportFragment toFragment) {
             toFragment.getSupportDelegate().mTransactionRecord = mRecord;
             mTransactionDelegate.loadRootTransaction(getFragmentManager(), containerId, toFragment);
+        }
+
+        @Override
+        public void load(FragmentManager fm, final int containerId, ISupportFragment toFragment) {
+            mTransactionDelegate.load(fm, containerId, toFragment);
+        }
+
+        @Override
+        public void remove(FragmentManager fm, ISupportFragment toFragment) {
+            mTransactionDelegate.remove(fm, toFragment);
         }
 
         @Override
