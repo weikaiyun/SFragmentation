@@ -2,11 +2,7 @@
 [![](https://jitpack.io/v/weikaiyun/EasyFragmentation.svg)](https://jitpack.io/#weikaiyun/EasyFragmentation)
 # EasyFragmentation
 
-***
-#### 鸣谢
-#### 原项目非常方便使用，但由于原作者已不再维护此项目，特基于原项目[Fragmentation](https://github.com/YoKeyword/Fragmentation)， 进行升级改造。
-#### 感谢原作者右右的开源贡献。 如有不妥请及时联系。
-***
+
 #### 框架负责管理fragment的各种操作，相比于google新出的navigation框架，更加灵活多变，易于使用。
 #### 框架对于fragment可见性判断，懒加载，转场动画有比较好的处理。
 #### 框架的源码简单易懂， 不存在复杂的逻辑.
@@ -101,6 +97,12 @@ showSoftInput(View view);
 
 #####  如有使用问题欢迎提交issues
 
+
+***
+#### 鸣谢
+#### 原项目非常方便使用，但由于原作者已不再维护此项目，特基于原项目[Fragmentation](https://github.com/YoKeyword/Fragmentation)， 进行升级改造。
+#### 感谢原作者右右的开源贡献。 如有不妥请及时联系。
+***
 ### LICENSE
 ```
 Copyright 2019 weikaiyun
