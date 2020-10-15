@@ -59,7 +59,7 @@ public abstract class ExtraTransaction {
 
     public abstract void popTo(String targetFragmentTag, boolean includeTargetFragment, Runnable afterPopTransactionRunnable);
 
-    public abstract void remove(FragmentManager fm, ISupportFragment toFragment);
+    public abstract void remove(ISupportFragment toFragment);
 
     public abstract void popToChild(String targetFragmentTag, boolean includeTargetFragment);
 
@@ -124,7 +124,7 @@ public abstract class ExtraTransaction {
         }
 
         @Override
-        public void remove(FragmentManager fm, ISupportFragment toFragment) {
+        public void remove(ISupportFragment toFragment) {
             mTransactionDelegate.remove(getFragmentManager(), toFragment);
         }
 
