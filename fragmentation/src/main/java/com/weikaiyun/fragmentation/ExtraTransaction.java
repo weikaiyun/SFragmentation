@@ -33,9 +33,6 @@ public abstract class ExtraTransaction {
 
     public abstract void start(ISupportFragment toFragment);
 
-    public abstract void load(FragmentManager fm, final int containerId, ISupportFragment toFragment);
-    public abstract void remove(FragmentManager fm, ISupportFragment toFragment);
-
     public abstract void startNotHideSelf(ISupportFragment toFragment);
 
     public abstract void startNotHideSelf(ISupportFragment toFragment, @ISupportFragment.LaunchMode int launchMode);
@@ -61,6 +58,8 @@ public abstract class ExtraTransaction {
     public abstract void popTo(String targetFragmentTag, boolean includeTargetFragment);
 
     public abstract void popTo(String targetFragmentTag, boolean includeTargetFragment, Runnable afterPopTransactionRunnable);
+
+    public abstract void remove(FragmentManager fm, ISupportFragment toFragment);
 
     public abstract void popToChild(String targetFragmentTag, boolean includeTargetFragment);
 
@@ -125,13 +124,8 @@ public abstract class ExtraTransaction {
         }
 
         @Override
-        public void load(FragmentManager fm, final int containerId, ISupportFragment toFragment) {
-            mTransactionDelegate.load(fm, containerId, toFragment);
-        }
-
-        @Override
         public void remove(FragmentManager fm, ISupportFragment toFragment) {
-            mTransactionDelegate.remove(fm, toFragment);
+            mTransactionDelegate.remove(getFragmentManager(), toFragment);
         }
 
         @Override
@@ -216,7 +210,7 @@ public abstract class ExtraTransaction {
             if (mFragment == null) {
                 return mActivity.getSupportFragmentManager();
             }
-            return mFragment.getParentFragmentManager();
+            return mFragment.getChildFragmentManager();
         }
     }
 }

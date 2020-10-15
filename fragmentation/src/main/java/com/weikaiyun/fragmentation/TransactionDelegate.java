@@ -105,18 +105,6 @@ class TransactionDelegate {
         });
     }
 
-    void load(final FragmentManager fm, final int containerId, final ISupportFragment toFragment) {
-        enqueue(fm, new Action(Action.ACTION_LOAD) {
-            @Override
-            public void run() {
-                FragmentTransaction ft = fm.beginTransaction();
-                String toName = toFragment.getClass().getName();
-                ft.add(containerId, (Fragment)toFragment, toName);
-                supportCommit(fm, ft);
-            }
-        });
-    }
-
     void remove(final FragmentManager fm, final ISupportFragment toFragment) {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
