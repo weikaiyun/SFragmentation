@@ -37,7 +37,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mDelegate.onAttach(context);
         _mActivity = (SupportActivity) mDelegate.getActivity();
@@ -167,8 +167,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
 
-    /****************************************以下为可选方法(Optional methods)******************************************************/
-
     /**
      * 隐藏软键盘
      */
@@ -264,13 +262,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     /**
-     * Pop the child fragment.
-     */
-    public void popChild() {
-        mDelegate.popChild();
-    }
-
-    /**
      * Pop the last fragment transition from the manager's fragment
      * back stack.
      * <p>
@@ -289,6 +280,36 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
      */
     public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
         mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
+
+
+
+    public void startChild(ISupportFragment toFragment) {
+        mDelegate.startChild(toFragment);
+    }
+
+    public void startChild(final ISupportFragment toFragment, @ISupportFragment.LaunchMode int launchMode) {
+        mDelegate.startChild(toFragment, launchMode);
+    }
+
+    public void startChildForResult(ISupportFragment toFragment, int requestCode) {
+        mDelegate.startChildForResult(toFragment, requestCode);
+    }
+
+    public void startChildWithPop(ISupportFragment toFragment) {
+        mDelegate.startChildWithPop(toFragment);
+    }
+
+    public void replaceChildFragment(ISupportFragment toFragment) {
+        mDelegate.replaceChildFragment(toFragment);
+    }
+
+    /**
+     * Pop the child fragment.
+     */
+    public void popChild() {
+        mDelegate.popChild();
     }
 
     public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment) {

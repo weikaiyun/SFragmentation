@@ -22,8 +22,8 @@ public class SupportFragmentDelegate {
     TransactionRecord mTransactionRecord;
     Bundle mNewBundle;
 
-    private ISupportFragment mSupportF;
-    private Fragment mFragment;
+    private final ISupportFragment mSupportF;
+    private final Fragment mFragment;
     protected FragmentActivity _mActivity;
     private ISupportActivity mSupport;
 
@@ -166,7 +166,6 @@ public class SupportFragmentDelegate {
         return false;
     }
 
-    /**********************************************************************************************/
 
     /**
      * 隐藏软键盘

@@ -16,12 +16,12 @@ import com.weikaiyun.fragmentation.queue.Action;
 import java.util.List;
 
 public class SupportActivityDelegate {
-    private ISupportActivity mSupport;
-    private FragmentActivity mActivity;
+    private final ISupportActivity mSupport;
+    private final FragmentActivity mActivity;
 
     private TransactionDelegate mTransactionDelegate;
 
-    private DebugStackDelegate mDebugStackDelegate;
+    private final DebugStackDelegate mDebugStackDelegate;
 
     private int mDefaultFragmentBackground = 0;
 
