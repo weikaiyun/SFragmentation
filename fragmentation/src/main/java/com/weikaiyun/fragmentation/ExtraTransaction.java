@@ -49,7 +49,7 @@ public abstract class ExtraTransaction {
 
     public abstract void replace(ISupportFragment toFragment);
 
-    public abstract void removeChild(ISupportFragment toFragment);
+    public abstract void remove(ISupportFragment toFragment);
 
     /**
      * 使用setTag()自定义Tag时，使用下面popTo()／popToChild()出栈
@@ -63,7 +63,7 @@ public abstract class ExtraTransaction {
 
     public abstract void loadChildRootFragment(int containerId, ISupportFragment toFragment);
 
-    public abstract void remove(ISupportFragment toFragment);
+    public abstract void removeChild(ISupportFragment toFragment);
 
     public abstract void popToChild(String targetFragmentTag, boolean includeTargetFragment);
 
