@@ -86,6 +86,7 @@ class TransactionDelegate {
                     Fragment to = (Fragment) tos[i];
 
                     ((ISupportFragment) to).getSupportDelegate().setCanPop(false);
+                    ((ISupportFragment) to).getSupportDelegate().setStartByFragmentation(true);
 
                     bindContainerId(containerId, tos[i]);
 
@@ -273,6 +274,12 @@ class TransactionDelegate {
                 return true;
             }
 
+            if (activeFragment.getSupportDelegate().isStartByFragmentation()
+                    && activeFragment.getSupportDelegate().isCanPop()) {
+                activeFragment.getSupportDelegate().pop();
+                return true;
+            }
+
             Fragment parentFragment = ((Fragment) activeFragment).getParentFragment();
             return dispatchBackPressedEvent((ISupportFragment) parentFragment);
         }
@@ -357,6 +364,8 @@ class TransactionDelegate {
 
     private void start(FragmentManager fm, final ISupportFragment from, ISupportFragment to, String toFragmentTag,
                        int type) {
+        ((ISupportFragment) to).getSupportDelegate().setStartByFragmentation(true);
+
         FragmentTransaction ft = fm.beginTransaction();
         boolean addMode = (type == TYPE_ADD
                 || type == TYPE_ADD_RESULT

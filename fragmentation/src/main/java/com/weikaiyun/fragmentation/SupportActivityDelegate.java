@@ -100,7 +100,9 @@ public class SupportActivityDelegate {
         List<Fragment> list = FragmentationMagician.getActiveFragments(getSupportFragmentManager());
         int fragmentNum = 0;
         for (Fragment f : list) {
-            if (f instanceof ISupportFragment && ((ISupportFragment) f).getSupportDelegate().isCanPop()) {
+            if (f instanceof ISupportFragment
+                    && ((ISupportFragment) f).getSupportDelegate().isCanPop()
+                    && ((ISupportFragment) f).getSupportDelegate().isStartByFragmentation()) {
                 fragmentNum++;
             }
         }

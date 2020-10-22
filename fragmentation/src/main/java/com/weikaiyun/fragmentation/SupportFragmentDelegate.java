@@ -31,12 +31,22 @@ public class SupportFragmentDelegate {
 
     private boolean canPop = true;
 
+    private boolean startByFragmentation = false;
+
     public void setCanPop(boolean canPop) {
         this.canPop = canPop;
     }
 
     public boolean isCanPop() {
         return canPop;
+    }
+
+    public boolean isStartByFragmentation() {
+        return startByFragmentation;
+    }
+
+    public void setStartByFragmentation(boolean startByFragmentation) {
+        this.startByFragmentation = startByFragmentation;
     }
 
     public void setVisible(boolean visible) {
