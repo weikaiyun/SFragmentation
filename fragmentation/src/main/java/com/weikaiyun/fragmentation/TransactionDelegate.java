@@ -35,7 +35,7 @@ class TransactionDelegate {
     static final int TYPE_ADD_RESULT_WITHOUT_HIDE = 3;
     static final int TYPE_REPLACE = 4;
 
-    private Handler mHandler;
+    private final Handler mHandler;
 
     ActionQueue mActionQueue;
 

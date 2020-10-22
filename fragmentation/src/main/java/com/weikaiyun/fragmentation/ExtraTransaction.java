@@ -49,6 +49,8 @@ public abstract class ExtraTransaction {
 
     public abstract void replace(ISupportFragment toFragment);
 
+    public abstract void removeChild(ISupportFragment toFragment);
+
     /**
      * 使用setTag()自定义Tag时，使用下面popTo()／popToChild()出栈
      *
@@ -58,6 +60,8 @@ public abstract class ExtraTransaction {
     public abstract void popTo(String targetFragmentTag, boolean includeTargetFragment);
 
     public abstract void popTo(String targetFragmentTag, boolean includeTargetFragment, Runnable afterPopTransactionRunnable);
+
+    public abstract void loadChildRootFragment(int containerId, ISupportFragment toFragment);
 
     public abstract void remove(ISupportFragment toFragment);
 
@@ -72,12 +76,12 @@ public abstract class ExtraTransaction {
     final static class ExtraTransactionImpl<T extends ISupportFragment>
             extends ExtraTransaction {
 
-        private FragmentActivity mActivity;
-        private T mSupportF;
-        private Fragment mFragment;
-        private TransactionDelegate mTransactionDelegate;
-        private boolean mFromActivity;
-        private TransactionRecord mRecord;
+        private final FragmentActivity mActivity;
+        private final T mSupportF;
+        private final Fragment mFragment;
+        private final TransactionDelegate mTransactionDelegate;
+        private final boolean mFromActivity;
+        private final TransactionRecord mRecord;
 
         ExtraTransactionImpl(FragmentActivity activity, T supportF,
                              TransactionDelegate transactionDelegate, boolean fromActivity) {
@@ -124,8 +128,19 @@ public abstract class ExtraTransaction {
         }
 
         @Override
+        public void loadChildRootFragment(int containerId, ISupportFragment toFragment) {
+            toFragment.getSupportDelegate().mTransactionRecord = mRecord;
+            mTransactionDelegate.loadRootTransaction(getChildFragmentManager(), containerId, toFragment);
+        }
+
+        @Override
         public void remove(ISupportFragment toFragment) {
             mTransactionDelegate.remove(getFragmentManager(), toFragment);
+        }
+
+        @Override
+        public void removeChild(ISupportFragment toFragment) {
+            mTransactionDelegate.remove(getChildFragmentManager(), toFragment);
         }
 
         @Override
@@ -136,7 +151,6 @@ public abstract class ExtraTransaction {
         @Override
         public void popTo(String targetFragmentTag, boolean includeTargetFragment,
                           Runnable afterPopTransactionRunnable) {
-
             mTransactionDelegate.popTo(targetFragmentTag, includeTargetFragment,
                     afterPopTransactionRunnable, getFragmentManager());
         }
@@ -149,13 +163,8 @@ public abstract class ExtraTransaction {
         @Override
         public void popToChild(String targetFragmentTag, boolean includeTargetFragment,
                                Runnable afterPopTransactionRunnable) {
-
-            if (mFromActivity) {
-                popTo(targetFragmentTag, includeTargetFragment, afterPopTransactionRunnable);
-            } else {
-                mTransactionDelegate.popTo(targetFragmentTag, includeTargetFragment,
-                        afterPopTransactionRunnable, mFragment.getChildFragmentManager());
-            }
+            mTransactionDelegate.popTo(targetFragmentTag, includeTargetFragment,
+                    afterPopTransactionRunnable, getChildFragmentManager());
         }
 
         @Override
@@ -210,6 +219,10 @@ public abstract class ExtraTransaction {
             if (mFragment == null) {
                 return mActivity.getSupportFragmentManager();
             }
+            return mFragment.getParentFragmentManager();
+        }
+
+        private FragmentManager getChildFragmentManager() {
             return mFragment.getChildFragmentManager();
         }
     }
