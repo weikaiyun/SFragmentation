@@ -155,12 +155,12 @@ public class DebugStackDelegate implements SensorEventListener {
         return name;
     }
 
-    private class StackViewTouchListener implements View.OnTouchListener {
-        private View stackView;
+    private static class StackViewTouchListener implements View.OnTouchListener {
+        private final View stackView;
         private float dX, dY = 0f;
         private float downX, downY = 0f;
         private boolean isClickState;
-        private int clickLimitValue;
+        private final int clickLimitValue;
 
         StackViewTouchListener(View stackView, int clickLimitValue) {
             this.stackView = stackView;

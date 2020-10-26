@@ -7,8 +7,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ActionQueue {
-    private Queue<Action> mQueue = new LinkedList<>();
-    private Handler mMainHandler;
+    private final Queue<Action> mQueue = new LinkedList<>();
+    private final Handler mMainHandler;
 
     public ActionQueue(Handler mainHandler) {
         this.mMainHandler = mainHandler;
