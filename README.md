@@ -100,8 +100,7 @@ showSoftInput(View view);
 
 ***
 #### 鸣谢
-#### 原项目非常方便使用，但由于原作者已不再维护此项目，特基于原项目[Fragmentation](https://github.com/YoKeyword/Fragmentation)， 进行升级改造。
-#### 感谢原作者右右的开源贡献。 如有不妥请及时联系。
+#### Thanks to [Fragmentation](https://github.com/YoKeyword/Fragmentation)。
 ***
 ### LICENSE
 ```
