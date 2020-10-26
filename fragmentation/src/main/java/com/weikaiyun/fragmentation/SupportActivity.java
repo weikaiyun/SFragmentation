@@ -90,7 +90,6 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
         mDelegate.post(runnable);
     }
 
-    /****************************************以下为可选方法(Optional methods)******************************************************/
 
     /**
      * 加载根Fragment, 即Activity内的第一个Fragment
