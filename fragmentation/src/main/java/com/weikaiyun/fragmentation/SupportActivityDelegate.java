@@ -8,7 +8,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentationMagician;
 
 import com.weikaiyun.fragmentation.debug.DebugStackDelegate;
 import com.weikaiyun.fragmentation.queue.Action;
@@ -97,7 +96,7 @@ public class SupportActivityDelegate {
      * 请尽量复写该方法,避免复写onBackPress(),以保证SupportFragment内的onBackPressedSupport()回退事件正常执行
      */
     public void onBackPressedSupport() {
-        List<Fragment> list = FragmentationMagician.getActiveFragments(getSupportFragmentManager());
+        List<Fragment> list = SupportHelper.getActiveFragments(getSupportFragmentManager());
         int fragmentNum = 0;
         for (Fragment f : list) {
             if (f instanceof ISupportFragment

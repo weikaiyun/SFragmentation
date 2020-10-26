@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentationMagician;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class SupportHelper {
     }
 
     public static ISupportFragment getTopFragment(FragmentManager fragmentManager, int containerId) {
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+        List<Fragment> fragmentList = getActiveFragments(fragmentManager);
         for (int i = fragmentList.size() - 1; i >= 0; i--) {
             Fragment fragment = fragmentList.get(i);
             if (fragment instanceof ISupportFragment) {
@@ -72,7 +71,7 @@ public class SupportHelper {
     public static ISupportFragment getPreFragment(Fragment fragment) {
         FragmentManager fragmentManager = fragment.getParentFragmentManager();
 
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+        List<Fragment> fragmentList = getActiveFragments(fragmentManager);
         int index = fragmentList.indexOf(fragment);
         for (int i = index - 1; i >= 0; i--) {
             Fragment preFragment = fragmentList.get(i);
@@ -114,7 +113,7 @@ public class SupportHelper {
         Fragment fragment = null;
 
         if (toFragmentTag == null) {
-            List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+            List<Fragment> fragmentList = getActiveFragments(fragmentManager);
 
             int sizeChildFrgList = fragmentList.size();
 
@@ -133,7 +132,7 @@ public class SupportHelper {
     }
 
     private static ISupportFragment getActiveFragment(FragmentManager fragmentManager, ISupportFragment parentFragment) {
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+        List<Fragment> fragmentList = getActiveFragments(fragmentManager);
         for (int i = fragmentList.size() - 1; i >= 0; i--) {
             Fragment fragment = fragmentList.get(i);
             if (fragment instanceof ISupportFragment) {
@@ -149,7 +148,7 @@ public class SupportHelper {
         Fragment target = fm.findFragmentByTag(targetTag);
         List<Fragment> willPopFragments = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fm);
+        List<Fragment> fragmentList = getActiveFragments(fm);
 
         int size = fragmentList.size();
 
@@ -174,5 +173,9 @@ public class SupportHelper {
             }
         }
         return willPopFragments;
+    }
+
+    public static List<Fragment> getActiveFragments(FragmentManager fragmentManager) {
+        return fragmentManager.getFragments();
     }
 }

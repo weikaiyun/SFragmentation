@@ -8,7 +8,6 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentationMagician;
 import androidx.lifecycle.Lifecycle;
 
 import com.weikaiyun.fragmentation.queue.Action;
@@ -153,7 +152,7 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
-                if (FragmentationMagician.isStateSaved(fm)) return;
+                if (fm.isStateSaved()) return;
                 ISupportFragment top = getTopFragmentForStart(from, fm);
                 if (top == null)
                     throw new NullPointerException("There is no Fragment in the FragmentManager, " +
@@ -185,7 +184,7 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
-                if (FragmentationMagician.isStateSaved(fm)) return;
+                if (fm.isStateSaved()) return;
 
                 final ISupportFragment top = getTopFragmentForStart(from, fm);
                 if (top == null)
@@ -215,7 +214,7 @@ class TransactionDelegate {
      * Pop
      */
     void pop(final FragmentManager fm) {
-        if (FragmentationMagician.isStateSaved(fm)) return;
+        if (fm.isStateSaved()) return;
         final ISupportFragment top = SupportHelper.getTopFragment(fm);
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
@@ -253,7 +252,7 @@ class TransactionDelegate {
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
             public void run() {
-                if (FragmentationMagician.isStateSaved(fm)) return;
+                if (fm.isStateSaved()) return;
 
                 doPopTo(targetFragmentTag, includeTargetFragment, fm);
 
@@ -412,7 +411,7 @@ class TransactionDelegate {
         ft.setMaxLifecycle((Fragment) showFragment, Lifecycle.State.RESUMED);
 
         if (hideFragment == null) {
-            List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fm);
+            List<Fragment> fragmentList = SupportHelper.getActiveFragments(fm);
             for (Fragment fragment : fragmentList) {
                 if (fragment != null && fragment != showFragment) {
                     ft.hide(fragment);
