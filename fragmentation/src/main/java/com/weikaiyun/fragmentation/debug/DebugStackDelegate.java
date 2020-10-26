@@ -1,5 +1,6 @@
 package com.weikaiyun.fragmentation.debug;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -31,7 +32,7 @@ import java.util.List;
  */
 
 public class DebugStackDelegate implements SensorEventListener {
-    private FragmentActivity mActivity;
+    private final FragmentActivity mActivity;
     private SensorManager mSensorManager;
     private AlertDialog mStackDialog;
 
@@ -47,6 +48,7 @@ public class DebugStackDelegate implements SensorEventListener {
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public void onPostCreate(int mode) {
         if (mode != Fragmentation.BUBBLE) return;
         View root = mActivity.findViewById(android.R.id.content);
