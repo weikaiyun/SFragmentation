@@ -14,8 +14,8 @@ public interface ISupportFragment {
     int SINGLETASK = 2;
 
     // ResultCode
-    int FRAGMENT_RESULT_CANCELED = 0;
-    int FRAGMENT_RESULT_OK = 1;
+    int RESULT_CANCELED = 0;
+    int RESULT_OK = 1;
 
     @IntDef({STANDARD, SINGLETOP, SINGLETASK})
     @Retention(RetentionPolicy.SOURCE)
