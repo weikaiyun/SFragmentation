@@ -1,10 +1,13 @@
 package com.common.weikaiyun.demo.ui.base;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.weikaiyun.fragmentation.SupportActivity;
 
-public abstract class BaseSupportActivity extends SupportActivity {
+import androidx.annotation.Nullable;
+
+import com.weikaiyun.fragmentation_swipeback.SwipeBackActivity;
+
+abstract public class BaseSwipeBackActivity extends SwipeBackActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
