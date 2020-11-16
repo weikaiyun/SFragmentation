@@ -250,7 +250,12 @@ class TransactionDelegate {
             @Override
             public void run() {
                 FragmentTransaction ft = fm.beginTransaction();
+                ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
                 ft.remove((Fragment) top);
+                if (preFragment instanceof Fragment) {
+                    ft.show((Fragment) preFragment);
+                    ft.setMaxLifecycle((Fragment) preFragment, Lifecycle.State.RESUMED);
+                }
                 supportCommit(fm, ft);
             }
         });

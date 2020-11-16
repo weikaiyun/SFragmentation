@@ -94,7 +94,7 @@ public class SwipeBackLayout extends FrameLayout {
     private int mCurrentSwipeOrientation;
     private float mParallaxOffset = DEFAULT_PARALLAX;
 
-    private boolean mCallOnDestroyView;
+    private boolean mCallPopQuiet;
 
     private boolean mInLayout;
 
@@ -342,10 +342,6 @@ public class SwipeBackLayout extends FrameLayout {
         }
     }
 
-    public void internalCallOnDestroyView() {
-        mCallOnDestroyView = true;
-    }
-
     public void setFragment(final ISupportFragment fragment, View view) {
         this.mFragment = fragment;
         mContentView = view;
@@ -490,9 +486,9 @@ public class SwipeBackLayout extends FrameLayout {
 
             if (mScrollPercent > 1) {
                 if (mFragment != null) {
-                    if (mCallOnDestroyView) return;
-
+                    if (mCallPopQuiet) return;
                     if (!((Fragment) mFragment).isDetached()) {
+                        mCallPopQuiet = true;
                         onDragFinished();
                         mFragment.getSupportDelegate().popQuiet();
                     }

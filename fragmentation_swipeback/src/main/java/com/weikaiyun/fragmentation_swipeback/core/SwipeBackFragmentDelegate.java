@@ -69,10 +69,6 @@ public class SwipeBackFragmentDelegate {
         mSwipeBackLayout.setParallaxOffset(offset);
     }
 
-    public void onDestroyView() {
-        mSwipeBackLayout.internalCallOnDestroyView();
-    }
-
     private void onFragmentCreate() {
         if (mFragment.getContext() == null) return;
 
