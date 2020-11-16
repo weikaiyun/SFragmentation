@@ -241,6 +241,22 @@ class TransactionDelegate {
     }
 
     /**
+     * popQuiet
+     */
+    void popQuiet(final FragmentManager fm) {
+        if (fm.isStateSaved()) return;
+        final ISupportFragment top = SupportHelper.getTopFragment(fm);
+        enqueue(fm, new Action(Action.ACTION_POP) {
+            @Override
+            public void run() {
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.remove((Fragment) top);
+                supportCommit(fm, ft);
+            }
+        });
+    }
+
+    /**
      * Pop the last fragment transition from the manager's fragment pop stack.
      *
      * @param targetFragmentTag     Tag

@@ -1,1 +1,2 @@
+include ':fragmentation_swipeback'
 include ':app', ':fragmentation'

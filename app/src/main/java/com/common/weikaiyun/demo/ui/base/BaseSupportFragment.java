@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.weikaiyun.fragmentation.SupportFragment;
+import com.weikaiyun.fragmentation_swipeback.SwipeBackFragment;
 
-abstract public class BaseSupportFragment extends SupportFragment {
+abstract public class BaseSupportFragment extends SwipeBackFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), container,false);
+        View view = inflater.inflate(getLayoutId(), container,false);
+        return attachToSwipeBack(view);
     }
 
     @Override

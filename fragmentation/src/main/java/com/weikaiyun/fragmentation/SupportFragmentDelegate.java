@@ -304,6 +304,10 @@ public class SupportFragmentDelegate {
         mTransactionDelegate.pop(mFragment.getParentFragmentManager());
     }
 
+    public void popQuiet() {
+        mTransactionDelegate.popQuiet(mFragment.getParentFragmentManager());
+    }
+
     /**
      * Pop the child fragment.
      */

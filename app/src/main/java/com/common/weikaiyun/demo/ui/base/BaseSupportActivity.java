@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.weikaiyun.fragmentation.SupportActivity;
+import com.weikaiyun.fragmentation_swipeback.SwipeBackActivity;
 
-public abstract class BaseSupportActivity extends SupportActivity {
+public abstract class BaseSupportActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
