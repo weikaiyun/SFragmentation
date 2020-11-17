@@ -12,10 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.weikaiyun.fragmentation.ISupportFragment;
 import com.weikaiyun.fragmentation.SwipeBackLayout;
 
-/**
- * Created by YoKey on 17/6/29.
- */
-
 public class SwipeBackFragmentDelegate {
     private final Fragment mFragment;
     private final ISupportFragment mSupport;

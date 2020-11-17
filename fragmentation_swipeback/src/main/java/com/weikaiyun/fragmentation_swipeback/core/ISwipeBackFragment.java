@@ -6,10 +6,6 @@ import androidx.annotation.FloatRange;
 
 import com.weikaiyun.fragmentation.SwipeBackLayout;
 
-/**
- * Created by YoKey on 17/6/29.
- */
-
 public interface ISwipeBackFragment {
 
     View attachToSwipeBack(View view);

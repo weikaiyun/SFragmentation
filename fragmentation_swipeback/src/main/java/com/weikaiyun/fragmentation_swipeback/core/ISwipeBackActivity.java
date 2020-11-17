@@ -2,9 +2,6 @@ package com.weikaiyun.fragmentation_swipeback.core;
 
 import com.weikaiyun.fragmentation.SwipeBackLayout;
 
-/**
- * Created by YoKey on 17/6/29.
- */
 public interface ISwipeBackActivity {
 
     SwipeBackLayout getSwipeBackLayout();
