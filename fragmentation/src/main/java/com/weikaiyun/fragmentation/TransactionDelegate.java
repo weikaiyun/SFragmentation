@@ -522,6 +522,14 @@ class TransactionDelegate {
             Log.e(TAG, "Pop failure! Can't find FragmentTag:" + targetFragmentTag + " in the FragmentManager's Stack.");
             return;
         }
+        Fragment preFragment = null;
+        if (includeTargetFragment) {
+            preFragment = (Fragment) SupportHelper.getPreFragment(targetFragment);
+            if (preFragment == null) {
+                Log.e(TAG, "Pop failure! Can't find targetFragment in the FragmentManager's Stack.");
+                return;
+            }
+        }
 
         List<Fragment> willPopFragments = SupportHelper.getWillPopFragments(fm, targetFragmentTag, includeTargetFragment);
         if (willPopFragments.size() <= 0) return;
@@ -547,8 +555,13 @@ class TransactionDelegate {
 
         ft.remove(top);
 
-        ft.show(targetFragment);
-        ft.setMaxLifecycle(targetFragment, Lifecycle.State.RESUMED);
+        if (includeTargetFragment && preFragment != null) {
+            ft.show(preFragment);
+            ft.setMaxLifecycle(preFragment, Lifecycle.State.RESUMED);
+        } else {
+            ft.show(targetFragment);
+            ft.setMaxLifecycle(targetFragment, Lifecycle.State.RESUMED);
+        }
         supportCommit(fm, ft);
     }
 

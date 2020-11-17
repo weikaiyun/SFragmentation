@@ -32,7 +32,7 @@ class DemoFragment4: BaseSwipeBackFragment() {
 //                    .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_pop_exit,
 //                        R.anim.h_fragment_pop_enter, R.anim.h_fragment_exit)
 //                    .popTo(DemoFragment1::class.java.name, false)
-                popTo(DemoFragment1::class.java, false)
+                popTo(DemoFragment1::class.java, true)
             }
         }
 
