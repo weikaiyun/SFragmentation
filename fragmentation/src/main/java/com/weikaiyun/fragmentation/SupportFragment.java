@@ -261,6 +261,10 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         mDelegate.pop();
     }
 
+    public void popQuiet() {
+        mDelegate.popQuiet();
+    }
+
     /**
      * Pop the last fragment transition from the manager's fragment
      * back stack.
