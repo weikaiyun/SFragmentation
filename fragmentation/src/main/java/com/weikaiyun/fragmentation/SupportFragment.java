@@ -76,6 +76,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
         onInvisible();
     }
 
+    @Override
     public void lazyInit() {
 
     }
