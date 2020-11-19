@@ -39,4 +39,8 @@ public interface ISupportFragment {
     void putNewBundle(Bundle newBundle);
 
     boolean onBackPressedSupport();
+
+    void onVisible();
+
+    void onInvisible();
 }

@@ -80,10 +80,12 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     }
 
+    @Override
     public void onVisible() {
 
     }
 
+    @Override
     public void onInvisible() {
 
     }
