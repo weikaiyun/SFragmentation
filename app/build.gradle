@@ -33,8 +33,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':fragmentation')
-    implementation project(':fragmentation_swipeback')
+    //implementation project(':fragmentation')
+    //implementation project(':fragmentation_swipeback')
+
+    implementation 'com.github.weikaiyun:EasyFragmentation:fragmentation:1.6.2'
+    implementation 'com.github.weikaiyun.EasyFragmentation:fragmentation_swipeback:1.6.2'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinx_coroutines}"
