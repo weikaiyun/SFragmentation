@@ -22,7 +22,7 @@ allprojects {
 ```
 dependencies {
 	//请使用最新版本
-	implementation 'com.github.weikaiyun:EasyFragmentation:latest'
+	implementation 'com.github.weikaiyun:EasyFragmentation:fragmentation:latest'
 	//滑动返回
 	implementation 'com.github.weikaiyun.EasyFragmentation:fragmentation_swipeback:latest'
 }
