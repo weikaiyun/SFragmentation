@@ -100,7 +100,7 @@ showSoftInput(View view);
 ##### 7. 可见性
 ```
 //可见
-onVisisble();
+onVisible();
 
 //不可见
 onInvisible();
