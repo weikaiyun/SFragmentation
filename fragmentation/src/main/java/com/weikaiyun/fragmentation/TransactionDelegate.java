@@ -244,7 +244,6 @@ class TransactionDelegate {
      * popQuiet
      */
     void popQuiet(final FragmentManager fm) {
-        if (fm.isStateSaved()) return;
         final ISupportFragment top = SupportHelper.getTopFragment(fm);
         enqueue(fm, new Action(Action.ACTION_POP) {
             @Override
