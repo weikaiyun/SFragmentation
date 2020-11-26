@@ -111,7 +111,6 @@ onInvisible();
 
 
 ***
-#### 鸣谢
 #### Thanks to [Fragmentation](https://github.com/YoKeyword/Fragmentation)。
 ***
 ### LICENSE
