@@ -5,9 +5,6 @@ import androidx.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by YoKey on 17/2/5.
- */
 public class Fragmentation {
     /**
      * Dont display stack view.

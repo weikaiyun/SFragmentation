@@ -20,9 +20,6 @@ import com.weikaiyun.fragmentation.R;
 
 import java.util.List;
 
-/**
- * Created by YoKeyword on 16/2/21.
- */
 public class DebugHierarchyViewContainer extends ScrollView {
     private Context mContext;
 

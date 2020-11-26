@@ -27,10 +27,6 @@ import com.weikaiyun.fragmentation.SupportHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by YoKey on 17/6/13.
- */
-
 public class DebugStackDelegate implements SensorEventListener {
     private final FragmentActivity mActivity;
     private SensorManager mSensorManager;
