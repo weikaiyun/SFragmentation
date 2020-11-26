@@ -8,7 +8,7 @@ import com.weikaiyun.fragmentation.SwipeBackLayout;
 import com.weikaiyun.fragmentation_swipeback.core.ISwipeBackActivity;
 import com.weikaiyun.fragmentation_swipeback.core.SwipeBackActivityDelegate;
 
-public class SwipeBackActivity extends SupportActivity implements ISwipeBackActivity {
+abstract public class SwipeBackActivity extends SupportActivity implements ISwipeBackActivity {
     final SwipeBackActivityDelegate mDelegate = new SwipeBackActivityDelegate(this);
 
     @Override

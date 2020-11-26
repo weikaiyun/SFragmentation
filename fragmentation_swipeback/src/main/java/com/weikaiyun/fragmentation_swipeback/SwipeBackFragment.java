@@ -12,7 +12,7 @@ import com.weikaiyun.fragmentation_swipeback.core.ISwipeBackFragment;
 import com.weikaiyun.fragmentation_swipeback.core.SwipeBackFragmentDelegate;
 
 
-public class SwipeBackFragment extends SupportFragment implements ISwipeBackFragment {
+abstract public class SwipeBackFragment extends SupportFragment implements ISwipeBackFragment {
     final SwipeBackFragmentDelegate mDelegate = new SwipeBackFragmentDelegate(this);
 
     @Override
