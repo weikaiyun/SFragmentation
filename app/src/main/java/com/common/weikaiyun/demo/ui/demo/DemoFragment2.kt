@@ -12,6 +12,7 @@ class DemoFragment2: BaseSwipeBackFragment() {
     private var param1: Int by argument()
     private var param2: String by argument()
     companion object {
+        const val RESULT_CODE = 100
         fun newInstance(param1: Int, param2: String): DemoFragment2 =
             DemoFragment2().apply {
                 this.param1 = param1
@@ -34,4 +35,10 @@ class DemoFragment2: BaseSwipeBackFragment() {
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_demo2
+
+    override fun onBackPressedSupport(): Boolean {
+        val bundle = Bundle()
+        setFragmentResult(RESULT_CODE, bundle)
+        return super.onBackPressedSupport()
+    }
 }
