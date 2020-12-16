@@ -1,6 +1,6 @@
 ![](https://img.shields.io/github/v/release/weikaiyun/EasyFragmentation.svg)
 [![](https://jitpack.io/v/weikaiyun/EasyFragmentation.svg)](https://jitpack.io/#weikaiyun/EasyFragmentation)
-# EasyFragmentation
+# SFragmentation
 
 
 #### 框架负责管理fragment的各种操作，相比于google新出的navigation框架，更加灵活多变，易于使用。
@@ -22,9 +22,9 @@ allprojects {
 ```
 dependencies {
 	//请使用最新版本
-	implementation 'com.github.weikaiyun.EasyFragmentation:fragmentation:latest'
+	implementation 'com.github.weikaiyun.SFragmentation:fragmentation:latest'
 	//滑动返回，可选
-	implementation 'com.github.weikaiyun.EasyFragmentation:fragmentation_swipeback:latest'
+	implementation 'com.github.weikaiyun.SFragmentation:fragmentation_swipeback:latest'
 }
 ```
 ##### demo有比较详细的使用示例， 欢迎star。
