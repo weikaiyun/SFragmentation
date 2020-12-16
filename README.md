@@ -1,6 +1,6 @@
 ![](https://img.shields.io/github/v/release/weikaiyun/EasyFragmentation.svg)
 [![](https://jitpack.io/v/weikaiyun/EasyFragmentation.svg)](https://jitpack.io/#weikaiyun/EasyFragmentation)
-# SFragmentation
+# SFragmentation(Super Fragmentation)
 
 
 #### 框架负责管理fragment的各种操作，相比于google新出的navigation框架，更加灵活多变，易于使用。
