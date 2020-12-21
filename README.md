@@ -27,7 +27,7 @@ dependencies {
 	implementation 'com.github.weikaiyun.SFragmentation:fragmentation_swipeback:latest'
 }
 ```
-##### demo有比较详细的使用示例， 欢迎star。
+##### demo有比较详细的使用示例， 欢迎star。(关于2,3,4,5中API的用法，有对应的childFragment的操作接口，使用过程中请务必弄清楚fragment的层级关系，使用对应的接口)
 
 ##### 1. Application初始化API
 
