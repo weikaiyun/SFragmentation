@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 
 /**
@@ -26,7 +27,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     @Nullable
     @Override
-    public Animation onCreateAnimation(int transit, final boolean enter, int nextAnim) {
+    public Animation onCreateAnimation(final int transit, final boolean enter, int nextAnim) {
         if (nextAnim > 0) {
             Animation anim = AnimationUtils.loadAnimation(_mActivity, nextAnim);
             anim.setAnimationListener(new Animation.AnimationListener() {
@@ -37,7 +38,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    if (enter) {
+                    if (enter && transit == FragmentTransaction.TRANSIT_FRAGMENT_OPEN) {
                         SupportFragment.this.onAnimationEnd();
                     }
                 }
