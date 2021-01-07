@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,35 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     protected SupportActivity _mActivity;
 
     private boolean isLoaded;
+
+    @Nullable
+    @Override
+    public Animation onCreateAnimation(int transit, final boolean enter, int nextAnim) {
+        if (nextAnim > 0) {
+            Animation anim = AnimationUtils.loadAnimation(_mActivity, nextAnim);
+            anim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    if (enter) {
+                        SupportFragment.this.onAnimationEnd();
+                    }
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            return anim;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -88,6 +119,11 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     @Override
     public void onInvisible() {
+
+    }
+
+    @Override
+    public void onAnimationEnd() {
 
     }
 
