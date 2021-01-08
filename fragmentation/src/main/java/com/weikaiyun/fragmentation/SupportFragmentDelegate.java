@@ -29,6 +29,8 @@ public class SupportFragmentDelegate {
 
     private boolean isVisible;
 
+    boolean hasEnterAnimation = false;
+
     private boolean canPop = true;
 
     private boolean startByFragmentation = false;

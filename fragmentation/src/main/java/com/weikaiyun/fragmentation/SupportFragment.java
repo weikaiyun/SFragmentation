@@ -24,15 +24,10 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     private boolean isLoaded;
 
-    private boolean hasEnterAnimation = false;
-
     @Nullable
     @Override
     public Animation onCreateAnimation(final int transit, final boolean enter, int nextAnim) {
         if (nextAnim > 0) {
-            if (enter) {
-                hasEnterAnimation = true;
-            }
             Animation anim = AnimationUtils.loadAnimation(_mActivity, nextAnim);
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -94,7 +89,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onResume() {
         super.onResume();
-        if (!hasEnterAnimation) {
+        if (!getSupportDelegate().hasEnterAnimation) {
             onRealResume();
         }
     }
@@ -123,7 +118,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     private void onEnterAnimationEnd() {
         onRealResume();
-        hasEnterAnimation = false;
+        getSupportDelegate().hasEnterAnimation = false;
     }
 
     private void onRealResume() {

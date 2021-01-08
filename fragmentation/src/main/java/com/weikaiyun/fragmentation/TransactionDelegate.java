@@ -220,14 +220,15 @@ class TransactionDelegate {
             @Override
             public void run() {
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
                 TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
                 if (record != null) {
                     if (record.currentFragmentPopEnter != Integer.MIN_VALUE) {
+                        preFragment.getSupportDelegate().hasEnterAnimation = true;
                         ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
                     }
                 } else {
+                    preFragment.getSupportDelegate().hasEnterAnimation = true;
                     ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
                             0, 0);
                 }
@@ -401,14 +402,15 @@ class TransactionDelegate {
             ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
         } else {
             if (addMode) {
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 TransactionRecord record = to.getSupportDelegate().mTransactionRecord;
                 if (record != null) {
                     if (record.targetFragmentEnter != Integer.MIN_VALUE) {
+                        to.getSupportDelegate().hasEnterAnimation = true;
                         ft.setCustomAnimations(record.targetFragmentEnter, record.currentFragmentPopExit,
                                 0, 0);
                     }
                 } else {
+                    to.getSupportDelegate().hasEnterAnimation = true;
                     ft.setCustomAnimations(Fragmentation.getDefault().targetFragmentEnter, Fragmentation.getDefault().currentFragmentPopExit,
                             0, 0);
                 }
