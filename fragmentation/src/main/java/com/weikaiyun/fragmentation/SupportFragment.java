@@ -30,6 +30,9 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public Animation onCreateAnimation(final int transit, final boolean enter, int nextAnim) {
         if (nextAnim > 0) {
+            if (enter) {
+                hasEnterAnimation = true;
+            }
             Animation anim = AnimationUtils.loadAnimation(_mActivity, nextAnim);
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -40,7 +43,6 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     if (enter) {
-                        hasEnterAnimation = true;
                         onEnterAnimationEnd();
                     }
                 }
