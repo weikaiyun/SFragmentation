@@ -40,7 +40,7 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    if (enter && transit == FragmentTransaction.TRANSIT_FRAGMENT_OPEN) {
+                    if (enter) {
                         hasEnterAnimation = true;
                         onEnterAnimationEnd();
                     }
