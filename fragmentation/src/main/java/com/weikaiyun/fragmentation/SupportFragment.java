@@ -25,6 +25,8 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     private boolean isLoaded;
 
+    private boolean hasEnterAnimation = false;
+
     @Nullable
     @Override
     public Animation onCreateAnimation(final int transit, final boolean enter, int nextAnim) {
@@ -39,7 +41,8 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     if (enter && transit == FragmentTransaction.TRANSIT_FRAGMENT_OPEN) {
-                        SupportFragment.this.onAnimationEnd();
+                        hasEnterAnimation = true;
+                        onEnterAnimationEnd();
                     }
                 }
 
@@ -90,14 +93,8 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onResume() {
         super.onResume();
-        if (!isLoaded && !isHidden()) {
-            lazyInit();
-            isLoaded = true;
-        }
-
-        if (!isHidden()) {
-            getSupportDelegate().setVisible(true);
-            onVisible();
+        if (!hasEnterAnimation) {
+            onRealResume();
         }
     }
 
@@ -123,9 +120,21 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
 
     }
 
-    @Override
-    public void onAnimationEnd() {
+    private void onEnterAnimationEnd() {
+        onRealResume();
+        hasEnterAnimation = false;
+    }
 
+    private void onRealResume() {
+        if (!isLoaded && !isHidden()) {
+            lazyInit();
+            isLoaded = true;
+        }
+
+        if (!isHidden()) {
+            getSupportDelegate().setVisible(true);
+            onVisible();
+        }
     }
 
     @Override

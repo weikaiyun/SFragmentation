@@ -43,6 +43,4 @@ public interface ISupportFragment {
     void onVisible();
 
     void onInvisible();
-
-    void onAnimationEnd();
 }
