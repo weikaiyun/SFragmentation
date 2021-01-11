@@ -398,6 +398,7 @@ class TransactionDelegate {
         Bundle args = getArguments(toF);
 
         if (from == null) {
+            to.getSupportDelegate().setCanPop(false);
             ft.replace(args.getInt(FRAGMENTATION_ARG_CONTAINER), toF, toFragmentTag);
             ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
         } else {
@@ -421,6 +422,7 @@ class TransactionDelegate {
                     ft.setMaxLifecycle(fromF, Lifecycle.State.STARTED);
                 }
             } else {
+                to.getSupportDelegate().setCanPop(false);
                 ft.replace(from.getSupportDelegate().mContainerId, toF, toFragmentTag);
                 ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
             }
