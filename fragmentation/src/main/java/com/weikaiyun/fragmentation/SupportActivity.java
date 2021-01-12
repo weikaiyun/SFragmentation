@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.weikaiyun.fragmentation.animation.FragmentAnimator;
+
 /**
  * Base class for activities that use the support-based
  * {@link ISupportActivity} and
@@ -57,6 +59,25 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     protected void onDestroy() {
         super.onDestroy();
         mDelegate.onDestroy();
+    }
+
+    /**
+     * Get all fragments animation.
+     *
+     * @return FragmentAnimator
+     */
+    @Override
+    public FragmentAnimator getFragmentAnimator() {
+        return mDelegate.getFragmentAnimator();
+    }
+
+    /**
+     * Set all fragments animation.
+     * 设置Fragment内的全局动画
+     */
+    @Override
+    public void setFragmentAnimator(FragmentAnimator fragmentAnimator) {
+        mDelegate.setFragmentAnimator(fragmentAnimator);
     }
 
     /**

@@ -38,7 +38,10 @@ class TransactionDelegate {
 
     ActionQueue mActionQueue;
 
+    private ISupportActivity mSupport;
+
     TransactionDelegate(ISupportActivity support) {
+        mSupport = support;
         mHandler = new Handler(Looper.getMainLooper());
         mActionQueue = new ActionQueue(mHandler);
     }
@@ -228,7 +231,11 @@ class TransactionDelegate {
                         ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
                     }
                 } else {
-                    if (Fragmentation.getDefault().currentFragmentPopEnter > 0) {
+                    if (mSupport.getFragmentAnimator().getCurrentFragmentPopEnter() > 0) {
+                        preFragment.getSupportDelegate().hasEnterAnimation = true;
+                        ft.setCustomAnimations(mSupport.getFragmentAnimator().getCurrentFragmentPopEnter(), mSupport.getFragmentAnimator().getTargetFragmentExit(),
+                                0, 0);
+                    } else if (Fragmentation.getDefault().currentFragmentPopEnter > 0) {
                         preFragment.getSupportDelegate().hasEnterAnimation = true;
                         ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
                                 0, 0);
@@ -413,7 +420,11 @@ class TransactionDelegate {
                                 0, 0);
                     }
                 } else {
-                    if (Fragmentation.getDefault().targetFragmentEnter > 0) {
+                    if (mSupport.getFragmentAnimator().getTargetFragmentEnter() > 0) {
+                        to.getSupportDelegate().hasEnterAnimation = true;
+                        ft.setCustomAnimations(mSupport.getFragmentAnimator().getTargetFragmentEnter(), mSupport.getFragmentAnimator().getCurrentFragmentPopExit(),
+                                0, 0);
+                    } else if (Fragmentation.getDefault().targetFragmentEnter > 0) {
                         to.getSupportDelegate().hasEnterAnimation = true;
                         ft.setCustomAnimations(Fragmentation.getDefault().targetFragmentEnter, Fragmentation.getDefault().currentFragmentPopExit,
                                 0, 0);
@@ -559,7 +570,11 @@ class TransactionDelegate {
                 ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
             }
         } else {
-            if (Fragmentation.getDefault().currentFragmentPopEnter > 0) {
+            if (mSupport.getFragmentAnimator().getCurrentFragmentPopEnter() > 0) {
+                ((ISupportFragment)targetFragment).getSupportDelegate().hasEnterAnimation = true;
+                ft.setCustomAnimations(mSupport.getFragmentAnimator().getCurrentFragmentPopEnter(), mSupport.getFragmentAnimator().getTargetFragmentExit(),
+                        0, 0);
+            } else if (Fragmentation.getDefault().currentFragmentPopEnter > 0) {
                 ((ISupportFragment)targetFragment).getSupportDelegate().hasEnterAnimation = true;
                 ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
                         0, 0);

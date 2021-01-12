@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.weikaiyun.fragmentation.animation.FragmentAnimator;
 import com.weikaiyun.fragmentation.debug.DebugStackDelegate;
 import com.weikaiyun.fragmentation.queue.Action;
 
@@ -23,6 +24,8 @@ public class SupportActivityDelegate {
     private final DebugStackDelegate mDebugStackDelegate;
 
     private int mDefaultFragmentBackground = 0;
+
+    private FragmentAnimator mFragmentAnimator = new FragmentAnimator();
 
     public SupportActivityDelegate(ISupportActivity support) {
         if (!(support instanceof FragmentActivity))
@@ -110,6 +113,14 @@ public class SupportActivityDelegate {
         } else {
             ActivityCompat.finishAfterTransition(mActivity);
         }
+    }
+
+    public FragmentAnimator getFragmentAnimator() {
+        return mFragmentAnimator;
+    }
+
+    public void setFragmentAnimator(FragmentAnimator mFragmentAnimator) {
+        this.mFragmentAnimator = mFragmentAnimator;
     }
 
     /**

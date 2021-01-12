@@ -2,7 +2,10 @@ package com.weikaiyun.fragmentation;
 
 import android.view.MotionEvent;
 
+import com.weikaiyun.fragmentation.animation.FragmentAnimator;
+
 public interface ISupportActivity {
+
     SupportActivityDelegate getSupportDelegate();
 
     ExtraTransaction extraTransaction();
@@ -14,4 +17,8 @@ public interface ISupportActivity {
     void onBackPressedSupport();
 
     boolean dispatchTouchEvent(MotionEvent ev);
+
+    FragmentAnimator getFragmentAnimator();
+
+    void setFragmentAnimator(FragmentAnimator fragmentAnimator);
 }
