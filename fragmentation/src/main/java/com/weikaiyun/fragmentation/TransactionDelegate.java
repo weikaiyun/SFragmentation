@@ -228,9 +228,11 @@ class TransactionDelegate {
                         ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
                     }
                 } else {
-                    preFragment.getSupportDelegate().hasEnterAnimation = true;
-                    ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
-                            0, 0);
+                    if (Fragmentation.getDefault().currentFragmentPopEnter > 0) {
+                        preFragment.getSupportDelegate().hasEnterAnimation = true;
+                        ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
+                                0, 0);
+                    }
                 }
                 ft.remove((Fragment) top);
                 if (preFragment instanceof Fragment) {
@@ -411,9 +413,11 @@ class TransactionDelegate {
                                 0, 0);
                     }
                 } else {
-                    to.getSupportDelegate().hasEnterAnimation = true;
-                    ft.setCustomAnimations(Fragmentation.getDefault().targetFragmentEnter, Fragmentation.getDefault().currentFragmentPopExit,
-                            0, 0);
+                    if (Fragmentation.getDefault().targetFragmentEnter > 0) {
+                        to.getSupportDelegate().hasEnterAnimation = true;
+                        ft.setCustomAnimations(Fragmentation.getDefault().targetFragmentEnter, Fragmentation.getDefault().currentFragmentPopExit,
+                                0, 0);
+                    }
                 }
                 ft.add(from.getSupportDelegate().mContainerId, toF, toFragmentTag);
                 ft.setMaxLifecycle(toF, Lifecycle.State.RESUMED);
@@ -551,11 +555,15 @@ class TransactionDelegate {
         TransactionRecord record = ((ISupportFragment) top).getSupportDelegate().mTransactionRecord;
         if (record != null) {
             if (record.currentFragmentPopEnter != Integer.MIN_VALUE) {
+                ((ISupportFragment)targetFragment).getSupportDelegate().hasEnterAnimation = true;
                 ft.setCustomAnimations(record.currentFragmentPopEnter, record.targetFragmentExit, 0, 0);
             }
         } else {
-            ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
-                    0, 0);
+            if (Fragmentation.getDefault().currentFragmentPopEnter > 0) {
+                ((ISupportFragment)targetFragment).getSupportDelegate().hasEnterAnimation = true;
+                ft.setCustomAnimations(Fragmentation.getDefault().currentFragmentPopEnter, Fragmentation.getDefault().targetFragmentExit,
+                        0, 0);
+            }
         }
 
         ft.remove(top);
