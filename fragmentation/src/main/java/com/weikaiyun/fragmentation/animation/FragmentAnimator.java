@@ -47,16 +47,16 @@ public class FragmentAnimator implements Parcelable {
         }
     };
 
-    public int getCurrentFragmentPopEnter() {
-        return currentFragmentPopEnter;
+    public int getTargetFragmentEnter() {
+        return targetFragmentEnter;
     }
 
     public int getCurrentFragmentPopExit() {
         return currentFragmentPopExit;
     }
 
-    public int getTargetFragmentEnter() {
-        return targetFragmentEnter;
+    public int getCurrentFragmentPopEnter() {
+        return currentFragmentPopEnter;
     }
 
     public int getTargetFragmentExit() {
@@ -90,9 +90,9 @@ public class FragmentAnimator implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(currentFragmentPopEnter);
-        dest.writeInt(currentFragmentPopExit);
         dest.writeInt(targetFragmentEnter);
+        dest.writeInt(currentFragmentPopExit);
+        dest.writeInt(currentFragmentPopEnter);
         dest.writeInt(targetFragmentExit);
     }
 }
