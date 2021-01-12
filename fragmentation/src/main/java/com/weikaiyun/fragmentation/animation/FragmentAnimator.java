@@ -63,8 +63,8 @@ public class FragmentAnimator implements Parcelable {
         return targetFragmentExit;
     }
 
-    public FragmentAnimator setCurrentFragmentPopEnter(int currentFragmentPopEnter) {
-        this.currentFragmentPopEnter = currentFragmentPopEnter;
+    public FragmentAnimator setTargetFragmentEnter(int targetFragmentEnter) {
+        this.targetFragmentEnter = targetFragmentEnter;
         return this;
     }
 
@@ -73,8 +73,8 @@ public class FragmentAnimator implements Parcelable {
         return this;
     }
 
-    public FragmentAnimator setTargetFragmentEnter(int targetFragmentEnter) {
-        this.targetFragmentEnter = targetFragmentEnter;
+    public FragmentAnimator setCurrentFragmentPopEnter(int currentFragmentPopEnter) {
+        this.currentFragmentPopEnter = currentFragmentPopEnter;
         return this;
     }
 
