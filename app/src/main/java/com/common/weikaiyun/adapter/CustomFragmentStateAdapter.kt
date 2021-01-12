@@ -4,6 +4,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.weikaiyun.fragmentation.SupportActivity
 import com.weikaiyun.fragmentation.SupportFragment
 
+//适用viewpager2
 
 class CustomFragmentStateAdapter(
     activity: SupportActivity,
