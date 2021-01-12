@@ -45,6 +45,12 @@ abstract public class SupportActivity extends AppCompatActivity implements ISupp
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        mDelegate.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
     }

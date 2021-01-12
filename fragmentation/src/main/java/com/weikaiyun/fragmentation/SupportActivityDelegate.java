@@ -3,6 +3,7 @@ package com.weikaiyun.fragmentation;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,8 @@ public class SupportActivityDelegate {
 
     private FragmentAnimator mFragmentAnimator = new FragmentAnimator();
 
+    static final String S_FRAGMENTATION_FRAGMENT_ANIMATOR = "s_fragmentation_fragment_animator";
+
     public SupportActivityDelegate(ISupportActivity support) {
         if (!(support instanceof FragmentActivity))
             throw new RuntimeException("Must extends FragmentActivity/AppCompatActivity");
@@ -46,8 +49,18 @@ public class SupportActivityDelegate {
     }
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            FragmentAnimator animator = savedInstanceState.getParcelable(S_FRAGMENTATION_FRAGMENT_ANIMATOR);
+            if (animator != null) {
+                mFragmentAnimator = animator;
+            }
+        }
         mTransactionDelegate = getTransactionDelegate();
         mDebugStackDelegate.onCreate(Fragmentation.getDefault().getMode());
+    }
+
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(S_FRAGMENTATION_FRAGMENT_ANIMATOR, mFragmentAnimator);
     }
 
     public void onPostCreate(@Nullable Bundle savedInstanceState) {
