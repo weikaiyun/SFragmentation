@@ -119,6 +119,18 @@ class TransactionDelegate {
         });
     }
 
+    void remove(final FragmentManager fm, final ISupportFragment toFragment, final int targetFragmentExit) {
+        enqueue(fm, new Action(Action.ACTION_POP) {
+            @Override
+            public void run() {
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(0, targetFragmentExit, 0, 0);
+                ft.remove((Fragment) toFragment);
+                supportCommit(fm, ft);
+            }
+        });
+    }
+
     /**
      * Dispatch the start transaction.
      */

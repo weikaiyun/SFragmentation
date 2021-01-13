@@ -60,7 +60,9 @@ public abstract class ExtraTransaction {
     public abstract void replaceChild(ISupportFragment toFragment);
 
     public abstract void remove(ISupportFragment toFragment);
+    public abstract void removeWithAnimation(ISupportFragment toFragment, int targetFragmentExit);
     public abstract void removeChild(ISupportFragment toFragment);
+    public abstract void removeChildWithAnimation(ISupportFragment toFragment, int targetFragmentExit);
 
     /**
      * 使用setTag()自定义Tag时，使用下面popTo()／popToChild()出栈
@@ -158,8 +160,18 @@ public abstract class ExtraTransaction {
         }
 
         @Override
+        public void removeWithAnimation(ISupportFragment toFragment, int targetFragmentExit) {
+            mTransactionDelegate.remove(getFragmentManager(), toFragment, targetFragmentExit);
+        }
+
+        @Override
         public void removeChild(ISupportFragment toFragment) {
             mTransactionDelegate.remove(getChildFragmentManager(), toFragment);
+        }
+
+        @Override
+        public void removeChildWithAnimation(ISupportFragment toFragment, int targetFragmentExit) {
+            mTransactionDelegate.remove(getChildFragmentManager(), toFragment, targetFragmentExit);
         }
 
         @Override
