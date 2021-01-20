@@ -595,7 +595,7 @@ class TransactionDelegate {
 
         ft.remove(top);
 
-        if (includeTargetFragment && preFragment != null) {
+        if (includeTargetFragment) {
             ft.show(preFragment);
             ft.setMaxLifecycle(preFragment, Lifecycle.State.RESUMED);
         } else {
