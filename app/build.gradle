@@ -36,10 +36,10 @@ dependencies {
     implementation project(':fragmentation')
     implementation project(':fragmentation_swipeback')
 
-//    implementation 'com.github.weikaiyun.SFragmentation:fragmentation:1.6.7'
-//    implementation 'com.github.weikaiyun.SFragmentation:fragmentation_swipeback:1.6.7'
+//    implementation 'com.github.weikaiyun.SFragmentation:fragmentation:1.7.6'
+//    implementation 'com.github.weikaiyun.SFragmentation:fragmentation_swipeback:1.7.6'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinx_coroutines}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinx_coroutines}"
 
