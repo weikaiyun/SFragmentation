@@ -37,6 +37,9 @@ class DemoMainFragment: BaseSupportFragment() {
     private val selectedTextColor = ResUtils.getColor(R.color.color_selected)
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
+        fl_container.setOnClickListener {
+            pop()
+        }
         val homeFragmentInStack: HomeFragment? = SupportHelper.findFragment(childFragmentManager, HomeFragment::class.java)
         if (homeFragmentInStack != null) {
             homeFragment = homeFragmentInStack

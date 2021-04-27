@@ -217,12 +217,14 @@ class TransactionDelegate {
             }
         });
 
-        enqueue(fm, new Action() {
-            @Override
-            public void run() {
-                safePopTo(fm, willPopFragments);
-            }
-        });
+        if (willPopFragments.size() > 0) {
+            enqueue(fm, new Action() {
+                @Override
+                public void run() {
+                    safePopTo(fm, willPopFragments);
+                }
+            });
+        }
     }
 
     /**
@@ -237,6 +239,9 @@ class TransactionDelegate {
                 FragmentTransaction ft = fm.beginTransaction();
                 ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
                 TransactionRecord record = top.getSupportDelegate().mTransactionRecord;
+
+                if (preFragment == null) return;
+
                 if (record != null) {
                     if (record.currentFragmentPopEnter != Integer.MIN_VALUE) {
                         preFragment.getSupportDelegate().hasEnterAnimation = true;
@@ -273,6 +278,9 @@ class TransactionDelegate {
             public void run() {
                 FragmentTransaction ft = fm.beginTransaction();
                 ISupportFragment preFragment = SupportHelper.getPreFragment((Fragment)top);
+
+                if (preFragment == null) return;
+
                 ft.remove((Fragment) top);
                 if (preFragment instanceof Fragment) {
                     ft.show((Fragment) preFragment);
