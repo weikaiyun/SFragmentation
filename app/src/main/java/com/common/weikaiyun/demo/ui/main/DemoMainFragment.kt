@@ -38,7 +38,7 @@ class DemoMainFragment: BaseSupportFragment() {
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         fl_container.setOnClickListener {
-            pop()
+            _mActivity.finish()
         }
         val homeFragmentInStack: HomeFragment? = SupportHelper.findFragment(childFragmentManager, HomeFragment::class.java)
         if (homeFragmentInStack != null) {
