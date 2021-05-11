@@ -39,6 +39,10 @@ public class SupportFragmentDelegate {
         return hasEnterAnimation;
     }
 
+    public void setHasEnterAnimation(boolean hasEnterAnimation) {
+        this.hasEnterAnimation = hasEnterAnimation;
+    }
+
     public void setCanPop(boolean canPop) {
         this.canPop = canPop;
     }
