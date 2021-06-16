@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -16,6 +17,10 @@ import com.weikaiyun.fragmentation.record.ResultRecord;
 import com.weikaiyun.fragmentation.record.TransactionRecord;
 
 public class SupportFragmentDelegate {
+    static final String S_FRAGMENTATION_FRAGMENT_VISIBLE_PROP = "s_fragmentation_fragment_visible_prop";
+    static final String S_FRAGMENTATION_FRAGMENT_POP_PROP = "s_fragmentation_fragment_pop_prop";
+    static final String S_FRAGMENTATION_FRAGMENT_START_PROP = "s_fragmentation_fragment_start_prop";
+
     int mContainerId;
 
     private TransactionDelegate mTransactionDelegate;
@@ -27,7 +32,7 @@ public class SupportFragmentDelegate {
     protected FragmentActivity _mActivity;
     private ISupportActivity mSupport;
 
-    private boolean isVisible;
+    private boolean isVisible = false;
 
     boolean hasEnterAnimation = false;
 
@@ -97,6 +102,11 @@ public class SupportFragmentDelegate {
     }
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        if(savedInstanceState != null) {
+            startByFragmentation = savedInstanceState.getBoolean(S_FRAGMENTATION_FRAGMENT_START_PROP, false);
+            isVisible = savedInstanceState.getBoolean(S_FRAGMENTATION_FRAGMENT_VISIBLE_PROP, false);
+            canPop = savedInstanceState.getBoolean(S_FRAGMENTATION_FRAGMENT_POP_PROP, true);
+        }
         Bundle bundle = mFragment.getArguments();
         if (bundle != null) {
             mContainerId = bundle.getInt(TransactionDelegate.FRAGMENTATION_ARG_CONTAINER);
@@ -108,6 +118,12 @@ public class SupportFragmentDelegate {
         if (view != null) {
             setBackground(view);
         }
+    }
+
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBoolean(S_FRAGMENTATION_FRAGMENT_START_PROP, startByFragmentation);
+        outState.putBoolean(S_FRAGMENTATION_FRAGMENT_POP_PROP, canPop);
+        outState.putBoolean(S_FRAGMENTATION_FRAGMENT_VISIBLE_PROP, isVisible);
     }
 
     public void setBackground(View view) {

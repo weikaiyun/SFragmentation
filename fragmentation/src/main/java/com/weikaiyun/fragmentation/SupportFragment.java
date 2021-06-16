@@ -87,6 +87,12 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mDelegate.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (!getSupportDelegate().hasEnterAnimation) {
