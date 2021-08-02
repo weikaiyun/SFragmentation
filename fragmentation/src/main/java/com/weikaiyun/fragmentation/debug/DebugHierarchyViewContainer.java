@@ -82,7 +82,7 @@ public class DebugHierarchyViewContainer extends ScrollView {
         mTitleLayout.setLayoutParams(flParams);
 
         TextView title = new TextView(mContext);
-        title.setText(R.string.fragmentation_stack_view);
+        title.setText(mContext.getClass().getSimpleName());
         title.setTextSize(20);
         title.setTextColor(Color.BLACK);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -174,6 +174,8 @@ public class DebugHierarchyViewContainer extends ScrollView {
         if (hierarchy == 0) {
             tvItem.setTextColor(Color.parseColor("#333333"));
             tvItem.setTextSize(16);
+        }else {
+            tvItem.setTextColor(Color.parseColor("#666666"));
         }
         tvItem.setGravity(Gravity.CENTER_VERTICAL);
         tvItem.setPadding((int) (mPadding + hierarchy * mPadding * 1.5), 0, mPadding, 0);
