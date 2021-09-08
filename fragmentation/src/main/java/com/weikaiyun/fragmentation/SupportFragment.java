@@ -142,12 +142,12 @@ abstract public class SupportFragment extends Fragment implements ISupportFragme
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        isLoaded = false;
     }
 
     @Override
     public void onDestroy() {
         mDelegate.onDestroy();
-        isLoaded = false;
         super.onDestroy();
     }
 
